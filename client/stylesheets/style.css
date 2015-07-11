@@ -158,3 +158,13 @@ body {
   margin-bottom: 5px;
   pointer-events: auto;
 }
+
+#main{
+  position: relative;
+}
+
+.page{
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
