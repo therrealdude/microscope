@@ -25,6 +25,17 @@
 			{{/each}}
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="control-label" for="image">Saved images</label>
+		<div class="controls">
+			{{#each saved_images}}
+				<br>
+				<img width="250" src="{{secure_url}}">
+				<img width="250" src="{{c.url public_id format=format effect='blur:300' angle=10}}">
+				<button class="delete">Delete</button>
+			{{/each}}
+		</div>
+	</div>
     <input type="submit" value="Submit" class="btn btn-primary"/>
   </form>
 </template>

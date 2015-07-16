@@ -8,6 +8,9 @@ Template.postSubmit.helpers({
   },
   errorClass: function (field) {
     return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
+  },
+  saved_images: function(){
+		return Images.find();
   }
 });
 
