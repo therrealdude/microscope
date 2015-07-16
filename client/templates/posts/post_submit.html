@@ -17,9 +17,7 @@
 	<div class="form-group">
 		<label class="control-label" for="image">Image</label>
 		<div class="controls">
-			{{#c_upload_stream callback="save_url"}}
-				<input type="file">
-			{{/c_upload_stream}}
+			<input type="file" class="upload">
 			{{#each c.uploading_images}}
 				<p>{{percent_uploaded}}</p>
 			{{/each}}
@@ -36,6 +34,7 @@
 			{{/each}}
 		</div>
 	</div>
+	<input type="hidden" id="images"/>
     <input type="submit" value="Submit" class="btn btn-primary"/>
   </form>
 </template>
