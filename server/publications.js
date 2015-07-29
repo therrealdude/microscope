@@ -22,4 +22,8 @@ Meteor.publish('notifications', function() {
 
 Meteor.publish('images', function(){
   return Images.find();
+});
+
+Meteor.publish('people', function(){
+  return People.find();
 })
