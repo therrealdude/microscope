@@ -1,4 +1,4 @@
-.grid-block, .main, .post, .comments li, .comment-form {
+.grid-block, .main, .post, .comments li, .comment-form, .person {
   background: #fff;
   border-radius: 3px;
   padding: 10px;
@@ -76,6 +76,22 @@ body {
     display: block;
     float: right;
     margin-top: 7px; }
+	
+.person {
+  *zoom: 1;
+  position: relative;
+  opacity: 1;
+}
+
+/* .person .person-content {
+    float: left; 
+}
+
+.person .person-content h3 {
+	margin: 0;
+	line-height: 1.4;
+	font-size: 18px; 
+} */
 
 .comments {
   list-style-type: none;

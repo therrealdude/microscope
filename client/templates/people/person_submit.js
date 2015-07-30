@@ -33,7 +33,7 @@ Template.personSubmit.events({
       if (result.personExists)
         throwError('This person has already been created');
     
-      Router.go('newPosts');  
+      Router.go('peopleList');  
     });
   }
 });
