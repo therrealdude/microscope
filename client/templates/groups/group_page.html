@@ -1,5 +1,20 @@
 <template name="groupPage">
   <div class="group-page page">
     {{> groupItem}}
+	<h3>Members</h3>
+	<ul>
+		{{#each groupMembers}}
+<!--  			{{if hasID}} -->
+				<li>
+					<a href={{pathFor "personPage"}}>{{name}}</a>
+				</li>
+<!--  			{{/if}} -->
+<!-- 			{{else}}
+				<li>
+					{{toTitleCase name}}
+				</li>
+			{{/else}} -->
+		{{/each}}
+	</ul>
   </div>
 </template>

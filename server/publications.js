@@ -27,3 +27,7 @@ Meteor.publish('images', function(){
 Meteor.publish('people', function(){
   return People.find();
 });
+
+Meteor.publish('groups', function(){
+	return Groups.find();
+});

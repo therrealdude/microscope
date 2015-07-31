@@ -19,7 +19,7 @@ Template.personSelect.onCreated(function(){
 });
 
 Template.personSelect.onRendered(function(){
-	$('select#members').dropdown('allowAdditions', true);
+	$('select#members').dropdown({allowAdditions: true});
 });
 
 Template.personSelect.helpers({
@@ -34,11 +34,12 @@ Template.groupSubmit.events({
 	
     var group = {
       name: $(e.target).find('[name=name]').val(),
-      bio: $(e.target).find('[name=bio]').val()
+      description: $(e.target).find('[name=description]').val(),
+	  members: $(e.target).find('[name=members]').val()
     };
 	
     var errors = validategroup(group);
-    if (errors.title || errors.url)
+    if (errors.name || errors.description)
       return Session.set('groupSubmitErrors', errors);
 
     Meteor.call('groupInsert', group, function(error, result) {
@@ -50,10 +51,7 @@ Template.groupSubmit.events({
       if (result.groupExists)
         throwError('This group has already been created');
     
-      Router.go('peopleList');  
+      Router.go('groupList');  
     });
-  },
-  'keydown #membersearch' : function(e) {
-	  
   }
 });
