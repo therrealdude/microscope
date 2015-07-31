@@ -17,3 +17,6 @@ lepozepo:cloudinary
 accounts-google
 accounts-twitter
 accounts-facebook
+semantic:ui
+flemay:less-autoprefixer
+semantic:ui-css

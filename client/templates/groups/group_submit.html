@@ -17,11 +17,8 @@
     <div class="form-group {{errorClass 'members'}}">
       <label class="control-label" for="bio">Members</label>
       <div class="controls">
-          <input name="membersearch" id="membersearch" type="text" value="" placeholder="Search" class="form-control"/>
-		  <select name="members" id="members" type="select">
-			{{> personSelect}}
-		  </select>
-          <span class="help-block">{{errorMessage 'members'}}</span>
+		{{> personSelect}} 
+        <span class="help-block">{{errorMessage 'members'}}</span>
       </div>
     </div>
     <input type="submit" value="Submit" class="btn btn-primary"/>
@@ -29,9 +26,11 @@
 </template>
 
 <template name="personSelect">
-	{{#each personSearch}}
-		<option value="{{_id}}">
-			{{name}}
-		</option>
-	{{/each}}
+	<select name="members" id="members" class="ui fluid search dropdown" multiple="">
+		{{#each personSearch}}
+			<option value="{{_id}}">
+				{{name}}
+			</option>
+		{{/each}}
+	</select>
 </template>

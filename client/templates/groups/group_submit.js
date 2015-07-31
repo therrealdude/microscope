@@ -10,14 +10,22 @@ Template.groupSubmit.helpers({
     return !!Session.get('groupSubmitErrors')[field] ? 'has-error' : '';
   },
   personSearch : function(){
-	var search = $('#membersearch').val();
-	if(search === undefined || search === ''){
+	
+  }
+});
+
+Template.personSelect.onCreated(function(){
+
+});
+
+Template.personSelect.onRendered(function(){
+	$('select#members').dropdown('allowAdditions', true);
+});
+
+Template.personSelect.helpers({
+	personSearch : function() {
 		return People.find();
 	}
-	else{
-		return People.find({name: /search/});
-	}
-  }
 });
 
 Template.groupSubmit.events({
