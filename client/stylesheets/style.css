@@ -1,4 +1,5 @@
-.grid-block, .main, .post, .comments li, .comment-form, .person, .group, .venue, .show {
+.grid-block, .main, .post, .comments li, 
+.comment-form, .person, .group, .venue, .show, .venue {
   background: #fff;
   border-radius: 3px;
   padding: 10px;

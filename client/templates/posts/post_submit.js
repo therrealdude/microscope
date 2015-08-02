@@ -1,4 +1,4 @@
-var images = undefined;
+var files = undefined;
 var imageOptions = undefined;
 
 Template.postSubmit.onCreated(function() {
@@ -30,7 +30,40 @@ Template.postSubmit.events({
     if (errors.title || errors.url)
       return Session.set('postSubmitErrors', errors);
 
-    Meteor.call('postInsert', post, images, imageOptions, function(error, result) {
+    var images = [];
+	if(files != undefined && imageOptions != undefined && files.length != undefined)
+    {
+        for (var i = 0; i < files.length; i++)
+        {
+            var reader = new FileReader;
+//            reader.onload = function() {
+//                imageOptions.db_id = _cloudinary.insert({});
+//                Meteor.call("cloudinary_upload", reader.result, imageOptions, function(err,res){
+//                    if(err){
+//                        _cloudinary.remove(options.db_id);
+//                        console.log(err);
+//                    }
+//                    else{
+//                        images.push(res);
+//                    }
+//                });
+//            }
+            reader.readAsDataURL(files.item(i));
+            
+            imageOptions.db_id = _cloudinary.insert({});
+            Meteor.call("cloudinary_upload", reader.result, imageOptions, function(err,res) {
+                    if(err){
+                        _cloudinary.remove(options.db_id);
+                        console.log(err);
+                    }
+                    else{
+                        images.push(res);
+                }
+            });
+        }
+	}
+      
+    Meteor.call('postInsert', post, images, function(error, result) {
       // display the error to the user and abort
       if (error)
         Errors.throw(error.reason);
@@ -51,6 +84,6 @@ Template.postSubmit.events({
 			options.public_id = helper.data.public_id;
 		}
 	  imageOptions = options;
-	  images = e.currentTarget.files;
+	  files = e.currentTarget.files;
   }
 });

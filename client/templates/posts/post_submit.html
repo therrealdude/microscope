@@ -1,6 +1,6 @@
 <template name="postSubmit">
   <form class="main form page">
-    <div class="form-group {{errorClass 'url'}}">
+    <div class="form-group {{errorClass 'name'}}">
       <label class="control-label" for="url">URL</label>
       <div class="controls">
           <input name="url" id="url" type="text" value="" placeholder="Your URL" class="form-control"/>
@@ -17,7 +17,7 @@
 	<div class="form-group">
 		<label class="control-label" for="image">Image</label>
 		<div class="controls">
-			<input type="file" class="upload">
+			<input type="file" class="upload" name="images">
 			{{#each c.uploading_images}}
 				<p>{{percent_uploaded}}</p>
 			{{/each}}
