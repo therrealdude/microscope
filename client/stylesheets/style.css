@@ -189,3 +189,7 @@ body {
 .capitalize {
   text-transform:capitalize;
 }
+
+.show-date-control {
+  width: 90% !important;
+}

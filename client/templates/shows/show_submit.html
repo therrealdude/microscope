@@ -1,0 +1,84 @@
+<template name="showSubmit">
+    <form class="main form page">
+        <h1>Show Submission Page</h1>
+        <h3>General Information</h3>
+        <div class="form-group {{errorClass 'name'}}">
+          <label class="control-label" for="name">Name</label>
+          <div class="controls">
+              <input name="name" id="name" type="text" value="" placeholder="Enter show name" class="form-control"/>
+              <span class="help-block">{{errorMessage 'name'}}</span>
+          </div>
+        </div>
+        <div class="form-group {{errorClass 'description'}}">
+          <label class="control-label" for="description">Description</label>
+          <div class="controls">
+              <input name="description" id="description" type="textarea" value="" placeholder="Enter show description" class="form-control"/>
+              <span class="help-block">{{errorMessage 'description'}}</span>
+          </div>
+        </div>
+
+        <div class="form-group {{errorClass 'venue'}}">
+          <label class="control-label" for="venue">Venue</label>
+          <div class="controls">
+              {{> venueSearch}}
+              <span>If you don't see your venue listed you can add it <a href="{{pathFor 'venueSubmit'}}">here</a>.</span>
+              <span class="help-block">{{errorMessage 'venue'}}</span>
+          </div>
+        </div>
+        <div class="form-group" style="display:inline-block">
+            <div class="ui checked checkbox">
+                <input type="checkbox" checked="" id="acceptsSubmissions" name="acceptsSubmissions" style="display:inline-block"/>
+                <label for="acceptsSubmissions" style="display:inline-block">Accepts Submissions</label>
+            </div>
+            <div class="ui">
+                <label class="control-label" style="display:inline-block">Ticket Price</label>
+                <input id="ticketPrice" name="ticketPrice" type="text" placeholder="Enter a ticket price" style="display:inline-block"/>
+            </div>
+        </div>
+        <div class="form-group {{errorClass 'date'}}">
+          <h3>Show Dates and Performers</h3>
+          <div class="controls" id="dates">
+              {{#each numShowDates}}
+              {{#if display}}
+                <div id="{{id}}">
+                  <label class="control-label" for="date">Date</label>
+                  <div class="row-fluid" display="inline-block">
+                    <input name="showdate" id="date{{id}}" type="datetime-local" value="" placeholder="Enter show date" class="form-control show-date-control" style="display:inline-block"/>
+                    <input type="button" value="Remove Date" id="remove{{id}}" remove="{{id}}" class="btn removeDate" style="display:inline-block"/>
+                  </div>
+                  <div>
+                    <label class="control-label" for="performers">Performers</label>
+                        <div class="controls">
+                            {{> performersSearch}}
+                                <span> If the group or person is not listed encourage them to create a profile or add their group.</span>
+                            <span class="help-block">{{errorMessage 'performers'}}</span>
+                        </div>
+                  </div>
+                </div>
+              {{/if}}
+              {{/each}}
+              <input type="button" value="Add Date" class="btn" id="btnAddDate"/>
+              <span class="help-block">{{errorMessage 'date'}}</span>
+          </div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+    </form>
+</template>
+
+<template name="venueSearch">
+    <select class="ui fluid search dropdown" id="venueSearch" name="venueSearch">
+        <option value="">Select Venue</option>
+        {{#each venuesSearch}}
+            <option value="{{_id}}">{{name}} {{address1}} {{city}}, {{state}} {{zipcode}}</option>
+        {{/each}}
+    </select>
+</template>
+
+<template name="performersSearch">
+    <select class="ui fluid search dropdown" multiple="" id="performersSearch" name="performersSearch">
+        <option value="">Select Performers</option>
+        {{#each performers}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+</template>

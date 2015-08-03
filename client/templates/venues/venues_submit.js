@@ -2,6 +2,10 @@ Template.venueSubmit.onRendered(function(){
     $('select#state').dropdown();
 });
 
+Template.venueSubmit.onCreated(function(){
+    Session.set('venueSubmitErrors', {}); 
+});
+
 Template.venueSubmit.helpers({
   errorMessage: function(field) {
     return Session.get('venueSubmitErrors')[field];

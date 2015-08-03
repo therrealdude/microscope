@@ -35,3 +35,7 @@ Meteor.publish('groups', function(){
 Meteor.publish('venues', function(){
     return Venues.find();
 });
+
+Meteor.publish('shows', function(){
+    return Shows.find();
+});
