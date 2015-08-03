@@ -39,10 +39,6 @@ Template.groupEdit.events({
       if (error)
         Errors.throw(error.reason);
     
-      // show this result but route anyway
-      if (result.groupExists)
-        throwError('This group has already been created');
-    
       Router.go('groupPage', {_id: groupid});  
     });
   }
