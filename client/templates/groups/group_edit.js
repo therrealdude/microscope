@@ -1,10 +1,9 @@
 Template.groupEdit.onCreated(function() {
   Session.set('groupEditErrors', {});
-  $('select#members').dropdown('set selected', this.members);
 });
 
 Template.groupEdit.onRendered(function(){
-	$('select#members').dropdown({allowAdditions: true});
+	$('select#members').dropdown({allowAdditions: true, 'set exactly': this.members}).dropdown('set exactly', this.data.members);
 });
 
 Template.groupEdit.helpers({
@@ -35,7 +34,7 @@ Template.groupEdit.events({
     if (errors.name || errors.description)
       return Session.set('groupSubmitErrors', errors);
 
-    Groups.insert(groupid, {$set: group}, function(error, result) {
+    Groups.update(groupid, {$set: group}, function(error, result) {
       // display the error to the user and abort
       if (error)
         Errors.throw(error.reason);
