@@ -34,7 +34,7 @@ Template.groupEdit.events({
     if (errors.name || errors.description)
       return Session.set('groupSubmitErrors', errors);
 
-    Groups.update(groupid, {$set: group}, function(error, result) {
+    Groups.update(groupid, {$set: group}, function(error) {
       // display the error to the user and abort
       if (error)
         Errors.throw(error.reason);

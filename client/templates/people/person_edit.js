@@ -25,7 +25,7 @@ Template.personEdit.events({
     if (errors.name || errors.bio)
       return Session.set('personEditErrors', errors);
 
-    Posts.update(currentPersonId, {$set: personProperties}, function(error) {
+    People.update(currentPersonId, {$set: personProperties}, function(error) {
       if (error) {
         // display the error to the user
         Errors.throw(error.reason);
@@ -33,7 +33,7 @@ Template.personEdit.events({
         if (result.postExists)
             Errors.throw('This link has already been posted');
       } else {
-        Router.go('personPage', {_id: currentPostId});
+        Router.go('personPage', {_id: currentPersonId});
       }
     });
   },
