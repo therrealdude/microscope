@@ -4,16 +4,9 @@
 	<h3>Members</h3>
 	<ul>
 		{{#each groupMembers}}
-<!--  			{{if hasID}} -->
 				<li>
 					<a href={{pathFor "personPage"}} class="capitalize">{{name}}</a>
 				</li>
-<!--  			{{/if}} -->
-<!-- 			{{else}}
-				<li>
-					{{toTitleCase name}}
-				</li>
-			{{/else}} -->
 		{{/each}}
 	</ul>
   </div>

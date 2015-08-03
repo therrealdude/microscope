@@ -8,14 +8,7 @@ Template.groupSubmit.helpers({
   },
   errorClass: function (field) {
     return !!Session.get('groupSubmitErrors')[field] ? 'has-error' : '';
-  },
-  personSearch : function(){
-	
   }
-});
-
-Template.personSelect.onCreated(function(){
-
 });
 
 Template.personSelect.onRendered(function(){

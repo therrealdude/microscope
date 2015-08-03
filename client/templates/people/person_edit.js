@@ -1,0 +1,50 @@
+Template.personEdit.onCreated(function() {
+  Session.set('postEditErrors', {});
+});
+Template.personEdit.helpers({
+  errorMessage: function(field) {
+    return Session.get('personEditErrors')[field];
+  },
+  errorClass: function (field) {
+    return !!Session.get('personEditErrors')[field] ? 'has-error' : '';
+  }
+});
+
+Template.personEdit.events({
+  'submit form': function(e) {
+    e.preventDefault();
+
+    var currentPersonId = this._id;
+
+    var personProperties = {
+      name: $(e.target).find('[name=name]').val(),
+      bio: $(e.target).find('[name=bio]').val()
+    }
+    
+    var errors = validatePerson(personProperties);
+    if (errors.name || errors.bio)
+      return Session.set('personEditErrors', errors);
+
+    Posts.update(currentPersonId, {$set: personProperties}, function(error) {
+      if (error) {
+        // display the error to the user
+        Errors.throw(error.reason);
+        // show this result but route anyway
+        if (result.postExists)
+            Errors.throw('This link has already been posted');
+      } else {
+        Router.go('personPage', {_id: currentPostId});
+      }
+    });
+  },
+
+  'click .delete': function(e) {
+    e.preventDefault();
+
+    if (confirm("Delete this post?")) {
+      var currentPersonId = this._id;
+      Person.remove(currentPersonId);
+      Router.go('home');
+    }
+  }
+});
