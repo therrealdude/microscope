@@ -39,7 +39,7 @@ Template.venueEdit.events({
             Errors.throw(error.reason);
         }
         
-        Router.go('venue', {_id: venueId});
+        Router.go('venuePage', {_id: venueId});
     });
   },
   
