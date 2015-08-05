@@ -1,0 +1,28 @@
+<template name="home">
+    {{> search}}
+</template>
+
+<template name="search">
+    <div class="ui four item menu">
+      <a class="item {{showsActive}}" name="shows">Shows</a>
+      <a class="item {{groupsActive}}" name="groups">Groups</a>
+      <a class="item {{peopleActive}}" name="people">People</a>
+      <a class="item {{venuesActive}}" name="venues">Venues</a>
+    </div>
+    {{#if showsSelected}}
+        <a href={{pathFor 'showSubmit'}} class="btn">Add Show</a>
+        {{> showList}}
+    {{/if}}
+    {{#if groupsSelected}}
+        <a href={{pathFor 'groupSubmit'}} class="btn">Add Group</a>
+        {{> groupList}}
+    {{/if}}
+    {{#if peopleSelected}}
+        <a href={{pathFor 'personSubmit'}} class="btn">Add Person</a>
+        {{> peopleList}}
+    {{/if}}
+    {{#if venuesSelected}}
+        <a href={{pathFor 'venueSubmit'}} class="btn">Add Venue</a>
+        {{> venueList}}
+    {{/if}}
+</template>

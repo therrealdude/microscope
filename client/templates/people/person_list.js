@@ -1,6 +1,12 @@
 Template.peopleList.helpers({
   people: function(){
-    return People.find();
+    var searchCriteria = Session.get('searchCriteria');
+    if(!searchCriteria || searchCriteria === ''){
+        return People.find();
+    }
+    else{
+        return People.find({name: {$regex: searchCriteria}});
+    }
   }
 });
 

@@ -1,4 +1,5 @@
 <template name="header">
+  <a href={{pathFor 'search'}}><img src="/ace_logo.png" style="display:block;margin-left:auto;margin-right:auto"/></a>
   <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
@@ -7,56 +8,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{pathFor 'newPosts'}}">Affordable City Entertainment</a>
     </div>
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav">
-        <li class="{{activeRouteClass 'newPosts'}}">
-          <a href="{{pathFor 'newPosts'}}">New</a>
-        </li>
-        <li class="{{activeRouteClass 'bestPosts'}}">
-          <a href="{{pathFor 'bestPosts'}}">Best</a>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shows<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li class="{{activeRouteClass showList}}"><span><a href={{pathFor 'showList'}}>Show List</a></span></li>
-                <li class="{{activeRouteClass 'showSubmit'}}"><span><a href={{pathFor 'showSubmit'}}>Add Show</a></span></li>
-            </ul>
+        <li>
+            <div class="ui search" style="margin-top:8px">
+                <div class="ui icon input">
+                    <input type="text" class="prompt" placeholder="Search..." id="search"/>
+                    <i class="search icon"></i>
+                </div>
+            </div>
         </li>
         {{#if currentUser}}
 			<li class="{{activeRouteClass 'postSubmit'}}"><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
 			<li class="dropdown">
 				{{> notifications}}
-			</li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Person Actions	<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li class="{{activeRouteClass personList}}"><span><a href={{pathFor 'peopleList'}}>People List</a></span></li>
-					<li class="{{activeRouteClass 'personSubmit'}}"><span><a href={{pathFor 'personSubmit'}}>Add Person</a></span></li>
-				</ul>
-			</li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Group Actions	<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li class="{{activeRouteClass groupList}}"><span><a href={{pathFor 'groupList'}}>Group List</a></span></li>
-					<li class="{{activeRouteClass 'groupSubmit'}}">
-                        <span><a href={{pathFor 'groupSubmit'}}>Add Group</a></span>
-                    </li>
-				</ul>
-			</li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Venue Actions<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li class="{{activeRouteClass 'venueSubmit'}}">
-                        <span><a href={{pathFor 'venueSubmit'}}>Add Venue</a></span>
-                    </li>
-                    <li class="">
-                        <span><a href={{pathFor 'venueList'}}>Venue List</a></span>
-                    </li>
-                </ul>
             </li>
 		{{/if}}
+        <li class="{{activeRouteClass 'newPosts'}}">
+          <a href="{{pathFor 'newPosts'}}">Blog</a>
+        </li>
 	  </ul>
 
       <ul class="nav navbar-nav navbar-right">

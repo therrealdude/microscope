@@ -1,3 +1,7 @@
+Template.header.onRendered(function() {
+    $('input#search').val(Session.get('searchCriteria'));
+});
+
 Template.header.helpers({
   activeRouteClass: function(/* route names */) {
     var args = Array.prototype.slice.call(arguments, 0);
@@ -9,4 +13,10 @@ Template.header.helpers({
 
     return active && 'active';
   }
+});
+
+Template.header.events({
+    'keyup input#search': function(e){
+        Session.set('searchCriteria', $(e.target).val());
+    }
 });

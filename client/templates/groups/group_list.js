@@ -1,6 +1,12 @@
 Template.groupList.helpers({
   groups: function(){
-    return Groups.find();
+    var searchCriteria = Session.get('searchCriteria');
+    if(!searchCriteria || searchCriteria === ''){
+        return Groups.find();
+    }
+    else{
+        return Groups.find({name: {$regex: searchCriteria}});
+    }
   }
 });
 
