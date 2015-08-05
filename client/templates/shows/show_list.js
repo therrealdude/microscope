@@ -5,7 +5,7 @@ Template.showList.helpers({
         return Shows.find();
     }
     else{
-        return Shows.find({name: {$regex: searchCriteria}});
+        return Shows.find({name: {$regex: new RegExp(searchCriteria, "i")}});
     }
     }
 });

@@ -5,7 +5,7 @@ Template.venueList.helpers({
         return Venues.find();
     }
     else{
-        return Venues.find({name: {$regex: searchCriteria}});
+        return Venues.find({name: {$regex: new RegExp(searchCriteria, "i")}});
     }
     }
 });

@@ -5,7 +5,7 @@ Template.peopleList.helpers({
         return People.find();
     }
     else{
-        return People.find({name: {$regex: searchCriteria}});
+        return People.find({name: {$regex: new RegExp(searchCriteria, "i")}});
     }
   }
 });
