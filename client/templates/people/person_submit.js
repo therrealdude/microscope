@@ -21,7 +21,7 @@ Template.personSubmit.events({
     };
 	
     var errors = validatePerson(person);
-    if (errors.title || errors.url)
+    if (errors.name || errors.bio || errors.duplicate)
       return Session.set('personSubmitErrors', errors);
 
     Meteor.call('personInsert', person, function(error, result) {
@@ -31,7 +31,7 @@ Template.personSubmit.events({
     
       // show this result but route anyway
       if (result.personExists)
-        throwError('This person has already been created');
+        throw new Meteor.Error('This person has already been created');
     
       Router.go('peopleList');  
     });

@@ -5,7 +5,10 @@
 	  <p class="person-bio">
 		{{bio}}
 	  </p>
-	  <a href="{{pathFor 'personEdit'}}" class="discuss btn btn-default">Edit</a>
+      {{#if isPerson}}
+	   <a href="{{pathFor 'personEdit'}}" class="discuss btn btn-default">Edit</a>
+      {{/if}}
     </div>
+    <button class="btn followbtn" style="align:right">Follow</button>
   </div>
 </template>

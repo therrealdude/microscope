@@ -12,6 +12,9 @@ Template.header.helpers({
     });
 
     return active && 'active';
+  },
+  hasSubmittedProfile: function() {
+    return People.findOne({userId: Meteor.user()._id});
   }
 });
 

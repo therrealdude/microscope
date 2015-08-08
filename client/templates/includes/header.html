@@ -20,7 +20,15 @@
             </div>
         </li>
         {{#if currentUser}}
-			<li class="{{activeRouteClass 'postSubmit'}}"><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
+          <li class="{{activeRouteClass 'personEdit'}}  {{activeRouteClass 'personSubmit'}}">
+              {{#if hasSubmittedProfile}}
+                <a href={{pathFor 'personEdit'}}>Edit Profile</a>
+              {{else}}
+                <a href={{pathFor 'personSubmit'}}>Fill Out Profile!</a>
+              {{/if}}
+
+          </li>
+          <li class="{{activeRouteClass 'postSubmit'}}"><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
 			<li class="dropdown">
 				{{> notifications}}
             </li>
