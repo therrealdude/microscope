@@ -20,3 +20,5 @@ accounts-facebook
 semantic:ui
 flemay:less-autoprefixer
 semantic:ui-css
+http
+aldeed:geocoder
