@@ -35,6 +35,7 @@ Template.venueSubmit.events({
     var addressString = venueAttributes.address1.split(' ').join('+') + venueAttributes.address2.split(' ').join('+') + ',' + venueAttributes.city + ',' + venueAttributes.state;
       
     Meteor.call('geocode', addressString, function(error, result){
+        console.log(result);
         if(error){
             Meteor.Error.throw(error.reason);
         }
