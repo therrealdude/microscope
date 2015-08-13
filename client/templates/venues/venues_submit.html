@@ -1,5 +1,5 @@
 <template name="venueSubmit">
-  <form class="main form page">
+  <form class="main form page" autocomplete="off">
     <div class="form-group {{errorClass 'name'}}">
       <label class="control-label" for="name">Name</label>
       <div class="controls">
@@ -17,7 +17,12 @@
     <div class="form-group {{errorClass 'address1'}}">
       <label class="control-label" for="address1">Address Line 1</label>
       <div class="controls">
-          <input name="address1" id="address1" type="text" value="" placeholder="Enter address line 1" class="form-control"/>
+          <input name="address1" id="address1" type="text" value="" placeholder="Enter address line 1" class="form-control" autocomplete="off" autocorrect="off"/>
+          <div class="geolocation">
+            <input type="hidden" name="lat" value=""/>
+            <input type="hidden" name="lng" value=""/>
+            <input name="formatted_address" type="hidden" value="">
+          </div>
           <span class="help-block">{{errorMessage 'address1'}}</span>
       </div>
       </div>

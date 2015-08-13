@@ -5,13 +5,17 @@ Meteor.methods({
     },
     geocode: function(address) {
         try{
+            console.log('Geocoding beginning');
             var googleMapsUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address;
             var ret = HTTP.get(googleMapsUrl);
-            //console.log(JSON.parse(ret.content));
-            return JSON.parse(ret.content);
+            console.log('Geocoding complete');
+            console.log('Geocoding data:');
+            console.log(ret.content);
+            //Session.set('geocodingData', ret.content);
+            return ret.content;
         }
         catch(ex) {
-            console.log('Geocoding failed.');
+            console.log(ex.message);
             }
     }
 });

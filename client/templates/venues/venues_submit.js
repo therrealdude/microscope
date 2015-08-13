@@ -1,5 +1,10 @@
 Template.venueSubmit.onRendered(function(){
     $('select#state').dropdown();
+    this.autorun(function () {
+        if (GoogleMaps.loaded()) {
+          $("input#address1").geocomplete({details: '.geolocation'});
+        }
+    });
 });
 
 Template.venueSubmit.onCreated(function(){
@@ -33,14 +38,12 @@ Template.venueSubmit.events({
     }
     
     var addressString = venueAttributes.address1.split(' ').join('+') + venueAttributes.address2.split(' ').join('+') + ',' + venueAttributes.city + ',' + venueAttributes.state;
-      
-    Meteor.call('geocode', addressString, function(error, result){
-        console.log(result);
-        if(error){
-            Meteor.Error.throw(error.reason);
-        }
-        var venue = _.extend(venueAttributes, {locationData: result})
+    Meteor.call('geocode', addressString, function(error, result) {
+        if(error)
+            Errors.throw(error.reason);
         
+        var venue = _.extend(venueAttributes, {locationData: result});
+
         Meteor.call('venueInsert', venue, function(error, result) {
             if(error) {
                 Errors.throw(error.reason);
