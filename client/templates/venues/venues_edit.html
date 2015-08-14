@@ -15,38 +15,18 @@
       </div>
     </div>
     <div class="form-group {{errorClass 'address1'}}">
-      <label class="control-label" for="address1">Address Line 1</label>
+      <label class="control-label" for="address1">Address</label>
       <div class="controls">
-          <input name="address1" id="address1" type="text" value="{{address1}}" placeholder="Enter address line 1" class="form-control"/>
+          <input name="address1" id="address1" type="text" value="{{address1}}" placeholder="Enter address..." class="form-control" autocomplete="off" autocorrect="off"/>
+          <div class="geolocation">
+            <input type="hidden" name="lat" value="{{latitude}}"/>
+            <input type="hidden" name="lng" value="{{longitude}}"/>
+            <input name="formatted_address" type="hidden" value="{{formatted_address}}">
+          </div>
+          <img src="/desktop/powered-by-google-on-white.png"/>
           <span class="help-block">{{errorMessage 'address1'}}</span>
       </div>
       </div>
-    <div class="form-group {{errorClass 'address2'}}">
-      <label class="control-label" for="address2">Address Line 2</label>
-      <div class="controls">
-          <input name="address2" id="address2" type="text" value="{{address2}}" placeholder="Enter address line 2" class="form-control"/>
-          <span class="help-block">{{errorMessage 'address2'}}</span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label">City, State and Zip</label>
-      <div class="controls">
-        <div class="{{errorClass 'city'}}">
-          <input name="city" id="city" type="text" value="{{city}}" placeholder="Enter city" class="form-control"/>
-          <span class="help-block">{{errorMessage 'city'}}</span>
-        </div>
-        <div class="{{errorClass 'state'}}">
-          <select name="state" id="state" class="ui search dropdown form-control">
-              {{> stateOptions}}
-          </select>
-          <span class="help-block">{{errorMessage 'state'}}</span>
-        </div>
-        <div class="{{errorClass 'zipcode'}}">
-          <input name="zipcode" id ="zipcode" type="text" value="{{zipcode}}" placeholder="Enter zip code" class="form-control"/>
-          <span class="help-block">{{errorMessage 'zipcode'}}</span>
-        </div>
-      </div>
-    </div>
     <input type="submit" value="Submit" class="btn btn-primary"/>
 	<hr/>
     <a class="btn btn-danger delete" href="#">Delete Venue</a>

@@ -1,5 +1,4 @@
 Template.venueSubmit.onRendered(function(){
-    $('select#state').dropdown();
     this.autorun(function () {
         if (GoogleMaps.loaded()) {
           $("input#address1").geocomplete({details: '.geolocation'});
@@ -26,31 +25,22 @@ Template.venueSubmit.events({
         name: $(e.target).find('[name=name]').val(),
         description:    $(e.target).find('[name=description]').val(),
         address1: $(e.target).find('[name=address1]').val(),
-        address2: $(e.target).find('[name=address2]').val(),
-        city: $(e.target).find('[name=city]').val(),
-        state: $(e.target).find('[name=state]').val(),
-        zipcode: $(e.target).find('[name=zipcode]').val()
+        latitude: $(e.target).find('[name=lat]').val(),
+        longitude: $(e.target).find('[name=lng]').val(),
+        formatted_address: $(e.target).find('[name=formatted_address]').val()
     };
     
     var errors = validateVenues(venueAttributes);
     if (errors.anything) {
         return Session.set('venueSubmitErrors', errors);
     }
-    
-    var addressString = venueAttributes.address1.split(' ').join('+') + venueAttributes.address2.split(' ').join('+') + ',' + venueAttributes.city + ',' + venueAttributes.state;
-    Meteor.call('geocode', addressString, function(error, result) {
-        if(error)
+
+    Meteor.call('venueInsert', venueAttributes, function(error, result) {
+        if(error) {
             Errors.throw(error.reason);
-        
-        var venue = _.extend(venueAttributes, {locationData: result});
+        }
 
-        Meteor.call('venueInsert', venue, function(error, result) {
-            if(error) {
-                Errors.throw(error.reason);
-            }
-
-            Router.go('search');
-        });
+        Router.go('search');
     });
   }
 });

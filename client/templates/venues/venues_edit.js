@@ -1,5 +1,9 @@
 Template.venueEdit.onRendered(function(){
-    $('select#state').dropdown('set selected', this.data.state);
+    this.autorun(function () {
+        if (GoogleMaps.loaded()) {
+          $("input#address1").geocomplete({details: '.geolocation'});
+        }
+    });
 });
 
 Template.venueEdit.onCreated(function(){
@@ -23,10 +27,8 @@ Template.venueEdit.events({
         name: $(e.target).find('[name=name]').val(),
         description: $(e.target).find('[name=description]').val(),
         address1: $(e.target).find('[name=address1]').val(),
-        address2: $(e.target).find('[name=address2]').val(),
-        city: $(e.target).find('[name=city]').val(),
-        state: $(e.target).find('[name=state]').val(),
-        zipcode: $(e.target).find('[name=zipcode]').val()
+        latitude: $(e.target).find('[name=lat]').val(),
+        longitude: $(e.target).find('[name=lng]').val()
     };
     
     var errors = validateVenues(venueAttributes);

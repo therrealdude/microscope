@@ -12,19 +12,24 @@ Template.personItem.events({
         
         var followers;
         if(this.followers){
-            followers = this.followers.push(currentUser.userId);
+            followers = this.followers.push(currentUser._id);
         }
         else{
-            followers = [currentUser.userId];
+            followers = [currentUser._id];
         }
         
         var following;
         if(currentUser.following) {
             following = currentUser.following;
-            following.push(this._id);
+            if(following.people){    
+                following.people.push(this._id);
+            }
+            else{
+                following.people = [this._id]
+            }
         }
         else{
-            following = [this._id];
+            following = {people: [this._id], venues: [], groups: [], shows: []};
         }
         
         People.update(currentUser._id, {$set: {following: following}}, function(error) {
