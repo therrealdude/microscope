@@ -9,26 +9,39 @@ template.stream.helpers({
         
         for(var i = 0; i<shows.length; i++){
             for(var j = 0; j< shows[i].dates; j++){
-                stream.add({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
+                stream.push({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
             }
         }
         
         for(var i = 0; i<venues.length; i++){
             for(var j = 0; j< venues[i].dates; j++){
-                stream.add({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
+				var v = Venues.findOne({_id: venues[i].venue});
+                stream.push({date: dates[j].date, showname: shows[i].name, venue: v._id, message: [String.Format("<span>You follow <a href='/venue/{1}'>{0}</a></span>", v.Name, v._id)]});
             }
         }
         
         for(var i = 0; i<groups.length; i++){
             for(var j = 0; j< groups[i].dates; j++){
-                stream.add({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
+				var gs = groups[i].dates.groups;
+				for (var g = 0; g < gs.length; g++ ){
+					if($.inArray(g._id, currentUser.following.groups)){
+						stream.push({date: dates[j].date, group: g._id, showname: shows[i].name, message: ["You follow this show"]});
+					}
+				}
             }
         }
         
         for(var i = 0; i<people.length; i++){
             for(var j = 0; j< people[i].dates; j++){
-                stream.add({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
+                var ps = groups[i].dates.groups;
+				for (var p = 0; p < ps.length; p++ ){
+					if($.inArray(p._id, currentUser.following.people)){
+						stream.push({date: dates[j].date, person: p._id, showname: shows[i].name, message: ["You follow this show"]});
+					}
+				}
             }
         }
+		
+		return stream;
     }
 });
