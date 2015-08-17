@@ -52,8 +52,20 @@ Template.showSubmit.events({
         for (var i = 0; i < showDateInfo.length; i++) {
             if(showDateInfo[i].display){
                 var control = $(e.target).find('#' + showDateInfo[i].id);
+                var performers = control.find('[name=performersSearch]').val();
+                var people = [];
+                var groups = [];
+                for (var i = 0; i<performers.length; i++){
+                    if(performers[i].indexOf('p:') != -1){
+                        people.push({_id: performers[i].replace('p:', '')});
+                    }
+                    if(performers[i].indexOf('g:') != -1){
+                        groups.push({_id: performers[i].replace('g:', '')});
+                    }
+                }
+                var performersList = {groups: groups, people: people};
                 dates.push({date: control.find('[name=showdate]').val(), 
-                            performers: control.find('[name=performersSearch]').val()});
+                            performers: performersList});
             }
         }
         
