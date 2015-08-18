@@ -28,6 +28,9 @@
               {{/if}}
 
           </li>
+		  <li class="{{activeRouteClass 'stream'}}  {{activeRouteClass 'stream'}}">
+			<a href={{pathFor 'showstream'}}>Stream</a>
+          </li>
           <li class="{{activeRouteClass 'postSubmit'}}"><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
 			<li class="dropdown">
 				{{> notifications}}
