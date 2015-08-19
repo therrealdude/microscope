@@ -11,14 +11,9 @@
     </div>
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav">
-        <li>
-            <div class="ui search" style="margin-top:8px">
-                <div class="ui icon input">
-                    <input type="text" class="prompt" placeholder="Search..." id="search"/>
-                    <i class="search icon"></i>
-                </div>
-            </div>
-        </li>
+		<li class="{{activeRouteClass 'search'}}">
+			<a href={{pathFor 'search'}}>Search</a>
+		</li>
         {{#if currentUser}}
           <li class="{{activeRouteClass 'personEdit'}}  {{activeRouteClass 'personSubmit'}}">
               {{#if hasSubmittedProfile}}

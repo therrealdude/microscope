@@ -4,6 +4,14 @@ Template.search.onCreated(function(){
     }
 });
 
+Template.search.onRendered(function(){
+    this.autorun(function () {
+        if (GoogleMaps.loaded()) {
+          $("input#addressSearch").geocomplete({details: '.geolocation'});
+        }
+    });
+});
+
 Template.search.helpers({
     showsSelected: function() {
         return Session.get('lastClicked') === 'shows';
@@ -34,5 +42,18 @@ Template.search.helpers({
 Template.search.events({
     'click a.item': function(e) {
         Session.set('lastClicked', $(e.target).attr('name'));
+    },
+	'keyup #searchCriteria input': function(e){
+        e.preventDefault();
+		var container = $(e.target).closest('#searchCriteria');
+		var searchCriteria = {
+			keywords: container.find('#search').val(),
+			latitude: container.find('[name=lat]').val(),
+			longitude: container.find('[name=lng]'),
+			radius: container.find('#radius').val(),
+			startdate: container.find('[name=startdate]'),
+			enddate: container.find('[name=enddate]')
+		}
+        Session.set('searchCriteria', searchCriteria);
     }
 });

@@ -19,11 +19,4 @@ Template.header.helpers({
 });
 
 Template.header.events({
-    'keyup input#search': function(e){
-        e.preventDefault();
-        Session.set('searchCriteria', $(e.target).val());
-        if(e.keyCode === 13){
-            Router.go('search')
-        }
-    }
 });
