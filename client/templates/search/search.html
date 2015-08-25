@@ -18,9 +18,9 @@
 			<input name="addressSearch" id="addressSearch" type="text" value="" placeholder="Enter address" autocomplete="off" autocorrect="off"/>
 		  </div>
 		  <div class="geolocation">
-			<input type="hidden" name="lat" value=""/>
-			<input type="hidden" name="lng" value=""/>
-			<input name="formatted_address" type="hidden" value="">
+			<input type="hidden" name="lat" id="lat" value=""/>
+			<input type="hidden" name="lng" id="lng" value=""/>
+			<input name="formatted_address" type="hidden" value=""/>
 		  </div>
 		  <div class="ui input">
 			<input name="radius" id="radius" type="number" placeholder="Enter radius..."/>
@@ -30,11 +30,11 @@
 	  <div class="item">
 		<div class="header">Start Date</div>
 		<div class="ui input">
-			<input type="datetime-local" placeholder="Start date and time..." name="startdate"/>
+			<input type="datetime-local" placeholder="Start date and time..." name="startdate" id="startdate"/>
 		</div>
 		<div class="header">End Date</div>
 		<div class="ui input">
-			<input type="datetime-local" placeholder="End date and time..." name="enddate"/>
+			<input type="datetime-local" placeholder="End date and time..." name="enddate" id="enddate"/>
 		</div>
 	  </div>
 	</div>

@@ -27,8 +27,14 @@ Template.venueEdit.events({
         name: $(e.target).find('[name=name]').val(),
         description: $(e.target).find('[name=description]').val(),
         address1: $(e.target).find('[name=address1]').val(),
-        latitude: $(e.target).find('[name=lat]').val(),
-        longitude: $(e.target).find('[name=lng]').val()
+		loc: {
+			type: 'Point',
+			coordinates: [
+				parseFloat($(e.target).find('[name=lat]').val()),
+				parseFloat($(e.target).find('[name=lng]').val())
+			]
+		},
+		formatted_address: $(e.target).find('[name=formatted_address]').val()
     };
     
     var errors = validateVenues(venueAttributes);

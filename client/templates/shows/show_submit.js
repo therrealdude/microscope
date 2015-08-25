@@ -64,7 +64,7 @@ Template.showSubmit.events({
                     }
                 }
                 var performersList = {groups: groups, people: people};
-                dates.push({date: control.find('[name=showdate]').val(), 
+                dates.push({date: new ISODate(control.find('[name=showdate]').val()), 
                             performers: performersList});
             }
         }

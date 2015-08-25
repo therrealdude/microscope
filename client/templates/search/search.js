@@ -47,12 +47,12 @@ Template.search.events({
         e.preventDefault();
 		var container = $(e.target).closest('#searchCriteria');
 		var searchCriteria = {
-			keywords: container.find('#search').val(),
-			latitude: container.find('[name=lat]').val(),
-			longitude: container.find('[name=lng]'),
-			radius: container.find('#radius').val(),
-			startdate: container.find('[name=startdate]'),
-			enddate: container.find('[name=enddate]')
+			'keywords': container.find('#search').val(),
+			'latitude': container.find('#lat').val(),
+			'longitude': container.find('#lng').val(),
+			'radius': container.find('#radius').val(),
+			'startdate': container.find('#startdate').val(),
+			'enddate': container.find('#enddate').val()
 		}
         Session.set('searchCriteria', searchCriteria);
     }
