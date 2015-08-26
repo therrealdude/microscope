@@ -64,7 +64,7 @@ Template.showEdit.events({
         for (var i = 0; i < showDateInfo.length; i++) {
             if(showDateInfo[i].display){
                 var control = $(e.target).find('#' + showDateInfo[i].id);
-                dates.push({date: new ISODate(control.find('[name=showdate]').val()), 
+                dates.push({date: new Date(control.find('[name=showdate]').val()), 
                             performers: control.find('[name=performersSearch]').val()});
             }
         }

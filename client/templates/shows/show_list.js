@@ -1,38 +1,38 @@
 Template.showList.helpers({
     shows: function(){
 		var searchCriteria = Session.get('searchCriteria');
-		var includeKeywords = searchCriteria && searchCriteria.keywords && searchCriteria.keywords != '';
-		var includeDates = searchCriteria && searchCriteria.startdate && searchCriteria.enddate && searchCriteria.startdate != '' && searchCriteria.enddate != '';
-		var includeLocation = searchCriteria && searchCriteria.lat && searchCriteria.lng && searchCriteria.radius && searchCriteria.lng != '' && searchCriteria.lat != '' && searchCriteria.radius != '';
-		var equatorialRadiusMiles = 3963.2;
+		var includeKeywords = searchCriteria != undefined && searchCriteria.keywords != undefined && searchCriteria.keywords != '';
+		var includeDates = searchCriteria != undefined && searchCriteria.startdate != undefined && searchCriteria.enddate != undefined && searchCriteria.startdate != '' && searchCriteria.enddate != '';
+		var includeLocation = searchCriteria != undefined && searchCriteria.latitude != undefined && searchCriteria.longitude != undefined && searchCriteria.radius != undefined && searchCriteria.longitude != '' && searchCriteria.latitude != '' && searchCriteria.radius != '';
 		
 		if(includeKeywords && includeDates && includeLocation){
-			var venues = Venues.find({geoWithin : {$centerSphere: [[parseFloat(searchCriteria.lat), parseFloat(searchCriteria.lng)], parseFloat(searchCriteria.radius)/equatorialRadiusMiles]}}).map(function(v) {return v._id});
+			var venues = getVenues(searchCriteria);
 			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")},
-			'dates.0.date': {$elemMatch: {$gt: new ISODate(searchCriteria.startdate), $lt: new ISODate(searchCriteria.enddate) }},
+			'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }},
 			venue: {$in: venues}});
 		}
 		else if(includeKeywords && includeDates){
 			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, 
-			'dates.0.date': {$elemMatch: {$gt: new ISODate(searchCriteria.startdate), $lt: new ISODate(searchCriteria.enddate) }}});
+			'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }}});
 		}
 		else if(includeKeywords && includeLocation){
-			var venues = Venues.find({geoWithin : {$centerSphere: [[parseFloat(searchCriteria.lat), parseFloat(searchCriteria.lng)], parseFloat(searchCriteria.radius)/equatorialRadiusMiles]}}).map(function(v) {return v._id});
+			var venues = getVenues(searchCriteria);
 			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")},
 			venue: {$in: venues}});
 		}
 		else if(includeDates && includeLocation){
-			var venues = Venues.find({geoWithin : {$centerSphere: [[parseFloat(searchCriteria.lat), parseFloat(searchCriteria.lng)], parseFloat(searchCriteria.radius)/equatorialRadiusMiles]}}).map(function(v) {return v._id});
-			return Shows.find({venue: {$in: venues}});
+			var venues = getVenues(searchCriteria);
+			return Shows.find({'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }}, 
+			venue: {$in: venues}});
 		}
 		else if(includeKeywords){
 			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}});
 		}
 		else if(includeDates){
-			return Shows.find({'dates.0.date': {$elemMatch: {$gt: new ISODate(searchCriteria.startdate), $lt: new ISODate(searchCriteria.enddate) }}});
+			return Shows.find({'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }}});
 		}
 		else if(includeLocation){
-			var venues = Venues.find({geoWithin : {$centerSphere: [[parseFloat(searchCriteria.lat), parseFloat(searchCriteria.lng)], parseFloat(searchCriteria.radius)/equatorialRadiusMiles]}}).map(function(v) {return v._id});
+			var venues = getVenues(searchCriteria);
 			return Shows.find({venue: {$in: venues}});
 		}
 		else{
@@ -40,3 +40,9 @@ Template.showList.helpers({
 		}
     }
 });
+
+var getVenues = function(searchCriteria){
+	var equatorialRadiusMiles = 3963.2;
+	return Venues.find({loc: {$geoWithin: {$centerSphere: [[parseFloat(searchCriteria.longitude), parseFloat(searchCriteria.latitude)], parseFloat(searchCriteria.radius)/equatorialRadiusMiles]}}}).map(function(v) {return v._id});
+}
+

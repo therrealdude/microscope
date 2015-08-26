@@ -44,16 +44,23 @@ Template.search.events({
         Session.set('lastClicked', $(e.target).attr('name'));
     },
 	'keyup #searchCriteria input': function(e){
-        e.preventDefault();
-		var container = $(e.target).closest('#searchCriteria');
-		var searchCriteria = {
-			'keywords': container.find('#search').val(),
-			'latitude': container.find('#lat').val(),
-			'longitude': container.find('#lng').val(),
-			'radius': container.find('#radius').val(),
-			'startdate': container.find('#startdate').val(),
-			'enddate': container.find('#enddate').val()
-		}
-        Session.set('searchCriteria', searchCriteria);
-    }
+		setSearchCriteria(e);
+    },
+	'change #searchCriteria input': function(e){
+		setSearchCriteria(e);
+	}
 });
+
+setSearchCriteria = function(e) {
+	e.preventDefault();
+	var container = $(e.target).closest('#searchCriteria');
+	var searchCriteria = {
+		'keywords': container.find('#search').val(),
+		'latitude': container.find('#lat').val(),
+		'longitude': container.find('#lng').val(),
+		'radius': container.find('#radius').val(),
+		'startdate': container.find('#startdate').val(),
+		'enddate': container.find('#enddate').val()
+	}
+	Session.set('searchCriteria', searchCriteria);
+}
