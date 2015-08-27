@@ -2,6 +2,7 @@ Template.search.onCreated(function(){
     if (!Session.get('lastClicked')){
         Session.set('lastClicked', 'shows');
     }
+	Session.set('searchCriteria', setSearchCriteria($('#searchCriteria')))
 });
 
 Template.search.onRendered(function(){
@@ -44,16 +45,16 @@ Template.search.events({
         Session.set('lastClicked', $(e.target).attr('name'));
     },
 	'keyup #searchCriteria input': function(e){
-		setSearchCriteria(e);
+		e.preventDefault();
+		setSearchCriteria($(e.target).closest('#searchCriteria'));
     },
 	'change #searchCriteria input': function(e){
-		setSearchCriteria(e);
+		e.preventDefault();
+		setSearchCriteria($(e.target).closest('#searchCriteria'));
 	}
 });
 
-setSearchCriteria = function(e) {
-	e.preventDefault();
-	var container = $(e.target).closest('#searchCriteria');
+setSearchCriteria = function(container) {
 	var searchCriteria = {
 		'keywords': container.find('#search').val(),
 		'latitude': container.find('#lat').val(),

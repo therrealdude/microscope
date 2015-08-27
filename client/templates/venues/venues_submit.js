@@ -28,8 +28,8 @@ Template.venueSubmit.events({
 		loc: {
 			type: 'Point',
 			coordinates: [
-				parseFloat($(e.target).find('[name=lat]').val()),
-				parseFloat($(e.target).find('[name=lng]').val())
+				parseFloat($(e.target).find('[name=lng]').val()),
+				parseFloat($(e.target).find('[name=lat]').val())
 			]
 		},
         formatted_address: $(e.target).find('[name=formatted_address]').val()

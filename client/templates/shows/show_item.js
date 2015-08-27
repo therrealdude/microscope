@@ -1,3 +1,9 @@
+Template.showItem.helpers({
+	hasDistance: function(){
+		this.distance != undefined;
+	}
+});
+
 Template.showItem.events({
     'click #btnfollow': function(e){
         e.preventDefault();

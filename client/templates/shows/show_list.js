@@ -1,48 +1,27 @@
+
 Template.showList.helpers({
     shows: function(){
-		var searchCriteria = Session.get('searchCriteria');
-		var includeKeywords = searchCriteria != undefined && searchCriteria.keywords != undefined && searchCriteria.keywords != '';
-		var includeDates = searchCriteria != undefined && searchCriteria.startdate != undefined && searchCriteria.enddate != undefined && searchCriteria.startdate != '' && searchCriteria.enddate != '';
-		var includeLocation = searchCriteria != undefined && searchCriteria.latitude != undefined && searchCriteria.longitude != undefined && searchCriteria.radius != undefined && searchCriteria.longitude != '' && searchCriteria.latitude != '' && searchCriteria.radius != '';
 		
-		if(includeKeywords && includeDates && includeLocation){
-			var venues = getVenues(searchCriteria);
-			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")},
-			'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }},
-			venue: {$in: venues}});
-		}
-		else if(includeKeywords && includeDates){
-			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, 
-			'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }}});
-		}
-		else if(includeKeywords && includeLocation){
-			var venues = getVenues(searchCriteria);
-			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")},
-			venue: {$in: venues}});
-		}
-		else if(includeDates && includeLocation){
-			var venues = getVenues(searchCriteria);
-			return Shows.find({'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }}, 
-			venue: {$in: venues}});
-		}
-		else if(includeKeywords){
-			return Shows.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}});
-		}
-		else if(includeDates){
-			return Shows.find({'dates.0.date': {$elemMatch: {$gte: new Date(searchCriteria.startdate), $lte: new Date(searchCriteria.enddate) }}});
-		}
-		else if(includeLocation){
-			var venues = getVenues(searchCriteria);
-			return Shows.find({venue: {$in: venues}});
+		var searchCriteria = Session.get('searchCriteria');
+		
+		if((searchCriteria === undefined) ||
+		((searchCriteria.keywords === undefined || searchCriteria.keywords === '') &&
+		(searchCriteria.startdate === undefined || searchCriteria.startdate === '' || searchCriteria.enddate === undefined || searchCriteria.enddate === '') &&
+		(searchCriteria.latitude === undefined || searchCriteria.latitude === '' || searchCriteria.longitude === undefined || searchCriteria.longitude === '' || searchCriteria.radius === undefined || searchCriteria.radius === '')))
+		{
+			Session.set('showList', Shows.find().fetch());
 		}
 		else{
-			return Shows.find();
+			Meteor.call('searchShows', searchCriteria, function(error, result){
+				if(error){
+					Errors.throw(error.reason);
+				}
+				Session.set('showList', result);
+			});
 		}
+		
+		return Session.get('showList');
     }
 });
 
-var getVenues = function(searchCriteria){
-	var equatorialRadiusMiles = 3963.2;
-	return Venues.find({loc: {$geoWithin: {$centerSphere: [[parseFloat(searchCriteria.longitude), parseFloat(searchCriteria.latitude)], parseFloat(searchCriteria.radius)/equatorialRadiusMiles]}}}).map(function(v) {return v._id});
-}
 
