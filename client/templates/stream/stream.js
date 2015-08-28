@@ -5,10 +5,12 @@ Template.showstream.helpers({
 		if (currentUser.following) {
 			
 			if(currentUser.following.shows){
-				var shows = Shows.find({_id: {$in: currentUser.following.shows}});
+				var shows = Shows.find({_id: {$in: currentUser.following.shows}, 'dates.0.date': {$gte: new Date() }});
 				for(var i = 0; i<shows.length; i++){
 					for(var j = 0; j< shows[i].dates; j++){
-						stream.push({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
+						if(shows[i].dates[j].date >= new Date()){
+							stream.push({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
+						}
 					}
 				}
 			}
