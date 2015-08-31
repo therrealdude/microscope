@@ -15,10 +15,17 @@ Template.personEdit.events({
     e.preventDefault();
 
     var currentPersonId = this._id;
-
+	
+	var sessionvideos = Session.get('videoLinks');
+	var personvideos = [];
+	for (var i = 0; i<sessionvideos.length; i++) {
+		personvideos.push[sessionvideos[i].content];
+	}
+	
     var personProperties = {
       name: $(e.target).find('[name=name]').val(),
-      bio: $(e.target).find('[name=bio]').val()
+      bio: $(e.target).find('[name=bio]').val(),
+	  videos: personvideos
     }
     
     var errors = validatePerson(personProperties);
@@ -36,15 +43,5 @@ Template.personEdit.events({
         Router.go('personPage', {_id: currentPersonId});
       }
     });
-  },
-
-  'click .delete': function(e) {
-    e.preventDefault();
-
-    if (confirm("Delete this post?")) {
-      var currentPersonId = this._id;
-      Person.remove(currentPersonId);
-      Router.go('home');
-    }
   }
 });

@@ -15,9 +15,16 @@ Template.personSubmit.events({
   'submit form': function(e) {
     e.preventDefault();
 	
+	var sessionvideos = Session.get('videoLinks');
+	var personvideos = [];
+	for (var i = 0; i<sessionvideos.length; i++) {
+		personvideos.push[sessionvideos[i].content];
+	}
+	
     var person = {
       name: $(e.target).find('[name=name]').val(),
-      bio: $(e.target).find('[name=bio]').val()
+      bio: $(e.target).find('[name=bio]').val(),
+	  videos: personvideos
     };
 	
     var errors = validatePerson(person);

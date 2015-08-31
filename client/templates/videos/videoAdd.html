@@ -1,0 +1,12 @@
+<template name="videoAdd">
+	<div id="videoAdd">
+		<h3>Videos</h3>
+		{{#each videoElement}}
+			{{#if display}}
+				<input name="videoAdd" id="{{id}}" placeholder="Enter video url..." class="videoTextBox form-control" value="{{content}}"/>
+				<input type="button" value="Remove Video" id="remove{{id}}" remove="{{id}}" class="btn removeVideo" style="display:inline-block"/>
+			{{/if}}
+		{{/each}}
+		<input type="button" value="Add Video" class="btn" id="btnAddVideo"/>
+	</div>
+</template>
