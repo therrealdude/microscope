@@ -1,5 +1,5 @@
 Template.personEdit.onCreated(function() {
-  Session.set('postEditErrors', {});
+  Session.set('personEditErrors', {});
 });
 Template.personEdit.helpers({
   errorMessage: function(field) {
@@ -19,7 +19,9 @@ Template.personEdit.events({
 	var sessionvideos = Session.get('videoLinks');
 	var personvideos = [];
 	for (var i = 0; i<sessionvideos.length; i++) {
-		personvideos.push[sessionvideos[i].content];
+		if (sessionvideos[i].display) {
+			personvideos.push(sessionvideos[i].content);
+		}
 	}
 	
     var personProperties = {

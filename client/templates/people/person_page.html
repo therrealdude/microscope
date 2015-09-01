@@ -1,5 +1,8 @@
 <template name="personPage">
   <div class="person-page page">
     {{> personItem}}
+	{{#each formattedVideoUrls}}
+		<div class="ui embed" data-url="{{this}}"></div>
+	{{/each}}
   </div>
 </template>

@@ -18,7 +18,9 @@ Template.personSubmit.events({
 	var sessionvideos = Session.get('videoLinks');
 	var personvideos = [];
 	for (var i = 0; i<sessionvideos.length; i++) {
-		personvideos.push[sessionvideos[i].content];
+		if(sessionvideos[i].display){
+			personvideos.push(sessionvideos[i].content);
+		}
 	}
 	
     var person = {
