@@ -1,0 +1,65 @@
+<template name="socialMediaDisplay">
+	{{#if hasSocialMedia}}
+		<div class="grid-block fluid">
+			<div class="ui horizontal list">
+				<div class="item">
+					<h4>Social Media: </h4>
+				</div>
+				{{#if hasFacebook}}
+					<div class="item">
+						<a href="{{socialmedia.facebook}}" target="_blank">
+							<div class="ui icon">
+								<i class="facebook icon big"></i>
+							</div>
+						</a>
+					</div>
+				{{/if}}
+				{{#if hasTwitter}}
+					<div class="item">
+						<a href="{{socialmedia.twitter}}" target="_blank">
+							<div class="ui icon">
+								<i class="twitter icon big"></i>
+							</div>
+						</a>
+					</div>
+				{{/if}}
+				{{#if hasTumblr}}
+					<div class="item">
+						<a href="{{socialmedia.tumblr}}" target="_blank">
+							<div class="ui icon">
+								<i class="tumblr icon big"></i>
+							</div>
+						</a>
+					</div>
+				{{/if}}
+				{{#if hasGooglePlus}}
+					<div class="item">
+						<a href="{{socialmedia.googleplus}}" target="_blank">
+							<div class="ui icon">
+								<i class="google plus icon big"></i>
+							</div>
+						</a>
+					</div>
+				{{/if}}
+				{{#if hasYouTube}}
+					<div class="item">
+						<a href="{{socialmedia.youtube}}" target="_blank">
+							<div class="ui icon">
+								<i class="youtube icon big"></i>
+							</div>
+						</a>
+					</div>
+				{{/if}}
+				{{#if hasVimeo}}
+					<div class="item">
+						<a href="{{socialmedia.vimeo}}" target="_blank">
+							<div class="ui icon">
+								<i class="vimeo icon big"></i>
+							</div>
+						</a>
+					</div>
+				{{/if}}
+			</div>
+		</div>
+	{{/if}}
+</template>

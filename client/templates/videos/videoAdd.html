@@ -1,12 +1,22 @@
 <template name="videoAdd">
 	<div id="videoAdd">
-		<h3>Videos</h3>
-		{{#each videoElements}}
-			{{#if display}}
-				<input name="videoAdd" id="{{id}}" placeholder="Enter video url..." class="videoTextBox form-control" value="{{content}}"/>
-				<input type="button" value="Remove Video" id="remove{{id}}" remove="{{id}}" class="btn removeVideo" style="display:inline-block"/>
-			{{/if}}
-		{{/each}}
+		<h3 class="ui dividing header">Videos</h3>
+		<div class="ui middle aligned divided list">
+			{{#each videoElements}}
+				{{#if display}}
+					<div class="field item">
+						<div class="fields">
+							<div class="twelve wide field">
+								<input name="videoAdd" id="{{id}}" placeholder="Enter video url..." class="videoTextBox" value="{{content}}"/>
+							</div>
+							<div class="four wide field">
+								<input type="button" value="Remove Video" id="remove{{id}}" remove="{{id}}" class="btn removeVideo" style="display:inline-block"/>
+							</div>
+						</div>
+					</div>
+				{{/if}}
+			{{/each}}
+		</div>
 		<input type="button" value="Add Video" class="btn" id="btnAddVideo"/>
 	</div>
 </template>

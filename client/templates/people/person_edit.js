@@ -27,7 +27,8 @@ Template.personEdit.events({
     var personProperties = {
       name: $(e.target).find('[name=name]').val(),
       bio: $(e.target).find('[name=bio]').val(),
-	  videos: personvideos
+	  videos: personvideos,
+	  socialmedia: Session.get('socialmedia')
     }
     
     var errors = validatePerson(personProperties);
