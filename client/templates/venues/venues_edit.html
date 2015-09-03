@@ -1,5 +1,11 @@
 <template name="venueEdit">
-  <form class="main form page">
+  <form class="ui main form page">
+	<div class="ui gray top attached label massive form-header">
+		Edit Venue
+	</div>
+	<br/>
+	<br/>
+	<h3 class="ui dividing header">General Info</h3>
     <div class="form-group {{errorClass 'name'}}">
       <label class="control-label" for="name">Name</label>
       <div class="controls">
@@ -10,7 +16,7 @@
     <div class="form-group {{errorClass 'description'}}">
       <label class="control-label" for="description">Description</label>
       <div class="controls">
-          <input name="description" id="description" type="textarea" value="{{description}}" placeholder="Enter venue description" class="form-control"/>
+          <textarea name="description" id="description" type="textarea" value="{{description}}" placeholder="Enter venue description" class="form-control"></textarea>
           <span class="help-block">{{errorMessage 'description'}}</span>
       </div>
     </div>
@@ -21,12 +27,24 @@
           <div class="geolocation">
             <input type="hidden" name="lat" value="{{latitude}}"/>
             <input type="hidden" name="lng" value="{{longitude}}"/>
-            <input name="formatted_address" type="hidden" value="{{formatted_address}}">
+            <input name="formatted_address" type="hidden" value="{{formatted_address}}"/>
           </div>
           <img src="/desktop/powered-by-google-on-white.png"/>
           <span class="help-block">{{errorMessage 'address1'}}</span>
       </div>
-      </div>
+    </div>
+	<div class="form-group {{errorClass 'address1'}}">
+		<label class="control-label" for="website">Website</label>
+		<div class="controls">
+			<input name="website" id="website" type="text" value="{{website}}" placeholder="Enter website..." class="form-control"/>
+		</div>
+	</div>
+	<div class="form-group {{errorClass 'videos'}}">
+		{{>videoAdd}}
+	</div>
+	<div class="form-group {{errorClass 'socialmedia'}}">
+		{{>socialMediaAdd}}
+	</div>
     <input type="submit" value="Submit" class="btn btn-primary"/>
 	<hr/>
     <a class="btn btn-danger delete" href="#">Delete Venue</a>

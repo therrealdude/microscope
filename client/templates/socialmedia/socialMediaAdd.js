@@ -3,7 +3,7 @@ Template.socialMediaAdd.onCreated(function(){
 		Session.set('socialmedia', this.data.socialmedia);
 	}
 	else{
-		Session.set('socialmedia', '');
+		Session.set('socialmedia', {});
 	}
 });
 

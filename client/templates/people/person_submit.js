@@ -26,7 +26,9 @@ Template.personSubmit.events({
     var person = {
       name: $(e.target).find('[name=name]').val(),
       bio: $(e.target).find('[name=bio]').val(),
-	  videos: personvideos
+	  website: $(e.target).find('[name=website]').val(),
+	  videos: personvideos,
+	  socialmedia: Session.get('socialmedia')
     };
 	
     var errors = validatePerson(person);

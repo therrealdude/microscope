@@ -27,6 +27,7 @@ Template.personEdit.events({
     var personProperties = {
       name: $(e.target).find('[name=name]').val(),
       bio: $(e.target).find('[name=bio]').val(),
+	  website: $(e.target).find('[name=website]').val(),
 	  videos: personvideos,
 	  socialmedia: Session.get('socialmedia')
     }

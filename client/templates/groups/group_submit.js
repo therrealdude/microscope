@@ -25,10 +25,21 @@ Template.groupSubmit.events({
   'submit form': function(e) {
     e.preventDefault();
 	
+	var sessionvideos = Session.get('videoLinks');
+	var groupvideos = [];
+	for (var i = 0; i<sessionvideos.length; i++) {
+		if(sessionvideos[i].display){
+			groupvideos.push(sessionvideos[i].content);
+		}
+	}
+	
     var group = {
       name: $(e.target).find('[name=name]').val(),
       description: $(e.target).find('[name=description]').val(),
-	  members: $(e.target).find('[name=members]').val()
+	  members: $(e.target).find('[name=members]').val(),
+	  website: $(e.target).find('[name=website]').val(),
+	  videos: groupvideos,
+	  socialmedia: Session.get('socialmedia')
     };
 	
     var errors = validategroup(group);

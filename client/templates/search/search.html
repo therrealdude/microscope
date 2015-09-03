@@ -3,40 +3,49 @@
 </template>
 
 <template name="search">
-	<div class="ui horizontal list" id="searchCriteria">
-	  <div class="ui search item" style="margin-top:8px">
-		<div class="ui icon input content">
-			<div class="header">Keywords</div>
-			<input type="text" class="prompt" placeholder="Search..." id="search"/>
-			<i class="search icon"></i>
+	<div class="ui grid-block">
+		<div class="ui gray top attached label big">
+			Search Criteria
 		</div>
-	  </div>
-	  <div class="item">
-		<div class="content">
-		  <div class="header">Location</div>
-		  <div class="ui input">
-			<input name="addressSearch" id="addressSearch" type="text" value="" placeholder="Enter address" autocomplete="off" autocorrect="off"/>
+		<br/>
+		<br/>
+		<div class="ui three column very relaxed grid" id="searchCriteria">
+		  <div class="column">
+			<div class="content">
+				<div class="header">Keywords</div>
+				<div class="ui input fluid">
+					<input type="text" placeholder="Search..." id="search"/>
+				</div>
+			</div>
 		  </div>
-		  <div class="geolocation">
-			<input type="hidden" name="lat" id="lat" value=""/>
-			<input type="hidden" name="lng" id="lng" value=""/>
-			<input name="formatted_address" type="hidden" value=""/>
+		  <div class="column">
+			<div class="content">
+			  <div class="header">Location</div>
+			  <div class="ui input fluid">
+				<input name="addressSearch" id="addressSearch" type="text" value="" placeholder="Enter address" autocomplete="off" autocorrect="off"/>
+			  </div>
+			  <div class="geolocation">
+				<input type="hidden" name="lat" id="lat" value=""/>
+				<input type="hidden" name="lng" id="lng" value=""/>
+				<input name="formatted_address" type="hidden" value=""/>
+			  </div>
+			  <div class="header">Radius</div>
+			  <div class="ui input fluid">
+				<input name="radius" id="radius" type="number" placeholder="Enter radius..."/>
+			  </div>
+			</div>
 		  </div>
-		  <div class="ui input">
-			<input name="radius" id="radius" type="number" placeholder="Enter radius..."/>
+		  <div class="column">
+			<div class="header">Start Date</div>
+			<div class="ui input fluid">
+				<input type="datetime-local" placeholder="Start date and time..." name="startdate" id="startdate"/>
+			</div>
+			<div class="header">End Date</div>
+			<div class="ui input fluid">
+				<input type="datetime-local" placeholder="End date and time..." name="enddate" id="enddate"/>
+			</div>
 		  </div>
 		</div>
-	  </div>
-	  <div class="item">
-		<div class="header">Start Date</div>
-		<div class="ui input">
-			<input type="datetime-local" placeholder="Start date and time..." name="startdate" id="startdate"/>
-		</div>
-		<div class="header">End Date</div>
-		<div class="ui input">
-			<input type="datetime-local" placeholder="End date and time..." name="enddate" id="enddate"/>
-		</div>
-	  </div>
 	</div>
 
     <div class="ui four item menu">

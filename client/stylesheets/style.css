@@ -200,7 +200,7 @@ body {
   height: 500px;
 }
 
-/* Video Styling */
-
-.videoTextBox {
+.form-header {
+	margin-bottom: 20px !important;
+	padding-bottom: 20px !important;
 }
