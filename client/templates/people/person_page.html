@@ -2,8 +2,6 @@
   <div class="person-page page">
     {{> personItem}}
 	{{> socialMediaDisplay}}
-	{{#each formattedVideoUrls}}
-		<div class="ui embed" data-url="{{this}}"></div>
-	{{/each}}
+	{{> videoDisplay}}
   </div>
 </template>

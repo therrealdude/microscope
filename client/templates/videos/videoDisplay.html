@@ -1,0 +1,23 @@
+<template name="videoDisplay">
+	<div class="ui list vertical">
+		{{#each formattedVideoUrls}}
+			<div class="item small">
+				<div class="ui embed" data-url="{{this}}"></div>
+			</div>
+		{{/each}}
+	</div>
+	<div class="ui two column grid fluid">
+		<div class="column">
+			<button class="ui left labeled icon button fluid">
+				<i class="left arrow icon"></i>
+				Previous
+			</button>
+		</div>
+		<div class="column">
+			<button class="ui right labeled icon button fluid">
+				<i class="right arrow icon"></i>
+				Next
+			</button>
+		</div>
+	</div>
+</template>

@@ -21,6 +21,15 @@ Template.venueSubmit.helpers({
 
 Template.venueSubmit.events({
   'submit form': function(e) {
+	  
+	var sessionvideos = Session.get('videoLinks');
+	var venuevideos = [];
+	for (var i = 0; i<sessionvideos.length; i++) {
+		if(sessionvideos[i].display){
+			venuevideos.push(sessionvideos[i].content);
+		}
+	}
+	
     var venueAttributes = {
         name: $(e.target).find('[name=name]').val(),
         description:    $(e.target).find('[name=description]').val(),
@@ -32,7 +41,9 @@ Template.venueSubmit.events({
 				parseFloat($(e.target).find('[name=lat]').val())
 			]
 		},
-        formatted_address: $(e.target).find('[name=formatted_address]').val()
+        formatted_address: $(e.target).find('[name=formatted_address]').val(),
+		videos: venuevideos,
+		socialmedia: Session.get('socialmedia')
     };
     
     var errors = validateVenues(venueAttributes);
