@@ -1,0 +1,8 @@
+<template name="venueSearch">
+    <select class="ui fluid search dropdown" id="venueSearch" name="venueSearch">
+        <option value="">Select Venue</option>
+        {{#each venuesSearch}}
+            <option value="{{_id}}">{{name}} {{address1}} {{city}}, {{state}} {{zipcode}}</option>
+        {{/each}}
+    </select>
+</template>

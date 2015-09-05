@@ -1,23 +1,27 @@
 <template name="videoDisplay">
-	<div class="ui list vertical">
-		{{#each formattedVideoUrls}}
-			<div class="item small">
-				<div class="ui embed" data-url="{{this}}"></div>
-			</div>
-		{{/each}}
-	</div>
-	<div class="ui two column grid fluid">
-		<div class="column">
-			<button class="ui left labeled icon button fluid">
-				<i class="left arrow icon"></i>
-				Previous
-			</button>
-		</div>
-		<div class="column">
-			<button class="ui right labeled icon button fluid">
-				<i class="right arrow icon"></i>
-				Next
-			</button>
-		</div>
-	</div>
+    {{#if hasVideos}}
+        <div class="ui grid fluid">
+            <div class="two wide column top"></div>
+            <div class="twelve wide column top">
+            {{#each formattedVideoUrls}}
+                    <div id="{{getVideoID displayorder}}" class="ui embed" data-url="{{url}}" style="{{getVideoVisibility displayorder}}"></div>
+            {{/each}}
+            </div>
+            <div class="two wide column top"></div>
+        </div>
+        <div class="ui two column grid fluid">
+            <div class="column">
+                <button class="ui left labeled icon button fluid previousVideo">
+                    <i class="left arrow icon"></i>
+                    Previous
+                </button>
+            </div>
+            <div class="column">
+                <button class="ui right labeled icon button fluid nextVideo">
+                    <i class="right arrow icon"></i>
+                    Next
+                </button>
+            </div>
+        </div>
+    {{/if}}
 </template>

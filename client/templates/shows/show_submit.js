@@ -3,13 +3,6 @@ Template.showSubmit.onCreated(function(){
     Session.set('showDateInfo', [{id: 'date0', display: true}]);
 });
 
-Template.performersSearch.onRendered(function(){
-    $('select#performersSearch').dropdown({allowAdditions: true});
-});
-
-Template.venueSearch.onRendered(function(){
-    $('select#venueSearch').dropdown();
-});
 
 Template.showSubmit.helpers({
     errorMessage: function(field){
@@ -93,22 +86,5 @@ Template.showSubmit.events({
     }
 });
 
-Template.venueSearch.helpers({
-    venuesSearch: function(){
-        return Venues.find();
-    }
-});
 
-Template.performersSearch.helpers({
-    performers: function(){
-        var ret = [];
-        People.find().map(function(p){
-            ret.push({_id: 'p:' + p._id, name: p.name});
-        });
-        Groups.find().map(function(g){
-            ret.push({_id: 'g:' + g._id, name: g.name});
-        });
-        return ret;    
-    }
-});
     

@@ -8,19 +8,6 @@ Template.showEdit.onCreated(function(){
 	Session.set('showDateInfo', controls);
 });
 
-Template.performersSearch.onRendered(function(){
-	var showInfoDates = Session.get('showDateInfo');
-	for(var i = 0; i < showInfoDates.length; i++)
-		if(showInfoDates[i].display){
-			$('#' + showInfoDates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', showInfoDates[i].performers);
-			$('#' + showInfoDates[i].id).find('[name=showdate]').val(showInfoDates[i].date);
-		}
-});
-
-Template.venueSearch.onRendered(function(){
-    $('select#venueSearch').dropdown('set selected', this.data.venue);
-});
-
 Template.showEdit.helpers({
     errorMessage: function(field){
         return Session.get('showEditErrors')[field];

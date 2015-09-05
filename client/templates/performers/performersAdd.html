@@ -1,0 +1,8 @@
+<template name="performersSearch">
+    <select class="ui fluid search dropdown" multiple="" id="performersSearch" name="performersSearch">
+        <option value="">Select Performers</option>
+        {{#each performers}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+</template>

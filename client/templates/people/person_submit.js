@@ -15,19 +15,11 @@ Template.personSubmit.events({
   'submit form': function(e) {
     e.preventDefault();
 	
-	var sessionvideos = Session.get('videoLinks');
-	var personvideos = [];
-	for (var i = 0; i<sessionvideos.length; i++) {
-		if(sessionvideos[i].display){
-			personvideos.push(sessionvideos[i].content);
-		}
-	}
-	
     var person = {
       name: $(e.target).find('[name=name]').val(),
       bio: $(e.target).find('[name=bio]').val(),
 	  website: $(e.target).find('[name=website]').val(),
-	  videos: personvideos,
+	  videos: Session.get('videosToSave'),
 	  socialmedia: Session.get('socialmedia')
     };
 	
