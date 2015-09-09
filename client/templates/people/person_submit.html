@@ -9,24 +9,41 @@
     <div class="form-group {{errorClass 'name'}}">
       <label class="control-label" for="name">Name</label>
       <div class="field">
-          <input name="name" id="name" type="text" value="" placeholder="Enter your name" class="form-control"/>
+          <input name="name" id="name" type="text" value="" placeholder="Enter your name..." class="form-control"/>
           <span class="help-block">{{errorMessage 'name'}}</span>
       </div>
     </div>
     <div class="form-group {{errorClass 'bio'}}">
       <label class="control-label" for="bio">Bio</label>
       <div class="field">
-          <textarea name="bio" id="bio" type="text" value="" placeholder="Enter your bio" class="form-control"></textarea>
+          <textarea name="bio" id="bio" type="text" value="" placeholder="Enter your bio..." class="form-control"></textarea>
           <span class="help-block">{{errorMessage 'bio'}}</span>
       </div>
     </div>
 	<div class="form-group {{errorClass 'website'}}">
       <label class="control-label" for="website">Website</label>
       <div class="field">
-          <input name="website" id="website" type="text" value="" placeholder="Enter your website" class="form-control"/>
+          <input name="website" id="website" type="text" value="" placeholder="Enter your website..." class="form-control"/>
           <span class="help-block">{{errorMessage 'website'}}</span>
       </div>
     </div>
+	<div class="form-group">
+		<h3 class="ui dividing header">Contact Info</h3>
+		<div class="field">
+			<label class="control-label" for="email">Email</label>
+			<input name="email" id="email" type="text" value="" placeholder="Enter email..."/>
+		</div>
+		<div class="field">
+			<label class="control-label" for="phone">Phone Number</label>
+			<input name="phone" id="phone" type="text" value="" placeholder="Enter phone number..."/>
+		</div>
+		<div class="field">
+			<div class="ui checkbox">
+				<input type="checkbox" name="personContactInfo" id="personContactInfo" style="margin-left:5px"/>
+				<label for="personContactInfo">Show Contact Info On Profile</label>
+			</div>
+		</div>
+	</div>
 	<div class="form-group {{errorClass 'videos'}}">
 		{{>videoAdd}}
 	</div>
