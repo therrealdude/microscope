@@ -3,6 +3,10 @@ Template.showSubmit.onCreated(function(){
     Session.set('showDateInfo', [{id: 'date0', display: true}]);
 });
 
+Template.showSubmit.onRendered(function(){
+    $('[name=contactPhone]').mask('(999) 999-9999');
+});
+
 
 Template.showSubmit.helpers({
     errorMessage: function(field){
