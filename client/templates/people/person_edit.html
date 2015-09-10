@@ -27,6 +27,23 @@
           <span class="help-block">{{errorMessage 'website'}}</span>
       </div>
     </div>
+	<div class="form-group">
+		<h3 class="ui dividing header">Contact Info</h3>
+		<div class="field">
+			<label class="control-label" for="email">Email</label>
+			<input name="email" id="email" type="text" value="{{email}}" placeholder="Enter email..."/>
+		</div>
+		<div class="field">
+			<label class="control-label" for="phone">Phone Number</label>
+			<input name="phone" id="phone" type="text" value="{{phone}}" placeholder="Enter phone number..."/>
+		</div>
+		<div class="field">
+			<div class="ui checkbox">
+				<input type="checkbox" name="showContactInfo" id="showContactInfo" style="margin-left:5px" checked="{{showContactInfo}}"/>
+				<label for="showContactInfo">Show Contact Info On Profile</label>
+			</div>
+		</div>
+	</div>
 	<div class="form-group {{errorClass 'videos'}}">
 		{{>videoAdd}}
 	</div>

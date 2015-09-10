@@ -21,7 +21,10 @@ Template.personEdit.events({
       bio: $(e.target).find('[name=bio]').val(),
 	  website: $(e.target).find('[name=website]').val(),
 	  videos: Session.get('videosToSave'),
-	  socialmedia: Session.get('socialmedia')
+	  socialmedia: Session.get('socialmedia'),
+	  email: $(e.target).find('[name=email]').val(),
+	  phone: $(e.target).find('[name=phone]').val(),
+	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked')
     }
     
     var errors = validatePerson(personProperties);
