@@ -3,10 +3,6 @@ Template.showSubmit.onCreated(function(){
     Session.set('showDateInfo', [{id: 'date0', display: true}]);
 });
 
-Template.showSubmit.onRendered(function(){
-    $('[name=contactPhone]').mask('(999) 999-9999');
-});
-
 
 Template.showSubmit.helpers({
     errorMessage: function(field){
@@ -69,9 +65,12 @@ Template.showSubmit.events({
         var show = {name: $(e.target).find('[name=name]').val(),
                     description: $(e.target).find('[name=description]').val(),
                     venue: $(e.target).find('[name=venueSearch]').val(),
-                    acceptsSubmissions: $(e.target).find('[name=acceptsSubmissions]').val() === "on",
+                    acceptsSubmissions: $(e.target).find('[name=acceptsSubmissions]').prop('checked'),
                     ticketPrice: $(e.target).find('[name=ticketPrice]').val(),
-                    dates: dates
+                    ticketLink: $(e.target).find('[name=ticketLink]').val(),
+                    dates: dates,
+                    socialmedia: Session.get('socialmedia'),
+                    videos: Session.get('videosToSave')
                    };
         
         var errors = validateShow(show);

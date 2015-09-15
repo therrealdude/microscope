@@ -43,35 +43,22 @@
                         <div class="ui label">$</div>
                         <input id="ticketPrice" name="ticketPrice" type="number" placeholder="Enter a ticket price"/>
                     </div>
-                </div>
-                <div class="field">
-                    <br/>
-                    <div class="ui checkbox">
-                        <input type="checkbox" checked="" id="acceptsSubmissions" name="acceptsSubmissions" />
-                        <label for="acceptsSubmissions">Accepts Submissions</label>
+               </div>
+               <div class="field">
+                    <label class="control-label">Ticket Link</label>
+                    <div class="ui labeled input">
+                        <div class="ui label">http://</div>
+                        <input id="ticketLink" name="ticketLink" type="text" placeholder="Enter link for ticket information..."/>
                     </div>
                 </div>
             </div>
         </div>
         <div class="field">
-            <label class="control-label">Contact Email</label>
-            <div class="three fields">
-                <div class="field">
-                    <input type="text" value="" id="contactEmail" name="contactEmail"/>
-                </div>
-                @
-                <div class="field">
-                    <input type="text" value="" id="contactEmailDomain" name="contactEmailDomain"/>
-                </div>
-                .
-                <div class="field">
-                    <input type="text" value="" id="contactEmailCom" name="contactEmailCom"/>
-                </div>
-            </div>
-        </div>
-        <div class="field">
-            <label class="control-label">Contact Phone Number</label>
-            <input type="text" value="" id="contactPhone" name="contactPhone"/>
+                    <br/>
+                    <div class="ui checkbox">
+                        <input type="checkbox" checked="" id="acceptsSubmissions" name="acceptsSubmissions" />
+                        <label for="acceptsSubmissions">Accepts Submissions</label>
+                    </div>
         </div>
         <div class="form-group {{errorClass 'date'}}">
           <h3 class="ui dividing header">Show Dates and Performers</h3>

@@ -18,10 +18,10 @@ Template.performersSearch.onRendered(function(){
             if(this.data && this.data.performers) {
                 var val = [];
                 for(var j = 0; j<this.data.performers.groups.length; j++){
-                    val.push('g:' + this.data.performers.groups[j]);
+                    val.push('g:' + this.data.performers.groups[j]._id);
                 }
                 for(var j = 0; j<this.data.performers.people.length; j++){
-                    val.push('p:' + this.data.performers.people[j]);
+                    val.push('p:' + this.data.performers.people[j]._id);
                 }
                 $('#' + showInfoDates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
                 $('#' + showInfoDates[i].id).find('[name=showdate]').val(showInfoDates[i].date);

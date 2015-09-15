@@ -21,6 +21,11 @@ Template.showEdit.helpers({
             ret = Session.get('showDateInfo');
         }
         return ret;
+    },
+    dateString: function(){
+        console.log(this.date.toISOString());
+        console.log(this.date.toISOString().replace('Z', '').replace(':00.000', ''));
+        return this.date.toISOString().replace('Z', '').replace(':00.000', '');
     }
 });
 
@@ -59,9 +64,12 @@ Template.showEdit.events({
         var show = {name: $(e.target).find('[name=name]').val(),
                     description: $(e.target).find('[name=description]').val(),
                     venue: $(e.target).find('[name=venueSearch]').val(),
-                    acceptsSubmissions: $(e.target).find('[name=acceptsSubmissions]').val() === "on",
+                    acceptsSubmissions: $(e.target).find('[name=acceptsSubmissions]').prop('checked'),
                     ticketPrice: $(e.target).find('[name=ticketPrice]').val(),
-                    dates: dates
+                    ticketLink: $(e.target).find('[name=ticketLink]').val(),
+                    dates: dates,
+                    socialmedia: Session.get('socialmedia'),
+                    videos: Session.get('videosToSave')
                    };
         
         var errors = validateShow(show);
