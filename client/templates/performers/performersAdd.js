@@ -12,22 +12,23 @@ Template.performersSearch.helpers({
 });
 
 Template.performersSearch.onRendered(function(){
-	var showInfoDates = Session.get('showDateInfo');
-	for(var i = 0; i < showInfoDates.length; i++)
-		if(showInfoDates[i].display){
-            if(this.data && this.data.performers) {
-                var val = [];
-                for(var j = 0; j<this.data.performers.groups.length; j++){
-                    val.push('g:' + this.data.performers.groups[j]._id);
-                }
-                for(var j = 0; j<this.data.performers.people.length; j++){
-                    val.push('p:' + this.data.performers.people[j]._id);
-                }
-                $('#' + showInfoDates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
-                $('#' + showInfoDates[i].id).find('[name=showdate]').val(showInfoDates[i].date);
-            }
-            else{
-                $('#' + showInfoDates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true});
-            }
+	if(this.data && this.data.performers) {
+		var val = [];
+		for(var j = 0; j<this.data.performers.groups.length; j++){
+			val.push('g:' + this.data.performers.groups[j]._id);
 		}
+		for(var j = 0; j<this.data.performers.people.length; j++){
+			val.push('p:' + this.data.performers.people[j]._id);
+		}
+		var showInfoDates = Session.get('showDateInfo');
+		for(var i = 0; i<showInfoDates.length; i++) {
+			if($('#' + showInfoDates[i].id).find('[name=performersSearch]').val() === null){
+				$('#' + showInfoDates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
+				break;
+			}
+		}
+	}
+	else{
+		$('[name=performersSearch]').dropdown({allowAdditions: true})
+	}
 });

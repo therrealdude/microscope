@@ -56,11 +56,23 @@ Template.showEdit.events({
         for (var i = 0; i < showDateInfo.length; i++) {
             if(showDateInfo[i].display){
                 var control = $(e.target).find('#' + showDateInfo[i].id);
+                var performers = control.find('[name=performersSearch]').val();
+                var people = [];
+                var groups = [];
+                for (var j = 0; j<performers.length; j++){
+                    if(performers[j].indexOf('p:') != -1){
+                        people.push({_id: performers[j].replace('p:', '')});
+                    }
+                    if(performers[j].indexOf('g:') != -1){
+                        groups.push({_id: performers[j].replace('g:', '')});
+                    }
+                }
+                var performersList = {groups: groups, people: people};
                 dates.push({date: new Date(control.find('[name=showdate]').val()), 
-                            performers: control.find('[name=performersSearch]').val()});
+                            performers: performersList});
             }
         }
-        
+		
         var show = {name: $(e.target).find('[name=name]').val(),
                     description: $(e.target).find('[name=description]').val(),
                     venue: $(e.target).find('[name=venueSearch]').val(),
