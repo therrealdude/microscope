@@ -1,3 +1,41 @@
 <template name="showPage">
     {{> showItem}}
+    <div class="show">
+    <h3 class="ui dividing header">Show Dates</h3>
+    <div class="ui list">
+        {{#if isAdmin}}
+        {{#each dates}}
+            <div class="item">
+                {{formatDateString}}
+                <div class="ui list">
+                    {{#each performersList}}
+                        {{#if isGroup}}
+                            <a href={{pathFor 'groupPage'}} class="item">{{name}}</a>
+                        {{/if}}
+                        {{#if isPerson}}
+                            <a href={{pathFor 'personPage'}} class="item">{{name}}</a>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+        {{/each}}
+        {{else}}
+            <div class="item">
+                {{formatDateString}}
+                <div class="ui list">
+                    {{#each performersList}}
+                        {{#if isGroup}}
+                            <a href={{pathFor 'groupPage'}} class="item">{{name}}</a>
+                        {{/if}}
+                        {{#if isPerson}}
+                            <a href={{pathFor 'personPage'}} class="item">{{name}}</a>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+    </div>
+    {{> socialMediaDisplay}}
+    {{> videoDisplay}}
 </template>
