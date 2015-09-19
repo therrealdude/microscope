@@ -42,6 +42,7 @@ Template.showSubmit.events({
         
         var dates = [];
         var showDateInfo = Session.get('showDateInfo');
+        var dateCount = 0;
         for (var i = 0; i < showDateInfo.length; i++) {
             if(showDateInfo[i].display){
                 var control = $(e.target).find('#' + showDateInfo[i].id);
@@ -60,7 +61,9 @@ Template.showSubmit.events({
 				}
                 var performersList = {groups: groups, people: people};
                 dates.push({date: new Date(control.find('[name=showdate]').val()), 
+                            id: 'date' + dateCount.toString(),
                             performers: performersList});
+                dateCount++;
             }
         }
         

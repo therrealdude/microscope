@@ -1,6 +1,7 @@
 Template.showPage.onCreated(function(){
 	Session.set('isAdmin', $.inArray(Meteor.userId(), this.data.admins));
-	Session.set('acceptsSubmissions', this.data.acceptsSubmissions)
+	Session.set('acceptsSubmissions', this.data.acceptsSubmissions);
+    Session.set('currentShow', this.data);
 });
 
 Template.showPage.onRendered(function(){
@@ -50,4 +51,39 @@ Template.showPage.helpers({
 });
 
 Template.showPage.events({
+    'click .request': function(e){
+        var popup = $(e.target).closest('.popup');
+        var requests;
+        if(this.data.requests){
+            requests = this.data.requests;
+        }
+        else{
+            requests = {people: [], groups: []};
+        }
+        
+        var yourself = popup.find('input.chooseYourself');
+        var groups = popup.find('input.chooseGroup');
+        
+        if(yourself.prop('checked')){
+            requests.people.push(yourself.attr('id'));
+        }
+        for(var i = 0; i< groups.length; i++){
+            if(groups[i].attr('checked')){
+                requests.groups.push({id: groups[i].attr(id), status: 'Pending', message: ''});
+            }
+        }
+        
+        this.data.requests = requests;
+        var show = Session.get('currentShow');
+        for(var i = 0; i<show.dates; i++){
+            if(show.dates[i].id === this.data.id){
+                show.dates[i] = this.data;
+            }
+        }
+        Shows.update(show._id, {$set: show}, function(error){
+            if(error){
+                Error.throw(error.reason);
+            }
+        });
+    }
 })
