@@ -48,14 +48,16 @@ Template.showSubmit.events({
                 var performers = control.find('[name=performersSearch]').val();
                 var people = [];
                 var groups = [];
-                for (var j = 0; j<performers.length; j++){
-                    if(performers[j].indexOf('p:') != -1){
-                        people.push({_id: performers[j].replace('p:', '')});
-                    }
-                    if(performers[j].indexOf('g:') != -1){
-                        groups.push({_id: performers[j].replace('g:', '')});
-                    }
-                }
+				if(performers){
+					for (var j = 0; j<performers.length; j++){
+						if(performers[j].indexOf('p:') != -1){
+							people.push({_id: performers[j].replace('p:', '')});
+						}
+						if(performers[j].indexOf('g:') != -1){
+							groups.push({_id: performers[j].replace('g:', '')});
+						}
+					}
+				}
                 var performersList = {groups: groups, people: people};
                 dates.push({date: new Date(control.find('[name=showdate]').val()), 
                             performers: performersList});

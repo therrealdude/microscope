@@ -3,7 +3,6 @@
     <div class="show">
     <h3 class="ui dividing header">Show Dates</h3>
     <div class="ui list">
-        {{#if isAdmin}}
         {{#each dates}}
             <div class="item">
                 {{formatDateString}}
@@ -17,23 +16,25 @@
                         {{/if}}
                     {{/each}}
                 </div>
+				{{#if acceptsSubmissions}}
+					<button class="btn requestSlot">Request Slot</button>
+					<div class="ui custom popup top left transition">
+						<div class="ui list">
+							{{#each currentUser}}
+								<div class="item">
+									{{name}}
+								</div>
+							{{/each}}
+							{{#each userGroups}}
+								<div class="item">
+									{{name}}
+								</div>
+							{{/each}}
+						</div>
+					</div>
+				{{/if}}
             </div>
         {{/each}}
-        {{else}}
-            <div class="item">
-                {{formatDateString}}
-                <div class="ui list">
-                    {{#each performersList}}
-                        {{#if isGroup}}
-                            <a href={{pathFor 'groupPage'}} class="item">{{name}}</a>
-                        {{/if}}
-                        {{#if isPerson}}
-                            <a href={{pathFor 'personPage'}} class="item">{{name}}</a>
-                        {{/if}}
-                    {{/each}}
-                </div>
-            </div>
-        {{/if}}
     </div>
     </div>
     {{> socialMediaDisplay}}

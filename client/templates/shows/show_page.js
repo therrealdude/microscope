@@ -1,9 +1,23 @@
+Template.showPage.onCreated(function(){
+	Session.set('isAdmin', $.inArray(Meteor.userId(), this.data.admins));
+	Session.set('acceptsSubmissions', this.data.acceptsSubmissions)
+});
+
+Template.showPage.onRendered(function(){
+	$('.requestSlot').popup({
+		popup : $('.custom.popup'),
+		on    : 'click'
+	  });
+})
+
 Template.showPage.helpers({
     isAdmin: function() {
-        return $.inArray(Meteor.userId(), this.admins);
+        return Session.get('isAdmin');
     },
+	acceptsSubmissions: function(){
+		return Session.get('acceptsSubmissions');
+	},
     performersList: function() {
-        console.log('entered performers list function');
         var ret = [];
         for(var i = 0; i<this.performers.people.length; i++){
             var person = People.findOne({_id: this.performers.people[i]._id});
@@ -15,20 +29,25 @@ Template.showPage.helpers({
             _.extend(group, {type: 'G'});
             ret.push(group);
         }
-        console.log(ret);
         return ret;
     },
     isPerson: function() {
-        console.log('checking if is a person');
-        console.log(this.type);
         return this.type === 'P';
     },
     isGroup: function() {
-        console.log('checking if is a group');
-        console.log(this.type);
         return this.type === 'G';
     },
     formatDateString: function(){
         return this.date.toLocaleString();
-    }
+    },
+	currentUser: function(){
+		return People.find({userId: Meteor.userId()}).fetch();
+	},
+	userGroups: function(){
+		var person = People.findOne({userId: Meteor.userId()});
+		return Groups.find({members: person._id}).fetch();
+	}
 });
+
+Template.showPage.events({
+})
