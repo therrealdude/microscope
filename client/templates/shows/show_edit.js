@@ -3,7 +3,7 @@ Template.showEdit.onCreated(function(){
 	var dates = this.data.dates.length;
 	var controls = [];
 	for (var i = 0; i < dates; i++){
-		controls.push({id: 'date' + i, display: true, date: this.data.dates[i].date, performers: this.data.dates[i].performers});
+		controls.push({id: this.data.dates[i].id, display: true, date: this.data.dates[i].date, performers: this.data.dates[i].performers, requests: this.data.dates[i].requests});
 	}
 	Session.set('showDateInfo', controls);
 });
@@ -23,8 +23,6 @@ Template.showEdit.helpers({
         return ret;
     },
     dateString: function(){
-        console.log(this.date.toISOString());
-        console.log(this.date.toISOString().replace('Z', '').replace(':00.000', ''));
         return this.date.toISOString().replace('Z', '').replace(':00.000', '');
     }
 });
@@ -32,7 +30,7 @@ Template.showEdit.helpers({
 Template.showEdit.events({
     'click input#btnAddDate': function(){
         var ret = Session.get('showDateInfo');
-        ret.push({id: 'date' + ret.length, display: true});
+        ret.push({id: 'date' + ret.length, display: true, requests: {people: [], groups: []}});
         Session.set('showDateInfo', ret);
     },
     'click input.removeDate': function(e){
@@ -61,18 +59,21 @@ Template.showEdit.events({
                 var performers = control.find('[name=performersSearch]').val();
                 var people = [];
                 var groups = [];
-                for (var j = 0; j<performers.length; j++){
-                    if(performers[j].indexOf('p:') != -1){
-                        people.push({_id: performers[j].replace('p:', '')});
-                    }
-                    if(performers[j].indexOf('g:') != -1){
-                        groups.push({_id: performers[j].replace('g:', '')});
-                    }
-                }
+				if(performers != null){
+					for (var j = 0; j<performers.length; j++){
+						if(performers[j].indexOf('p:') != -1){
+							people.push({_id: performers[j].replace('p:', '')});
+						}
+						if(performers[j].indexOf('g:') != -1){
+							groups.push({_id: performers[j].replace('g:', '')});
+						}
+					}
+				}
                 var performersList = {groups: groups, people: people};
                 dates.push({date: new Date(control.find('[name=showdate]').val()), 
                             id: 'date' + dateCount,
-                            performers: performersList});
+                            performers: performersList,
+							requests: showDateInfo[i].requests});
                 dateCount++;
             }
         }
@@ -85,14 +86,15 @@ Template.showEdit.events({
                     ticketLink: $(e.target).find('[name=ticketLink]').val(),
                     dates: dates,
                     socialmedia: Session.get('socialmedia'),
-                    videos: Session.get('videosToSave')
+                    videos: Session.get('videosToSave'),
+					admins: this.admins
                    };
         
-        var errors = validateShow(show);
-        var check = {};
-        if(errors === check){
-            return Session.set('showSubmitErrors', errors);
-        }
+        //var errors = validateShow(show);
+        //var check = {};
+        //if(errors != check){
+         //   return Session.set('showSubmitErrors', errors);
+        //}
         
         Shows.update(showid, {$set: show}, function(error){
             if(error){

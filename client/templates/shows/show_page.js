@@ -1,14 +1,16 @@
 Template.showPage.onCreated(function(){
-	Session.set('isAdmin', $.inArray(Meteor.userId(), this.data.admins));
+	Session.set('isAdmin', $.inArray(Meteor.userId(), this.data.admins) != -1);
 	Session.set('acceptsSubmissions', this.data.acceptsSubmissions);
     Session.set('currentShow', this.data);
 });
 
 Template.showPage.onRendered(function(){
-	$('.requestSlot').popup({
-		popup : $('.custom.popup'),
-		on    : 'click'
-	  });
+	for(var i = 0; i<this.data.dates.length; i++){
+		$('#' + this.data.dates[i].id + ' .requestSlot').popup({
+			popup : $('#' + this.data.dates[i].id + ' .custom.popup'),
+			on    : 'click'
+		  });
+	}
 })
 
 Template.showPage.helpers({
@@ -16,7 +18,7 @@ Template.showPage.helpers({
         return Session.get('isAdmin');
     },
 	acceptsSubmissions: function(){
-		return Session.get('acceptsSubmissions');
+		return Session.get('acceptsSubmissions') && !Session.get('isAdmin');
 	},
     performersList: function() {
         var ret = [];
@@ -47,40 +49,52 @@ Template.showPage.helpers({
 	userGroups: function(){
 		var person = People.findOne({userId: Meteor.userId()});
 		return Groups.find({members: person._id}).fetch();
+	},
+	numberRequests: function(){
+		return this.requests.people.length + this.requests.groups.length;
 	}
 });
 
 Template.showPage.events({
+	'click .btnclose': function(e){
+		e.preventDefault();
+		$(e.target).closest('.popup').popup('hide all');
+	},
     'click .request': function(e){
+		e.preventDefault();
+		
         var popup = $(e.target).closest('.popup');
         var requests;
-        if(this.data.requests){
-            requests = this.data.requests;
+        if(this.requests){
+            requests = this.requests;
         }
         else{
             requests = {people: [], groups: []};
         }
         
-        var yourself = popup.find('input.chooseYourself');
-        var groups = popup.find('input.chooseGroup');
+        var yourself = popup.find('input[name=chooseYourself]');
+        var groups = popup.find('input[name=chooseGroup]');
         
         if(yourself.prop('checked')){
-            requests.people.push(yourself.attr('id'));
+            requests.people.push({id: yourself.attr('id'), status: 'Pending', message: ''});
         }
-        for(var i = 0; i< groups.length; i++){
-            if(groups[i].attr('checked')){
-                requests.groups.push({id: groups[i].attr(id), status: 'Pending', message: ''});
+        for(var i = 0; i < groups.length; i++){
+			var addGroup = groups[i].checked;
+            if(addGroup){
+                requests.groups.push({id: groups[i].id, status: 'Pending', message: ''});
             }
         }
         
-        this.data.requests = requests;
+        this.requests = requests;
         var show = Session.get('currentShow');
-        for(var i = 0; i<show.dates; i++){
-            if(show.dates[i].id === this.data.id){
-                show.dates[i] = this.data;
+        for(var i = 0; i<show.dates.length; i++){
+            if(show.dates[i].id === this.id){
+                show.dates[i] = this;
             }
         }
-        Shows.update(show._id, {$set: show}, function(error){
+		
+		var showid = show._id;
+        Shows.update(showid, {$set: {dates: show.dates}}, function(error){
             if(error){
                 Error.throw(error.reason);
             }

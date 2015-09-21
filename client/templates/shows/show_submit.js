@@ -62,7 +62,8 @@ Template.showSubmit.events({
                 var performersList = {groups: groups, people: people};
                 dates.push({date: new Date(control.find('[name=showdate]').val()), 
                             id: 'date' + dateCount.toString(),
-                            performers: performersList});
+                            performers: performersList,
+							requests: {people: [], groups: []}});
                 dateCount++;
             }
         }
@@ -89,7 +90,7 @@ Template.showSubmit.events({
                 Errors.throw(error.reason);
             }
             
-            Router.go('showList');
+            Router.go('showPage', {_id: result._id});
         });
     }
 });

@@ -4,7 +4,7 @@
     <h3 class="ui dividing header">Show Dates</h3>
     <div class="ui list">
         {{#each dates}}
-            <div class="item">
+            <div class="item" id="{{id}}">
                 {{formatDateString}}
                 <div class="ui list">
                     {{#each performersList}}
@@ -18,6 +18,7 @@
                 </div>
 				{{#if acceptsSubmissions}}
 					<button class="btn requestSlot">Request Slot</button>
+					<span>{{pluralize numberRequests 'Request'}}</span>
 					<div class="ui custom popup top left transition fluid" id={{id}}>
                         <form class="ui form">
                         <div class="ui gray top attached label big form-header">
@@ -47,23 +48,34 @@
                                 <div class="ui list">
                                     {{#each userGroups}}
                                         <div class="item">
-                                            <field>
+                                            <div class="field">
                                                 <div class="ui checkbox">
                                                     <input type="checkbox" id="{{_id}}" name="chooseGroup" style="left:20px;bottom:25px;"/>
                                                     <label for="chooseGroup">{{name}}</label>
                                                 </div>
-                                            </field>
+                                            </div>
                                         </div>
                                     {{/each}}
                                 </div>
                             </div>
                             <div class="four wide column">
                                 <br/>
-                                <br/>
-                                <button class="btn request">Send Request</button>
+								<div class="field">
+									<button class="ui button request fluid">Send Request</button>
+								</div>
+								<div class="field">
+									<button class="ui button btnclose fluid">Close</button>
+								</div>
                             </div>
 						</div>
                         </form>
+					</div>
+				{{/if}}
+				{{#if isAdmin}}
+					<button class="btn viewRequests">View Requests</button>
+					<span>{{pluralize numberRequests 'Request'}}</span>
+					<div class="ui custom popup top left transition fluid" id={{id}}>
+						
 					</div>
 				{{/if}}
             </div>

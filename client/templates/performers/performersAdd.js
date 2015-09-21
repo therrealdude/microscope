@@ -20,13 +20,8 @@ Template.performersSearch.onRendered(function(){
 		for(var j = 0; j<this.data.performers.people.length; j++){
 			val.push('p:' + this.data.performers.people[j]._id);
 		}
-		var showInfoDates = Session.get('showDateInfo');
-		for(var i = 0; i<showInfoDates.length; i++) {
-			if($('#' + showInfoDates[i].id).find('[name=performersSearch]').val() === null){
-				$('#' + showInfoDates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
-				break;
-			}
-		}
+		
+		$('#' + this.data.id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
 	}
 	else{
 		$('[name=performersSearch]').dropdown({allowAdditions: true})
