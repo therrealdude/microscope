@@ -4,10 +4,10 @@
 	<h3>Members</h3>
 	<ul>
 		{{#each groupMembers}}
-				<li>
-					<a href={{pathFor "personPage"}} class="capitalize">{{name}}</a>
-				</li>
+				{{>personItem}}
 		{{/each}}
 	</ul>
+    {{> socialMediaDisplay}}
+    {{> videoDisplay}}
   </div>
 </template>

@@ -21,15 +21,8 @@ Template.venueEdit.helpers({
 
 Template.venueEdit.events({
   'submit form': function(e) {
+    e.preventDefault();
 	var venueId = this._id;  
-	
-	var sessionvideos = Session.get('videoLinks');
-	var venuevideos = [];
-	for (var i = 0; i<sessionvideos.length; i++) {
-		if(sessionvideos[i].display){
-			venuevideos.push(sessionvideos[i].content);
-		}
-	}
 	
     var venueAttributes = {
         name: $(e.target).find('[name=name]').val(),
@@ -44,7 +37,7 @@ Template.venueEdit.events({
 		},
 		formatted_address: $(e.target).find('[name=formatted_address]').val(),
 		website: $(e.target).find('[name=website]').val(),
-		videos: venuevideos,
+		videos: Session.get('videosToSave'),
 		socialmedia: Session.get('socialmedia')
     };
     
@@ -58,7 +51,7 @@ Template.venueEdit.events({
             Errors.throw(error.reason);
         }
         
-        Router.go('venuePage', {_id: venueId});
+        Router.go('/venue/' + venueId);
     });
   },
   

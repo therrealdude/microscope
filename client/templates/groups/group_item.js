@@ -1,3 +1,13 @@
+Template.groupItem.helpers({
+    canEdit: function(){
+        var currentPerson = People.findOne({userId: Meteor.userId()});
+        console.log(currentPerson);
+        console.log(this.members);
+        console.log($.inArray(currentPerson._id, this.members));
+        return $.inArray(currentPerson._id, this.members) != -1;
+    }
+});
+
 Template.groupItem.events({
     'click #btnfollow': function(e){
         e.preventDefault();

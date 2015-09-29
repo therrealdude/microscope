@@ -5,7 +5,9 @@
 	  <p class="group-description">
 		{{description}}
 	  </p>
-	  <a href="{{pathFor 'groupEdit'}}">Edit</a>
+      {{#if canEdit}}
+	       <a href="{{pathFor 'groupEdit'}}">Edit</a>
+      {{/if}}
       <button class="btn" id="btnFollow">Follow</button>
     </div>
   </div>
