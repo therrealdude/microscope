@@ -24,13 +24,14 @@ Template.personEdit.events({
 	  socialmedia: Session.get('socialmedia'),
 	  email: $(e.target).find('[name=email]').val(),
 	  phone: $(e.target).find('[name=phone]').val(),
-	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked')
+	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked'),
+      images: Cloudinary.collection.find().fetch()
     }
     
     var errors = validatePerson(personProperties);
     if (errors.name || errors.bio)
       return Session.set('personEditErrors', errors);
-
+    
     People.update(currentPersonId, {$set: personProperties}, function(error) {
       if (error) {
         // display the error to the user

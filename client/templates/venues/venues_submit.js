@@ -35,7 +35,7 @@ Template.venueSubmit.events({
 			]
 		},
         formatted_address: $(e.target).find('[name=formatted_address]').val(),
-        website: $(e.target).find('[name=website]'),
+        website: $(e.target).find('[name=website]').val(),
 		videos: Session.get('videosToSave'),
 		socialmedia: Session.get('socialmedia')
     };
@@ -50,7 +50,7 @@ Template.venueSubmit.events({
             Errors.throw(error.reason);
         }
 
-        Router.go('/venue/' + result._id);
+        Router.go('/venue/' + result.id);
     });
   }
 });

@@ -1,0 +1,21 @@
+<Template name="imageUpload">
+    <div>
+        <label for="file" class="ui icon button">
+            <i class="file icon"></i>
+            Open File</label>
+         <input type="file" name="imageUpload" accept="image/*" multiple style="display:none"/>
+    </div>
+    <div class="inline fields">
+        <label>Choose Featured Image</label>
+        {{#each images}}
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="primary" style="top:-3px;left:18px" id="primary">
+                    <label for="primary">
+                        <img src="{{c.url public_id format=format}}" class="ui image medium"/>
+                    </label>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</Template>

@@ -108,7 +108,7 @@ Template.showEdit.events({
 	'click .delete': function(e) {
 		e.preventDefault();
 
-		if (confirm("Delete this post?")) {
+		if (confirm("Delete this show?")) {
 		  var currentShowId = this._id;
 		  Shows.remove(currentShowId);
 		  Router.go('home');

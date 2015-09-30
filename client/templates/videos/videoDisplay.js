@@ -29,6 +29,9 @@ Template.videoDisplay.helpers({
     },
     hasVideos: function(){
         return this.videos && this.videos.length > 0;
+    },
+    showNextPrevious: function(){
+        return this.videos.length > 1;
     }
 });
 
