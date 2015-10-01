@@ -1,10 +1,13 @@
 <template name="personItem">
-  <div class="person">
-    <div class="person-content">
-      <h3><a href={{pathFor 'personPage'}}>{{name}}</a></h3>
-	  <p class="person-bio">
-		{{bio}}
-	  </p>
+  <div class="item person">
+    {{>imageFeature}}
+    <div class="content person-content">
+        <div class="header"><a href={{pathFor 'personPage'}}>{{name}}</a></div>
+	  <div class="description">
+		<p>
+          {{bio}}
+	    </p>
+      </div>
       {{#if isPerson}}
 	   <a href="{{pathFor 'personEdit'}}" class="discuss btn btn-default">Edit</a>
       {{/if}}

@@ -10,12 +10,14 @@ Template.imageUpload.onCreated(function(){
 Template.imageUpload.helpers({
     images: function(){
         return Cloudinary.collection
-            .find({percent_uploaded: 100})
+            .find({status: 'complete'})
             .fetch()
             .map(function(i){
-            console.log(i.percent_uploaded);
             return i.response;
         });
+    },
+    hasImages: function(){
+        return Cloudinary.collection.find().fetch().length > 0;
     }
 });
 
@@ -25,5 +27,10 @@ Template.imageUpload.events({
     },
     'change [name=imageUpload]': function(e){
         Cloudinary.upload(e.currentTarget.files);
+        e.currentTarget.files = [];
+    },
+    'change [name=primary]': function(e){
+        Cloudinary.collection.update({}, {$set: {primary: false}});
+        Cloudinary.collection.update({'response.public_id': $(e.target).attr('id')}, {$set: {primary: $(e.target).prop('checked')}});
     }
 });
