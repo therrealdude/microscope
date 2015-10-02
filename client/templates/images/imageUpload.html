@@ -7,18 +7,38 @@
          <input type="file" name="imageUpload" accept="image/*" multiple style="display:none"/>
     </div>
     {{#if hasImages}}
-        <div class="inline fields">
-            <label>Choose Featured Image</label>
+        <label>Choose Featured Image</label>
+        <div id="imageDiv" class="field">
             {{#each images}}
-                <div class="field">
-                    <div class="ui radio checkbox">
-                        <input type="radio" name="primary" style="top:-3px;left:18px" id="{{public_id}}">
-                        <label for="primary">
-                            <img src="{{c.url public_id format=format}}" class="ui image small"/>
-                        </label>
-                    </div>
+                <div class="inline fields">
+                    {{#if image1}}
+                        {{#with image1}}
+                            {{>imageSelectionItem}}
+                        {{/with}}
+                    {{/if}}
+                    {{#if image2}}
+                        {{#with image2}}
+                            {{>imageSelectionItem}}
+                        {{/with}}
+                    {{/if}}
+                    {{#if image3}}
+                        {{#with image3}}
+                            {{>imageSelectionItem}}
+                        {{/with}}
+                    {{/if}}
                 </div>
             {{/each}}
         </div>
     {{/if}}
+</Template>
+
+<Template name="imageSelectionItem">
+    <div class="field">
+        <div class="ui radio checkbox">
+            <input type="radio" name="primary" style="top:-3px;left:18px" id="{{public_id}}">
+            <label for="primary">
+                <img src="{{c.url public_id format=format}}" class="ui image medium"/>
+            </label>
+        </div>
+    </div>
 </Template>
