@@ -1,0 +1,44 @@
+<Template name="imageDisplay">
+    <div class="dividing header">Pictures</div>
+    <div id="imageDiv">
+        {{#each images}}
+            <div class="ui list horizontal">
+                {{#with image1}}
+                    <div class="item">
+                        {{>imageDisplayItem}}
+                    </div>
+                {{/with}}
+                {{#with image2}}
+                    <div class="item">
+                        {{>imageDisplayItem}}
+                    </div>
+                {{/with}}
+                {{#with image3}}
+                    <div class="item">
+                        {{>imageDisplayItem}}
+                    </div>
+                {{/with}}
+                {{#with image4}}
+                    <div class="item">
+                        {{>imageDisplayItem}}
+                    </div>
+                {{/with}}
+                {{#with image5}}
+                    <div class="item">
+                        {{>imageDisplayItem}}
+                    </div>
+                {{/with}}
+                {{#with image6}}
+                    <div class="item">
+                        {{>imageDisplayItem}}
+                    </div>
+                {{/with}}
+                {{#with image7}}
+                    <div class="item">
+                        {{>imageDisplayItem}}
+                    </div>
+                {{/with}}
+            </div>
+        {{/each}}
+    </div>
+</Template>

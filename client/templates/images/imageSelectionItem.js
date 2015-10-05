@@ -14,9 +14,5 @@ Template.imageSelectionItem.events({
         }
         imagesToDelete.push(this.public_id);
         Session.set('imagesToDelete', imagesToDelete);
-    },
-    'click [name=imageDisplay]': function(e){
-        $('#' + this.public_id + '.ui.modal').modal('show');
-        $('#' + this.public_id + '.ui.modal').modal('show');
     }
 });
