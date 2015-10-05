@@ -1,0 +1,17 @@
+
+<Template name="imageSelectionItem">
+    <div class="field inline">
+        {{#if this}}
+            <div class="ui radio checkbox">
+                <input type="radio" name="primary" style="top:-3px;left:18px" id="{{public_id}}" title="Set Featured Image">
+                <label for="primary">
+                    <img src="{{c.url public_id format=format}}" class="ui small image" id="{{public_id}}" name="imageDisplay"/>
+                </label>
+            </div>
+            <a name="deleteImage" class="ui right red tiny icon" id="{{public_id}}">
+                <i class="icon remove circle red" title="Delete Image" style="cursor:pointer"></i>
+            </a>
+            {{>imageModal}}
+        {{/if}}
+    </div>
+</Template>

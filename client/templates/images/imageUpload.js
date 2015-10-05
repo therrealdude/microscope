@@ -11,6 +11,8 @@ Template.imageUpload.onRendered(function(){
     $('#imageDiv').slimScroll({
         'height': '400px'
     });
+    var primary = Cloudinary.collection.findOne({primary: true});
+    $('#' + primary.response.public_id + '[name=primary]').prop('checked', true);
 });
 
 Template.imageUpload.helpers({
@@ -22,11 +24,12 @@ Template.imageUpload.helpers({
             return i.response;
         });
         var ret = [];
-        for (var i = 0; i<images.length; i+=3)
+        for (var i = 0; i<images.length; i+=4)
         {
             var image1 = null;
             var image2 = null;
             var image3 = null;
+            var image4 = null;
             
             if(i< images.length){
                 image1 = images[i];
@@ -37,7 +40,10 @@ Template.imageUpload.helpers({
             if (i+2 < images.length){
                 image3 = images[i + 2];
             }
-            ret.push({image1: image1, image2: image2, image3: image3});
+            if (i + 3 < images.length){
+                image4 = images[i + 3];
+            }
+            ret.push({image1: image1, image2: image2, image3: image3, image4: image4});
         }
         return ret;
     },
@@ -47,18 +53,11 @@ Template.imageUpload.helpers({
 });
 
 Template.imageUpload.events({
-    'click .ui.icon.button': function(e){
+    'click [name=uploadIcon]': function(e){
         $('[name=imageUpload]').click();  
     },
     'change [name=imageUpload]': function(e){
         Cloudinary.upload(e.currentTarget.files);
         e.currentTarget.files = [];
-    }
-});
-
-Template.imageSelectionItem.events({
-    'change [name=primary]': function(e){
-        Cloudinary.collection.update({}, {$set: {primary: false}}, {multi: true});
-        Cloudinary.collection.update({'response.public_id': $(e.target).attr('id')}, {$set: {primary: $(e.target).prop('checked')}});
     }
 });

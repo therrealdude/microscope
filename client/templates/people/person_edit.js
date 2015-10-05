@@ -40,6 +40,10 @@ Template.personEdit.events({
         if (result.postExists)
             Errors.throw('This link has already been posted');
       } else {
+        var imagesToDelete = Session.get('imagesToDelete');
+        for (var i = 0; i<imagesToDelete.length; i++){
+            Cloudinary.delete(imagesToDelete[i]);
+        }
         Router.go('personPage', {_id: currentPersonId});
       }
     });
