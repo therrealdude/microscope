@@ -1,5 +1,5 @@
 .grid-block, .main, .post, .comments li, 
-.comment-form, .person, .group, .venue, .show, .venue {
+.comment-form, .person, .group, .venue, .show {
   background: #fff !important;
   border-radius: 3px;
   padding: 10px;
@@ -8,6 +8,22 @@
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); }
 
+ .person, .group, .venue, .show {
+	 border-radius: 10px !important;
+ }
+ 
+ img.featured {
+	 border-top-left-radius: 10px;
+	 border-bottom-left-radius: 10px;
+ }
+
+button.followbtn{
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+} 
+  
 body {
   background: #555;
   color: #666666; }

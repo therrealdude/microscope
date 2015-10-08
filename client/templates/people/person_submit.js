@@ -28,7 +28,8 @@ Template.personSubmit.events({
 	  socialmedia: Session.get('socialmedia'),
 	  email: $(e.target).find('[name=email]').val(),
 	  phone: $(e.target).find('[name=phone]').val(),
-	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked')
+	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked'),
+	  images: Cloudinary.collection.find().fetch()
     };
 	
     var errors = validatePerson(person);
@@ -39,12 +40,18 @@ Template.personSubmit.events({
       // display the error to the user and abort
       if (error)
         Errors.throw(error.reason);
-    
+	
+	  var imagesToDelete = Session.get('imagesToDelete');
+	  if(imagesToDelete){
+		for (var i = 0; i<imagesToDelete.length; i++){
+			Cloudinary.delete(imagesToDelete[i]);
+		}
+	  }
       // show this result but route anyway
       if (result.personExists)
         throw new Meteor.Error('This person has already been created');
     
-      Router.go('peopleList');  
+      Router.go('/person/' + result._id);  
     });
   }
 });
