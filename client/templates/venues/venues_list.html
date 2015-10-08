@@ -1,5 +1,9 @@
 <template name="venueList">
-    {{#each venues}}
-        {{> venueItem}}
-    {{/each}}
+	<div class="venues">
+		<div class="wrapper ui items">
+			{{#each venues}}
+				{{> venueItem}}
+			{{/each}}
+		</div>
+	</div>
 </template>

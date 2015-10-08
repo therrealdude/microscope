@@ -39,6 +39,9 @@
 			<input name="website" id="website" type="text" value="" placeholder="Enter website..." class="form-control"/>
 		</div>
 	</div>
+	<div class="form-group {{errorClass 'images'}}">
+		{{>imageUpload}}
+	</div>	
 	<div class="form-group {{errorClass 'videos'}}">
 		{{>videoAdd}}
 	</div>

@@ -37,7 +37,8 @@ Template.venueSubmit.events({
         formatted_address: $(e.target).find('[name=formatted_address]').val(),
         website: $(e.target).find('[name=website]').val(),
 		videos: Session.get('videosToSave'),
-		socialmedia: Session.get('socialmedia')
+		socialmedia: Session.get('socialmedia'),
+		images: Cloudinary.collection.find().fetch()
     };
     
     var errors = validateVenues(venueAttributes);
@@ -49,7 +50,12 @@ Template.venueSubmit.events({
         if(error) {
             Errors.throw(error.reason);
         }
-
+		var imagesToDelete = Session.get('imagesToDelete');
+        if(imagesToDelete){
+            for (var i = 0; i<imagesToDelete.length; i++){
+                Cloudinary.delete(imagesToDelete[i]);
+            }
+        }
         Router.go('/venue/' + result.id);
     });
   }

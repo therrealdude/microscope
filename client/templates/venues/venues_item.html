@@ -1,11 +1,16 @@
 <template name="venueItem">
-  <div class="venue">
-    <div class="venue-content">
-      <h3><a href={{pathFor 'venuePage'}}>{{name}}</a></h3>
-	  <p class="venue-bio">
-		{{description}}
-		<a href={{pathFor 'venueEdit'}}>Edit</a>
-	  </p>
-    </div>
+  <div class="item venue">
+	{{>imageFeature}}
+	<div class="content">
+	  <br/>
+	  <div class="header"><a href={{pathFor 'venuePage'}}>{{name}}</a></div>
+	  <div class="description">
+		  <p class="venue-bio">
+			{{description}}
+			<a href={{pathFor 'venueEdit'}} class="discuss btn btn-default">Edit</a>
+		  </p>
+	  </div>
+	</div>
+	<button class="btn followbtn" style="align:right">Follow</button>
   </div>
 </template>
