@@ -8,7 +8,7 @@ Template.imageUpload.onCreated(function(){
 });
 
 Template.imageUpload.onRendered(function(){
-    $('#imageDiv').slimScroll({
+    $('#imageUploadDiv .innerDiv').slimScroll({
         'height': '400px'
     });
     var primary = Cloudinary.collection.findOne({primary: true});

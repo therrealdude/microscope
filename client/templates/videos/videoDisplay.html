@@ -1,29 +1,31 @@
 <template name="videoDisplay">
     {{#if hasVideos}}
-        <div class="ui grid fluid">
-            <div class="two wide column top"></div>
-            <div class="twelve wide column top">
-            {{#each formattedVideoUrls}}
-                    <div id="{{getVideoID displayorder}}" class="ui embed" data-url="{{url}}" style="{{getVideoVisibility displayorder}}"></div>
-            {{/each}}
+        <div id="videoDiv">
+            <div class="ui grid fluid">
+                <div class="two wide column top"></div>
+                <div class="twelve wide column top">
+                {{#each formattedVideoUrls}}
+                        <div id="{{getVideoID displayorder}}" class="ui embed" data-url="{{url}}" style="{{getVideoVisibility displayorder}}"></div>
+                {{/each}}
+                </div>
+                <div class="two wide column top"></div>
             </div>
-            <div class="two wide column top"></div>
+            {{#if showNextPrevious}}
+                <div class="ui two column grid fluid videoButtons">
+                    <div class="column">
+                        <button class="ui left labeled icon button fluid previousVideo">
+                            <i class="left arrow icon"></i>
+                            Previous
+                        </button>
+                    </div>
+                    <div class="column">
+                        <button class="ui right labeled icon button fluid nextVideo">
+                            <i class="right arrow icon"></i>
+                            Next
+                        </button>
+                    </div>
+                </div>
+            {{/if}}
         </div>
-        {{#if showNextPrevious}}
-            <div class="ui two column grid fluid">
-                <div class="column">
-                    <button class="ui left labeled icon button fluid previousVideo">
-                        <i class="left arrow icon"></i>
-                        Previous
-                    </button>
-                </div>
-                <div class="column">
-                    <button class="ui right labeled icon button fluid nextVideo">
-                        <i class="right arrow icon"></i>
-                        Next
-                    </button>
-                </div>
-            </div>
-        {{/if}}
     {{/if}}
 </template>

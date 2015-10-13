@@ -1,6 +1,6 @@
 Template.imageDisplay.onRendered(function(){
-    $('#imageDiv').slimScroll({
-        height: '400px'
+    $('#imageDiv .imageDiv').slimScroll({
+        height: '300px'
     })
 });
 
@@ -15,7 +15,6 @@ Template.imageDisplay.helpers({
                 var image4 = null;
                 var image5 = null;
                 var image6 = null;
-                var image7 = null;
                 
                 if(i < this.images.length){
                     image1 = this.images[i].response;
@@ -35,17 +34,13 @@ Template.imageDisplay.helpers({
                 if(i + 5 < this.images.length){
                     image6 = this.images[i + 5].response;
                 }
-                if(i + 6 < this.images.length){
-                    image7 = this.images[i + 6].response;
-                }
                 ret.push({
                     image1: image1, 
                     image2: image2, 
                     image3: image3, 
                     image4: image4, 
                     image5: image5,
-                    image6: image6,
-                    image7: image7
+                    image6: image6
                          });
             }
         }

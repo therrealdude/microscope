@@ -8,31 +8,33 @@
     </div>
     {{#if hasImages}}
         <label>Choose Featured Image</label>
-        <div id="imageDiv" class="ui fluid">
-            {{#each images}}
-                <div class="inline fields">
-                    {{#if image1}}
-                        {{#with image1}}
-                            {{>imageSelectionItem}}
-                        {{/with}}
-                    {{/if}}
-                    {{#if image2}}
-                        {{#with image2}}
-                            {{>imageSelectionItem}}
-                        {{/with}}
-                    {{/if}}
-                    {{#if image3}}
-                        {{#with image3}}
-                            {{>imageSelectionItem}}
-                        {{/with}}
-                    {{/if}}
-                    {{#if image4}}
-                        {{#with image4}}
-                            {{>imageSelectionItem}}
-                        {{/with}}
-                    {{/if}}
-                </div>
-            {{/each}}
+        <div id="imageUploadDiv" class="ui fluid">
+            <div class="innerDiv">
+                {{#each images}}
+                    <div class="inline fields">
+                        {{#if image1}}
+                            {{#with image1}}
+                                {{>imageSelectionItem}}
+                            {{/with}}
+                        {{/if}}
+                        {{#if image2}}
+                            {{#with image2}}
+                                {{>imageSelectionItem}}
+                            {{/with}}
+                        {{/if}}
+                        {{#if image3}}
+                            {{#with image3}}
+                                {{>imageSelectionItem}}
+                            {{/with}}
+                        {{/if}}
+                        {{#if image4}}
+                            {{#with image4}}
+                                {{>imageSelectionItem}}
+                            {{/with}}
+                        {{/if}}
+                    </div>
+                {{/each}}
+            </div>
         </div>
     {{/if}}
 </Template>

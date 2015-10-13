@@ -1,7 +1,7 @@
 .grid-block, .main, .post, .comments li, 
-.comment-form, .person, .group, .venue, .show {
+.comment-form {
   background: #fff !important;
-  border-radius: 3px;
+  border-radius: 0px;
   padding: 10px;
   margin-bottom: 10px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
@@ -9,19 +9,25 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); }
 
  .person, .group, .venue, .show {
-	 border-radius: 10px !important;
+  border-radius: 0px;
+  padding: 10px;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+ }
+ .content{
+    background: #fff !important;
+    border: solid 5px !important;
  }
  
  img.featured {
-	 border-top-left-radius: 10px;
-	 border-bottom-left-radius: 10px;
+    border: solid 5px;
  }
 
 button.followbtn{
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
+    border-radius: 0px !important;
+    border: solid 5px !important;
 } 
   
 body {
@@ -30,7 +36,10 @@ body {
 
 #main {
   position: relative;
+  background: #999999;
+  padding: 5px;
 }
+
 .page {
   position: absolute;
   top: 0px;
@@ -38,7 +47,9 @@ body {
 }
 
 .navbar {
-  margin-bottom: 10px; }
+  margin-bottom: 10px; 
+  border-radius: 0px !important;
+}
   /* line 32, ../sass/style.scss */
   .navbar .navbar-inner {
     border-radius: 0px 0px 3px 3px; }
@@ -99,16 +110,6 @@ body {
   position: relative;
   opacity: 1;
 }
-
-/* .person .person-content {
-    float: left; 
-}
-
-.person .person-content h3 {
-	margin: 0;
-	line-height: 1.4;
-	font-size: 18px; 
-} */
 
 .comments {
   list-style-type: none;
@@ -192,10 +193,6 @@ body {
   pointer-events: auto;
 }
 
-#main{
-  position: relative;
-}
-
 .page{
   position: absolute;
   top: 0px;
@@ -220,3 +217,44 @@ body {
 	margin-bottom: 20px !important;
 	padding-bottom: 20px !important;
 }
+
+#imageDiv, #videoDiv{
+    margin: 5px !important;
+    background: #dddddd;
+    border: solid 5px;
+    border-color: #555555;
+}
+
+#imageDiv img{
+    margin: 5px;
+}
+
+.socialmedia{
+    margin: 5px;
+    border: 5px solid;
+}
+
+.previousVideo, .nextVideo {
+    margin-bottom: 5px !important;
+    border: solid 5px !important;
+}
+
+.videoButtons {
+    padding: 5px !important;
+}
+
+.ui.embed {
+    margin-top: 5px;
+}
+
+#searchCriteria .content{
+    border: none !important;
+}
+
+.searchlabel {
+    border-top: solid 5px !important; 
+    border-left: solid 5px !important; 
+    border-right: solid 5px !important; 
+    border-color: #999999 !important;
+}
+
