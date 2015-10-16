@@ -258,3 +258,12 @@ body {
     border-color: #999999 !important;
 }
 
+.calendar {
+
+}
+
+.calendar .calendarItem {
+	border: 5px solid;
+	background: #fff;
+}
+
