@@ -19,7 +19,6 @@ Template.calendar.helpers({
         
         var today = new Date();
         var startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + dateOffSet, 0, 0, 0);
-		console.log(startDate.getDay());
         
         var ret = [{day: startDate, shows: []}, 
 		{day: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 1, 0, 0, 0), shows: []}, 
@@ -63,7 +62,6 @@ Template.calendar.helpers({
             }
         }
 		
-		console.log(ret);
 		return ret;
     }
 });

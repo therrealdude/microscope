@@ -267,3 +267,7 @@ body {
 	background: #fff;
 }
 
+.calendar .calendarItem.past {
+	background: red;
+}
+

@@ -1,6 +1,10 @@
 Template.calendarItem.helpers({
 	inPast: function(){
-		if(this.day < new Date().setTime("00:00.0000")){
+		var today = new Date();
+		today.setHours(0);
+		today.setMinutes(0);
+		today.setSeconds(0);
+		if(this.day < today){
 			return "past";
 		}else{
 			return "";
@@ -15,7 +19,6 @@ Template.calendarItem.helpers({
 });
 
 var getWeekDay = function (dayofweek){
-	console.log(dayofweek);
 	if(dayofweek === 0){
 		return "Sunday";
 	}

@@ -1,13 +1,11 @@
 <Template name="calendar">
-	<div class="ui fluid grid">
-		<div class="two wide column"><button class="ui button calendarPrevious">Previous</button></div>
-		<div class="twelve wide column">
-			<div class="ui horizontal fluid list calendar">
-				{{#each calendarShows}}
-					{{>calendarItem}}
-				{{/each}}
+	<div class="ui fluid grid calendar">
+		<div class="one wide column"><button class="ui left attached button calendarPrevious"><i class="ui left arrow icon"></i></button></div>
+		{{#each calendarShows}}
+			<div class="two wide column">
+				{{>calendarItem}}
 			</div>
-		</div>
-		<div class="two wide column"><button class="ui button calendarNext">Next</button></div>
+		{{/each}}
+		<div class="one wide column"><button class="ui right attached button calendarNext"><i class="ui right arrow icon"></i></button></div>
 	</div>
 </Template>	
