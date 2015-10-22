@@ -76,7 +76,8 @@ Template.showSubmit.events({
                     ticketLink: $(e.target).find('[name=ticketLink]').val(),
                     dates: dates,
                     socialmedia: Session.get('socialmedia'),
-                    videos: Session.get('videosToSave')
+                    videos: Session.get('videosToSave'),
+					images: Cloudinary.find().fetch()
                    };
         
         var errors = validateShow(show);

@@ -76,6 +76,9 @@
               <span class="help-block">{{errorMessage 'date'}}</span>
           </div>
         </div>
+		<div class="form-group {{errorClass 'photos'}}">
+			{{>imageUpload}}
+		</div>
         <div class="form-group {{errorClass 'videos'}}">
             {{>videoAdd}}
         </div>
