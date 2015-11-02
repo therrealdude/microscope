@@ -1,15 +1,19 @@
 <template name="showItem">
-  <div class="show">
-    <div class="show-content">
-      <h3><a href={{pathFor 'showPage'}}>{{name}} </a></h3>
+  <div class="item">
+	{{>imageFeature}}
+    <div class="content">
+	  <br/>
+      <div class="header"><a href={{pathFor 'showPage'}}>{{name}} </a></div>
 	  <a href={{pathFor 'showEdit'}}>Edit</a>
-	  <p class="show-description">
-		{{description}}
-	  </p>
-	  <p>
-		{{distance}}
-	  </p>
-      <button id="btnfollow" class="btn">Follow</button>
+	  <div class="description">
+		<p>
+			{{description}}
+		</p>
+		<!--<p>
+			{{distance}}
+		</p>-->
+	  </div>
     </div>
+	<button id="btnfollow" class="btn followbtn" style="align:right">Follow</button>
   </div>
 </template>

@@ -1,14 +1,16 @@
 <template name="groupItem">
-  <div class="group">
-    <div class="group-content">
-      <h3><a href={{pathFor 'groupPage'}}>{{name}}</a></h3>
+  <div class="group item">
+	{{>imageFeature}}
+    <div class="content">
+	  <br/>
+      <div class="header"><a href={{pathFor 'groupPage'}}>{{name}}</a></div>
 	  <p class="group-description">
 		{{description}}
 	  </p>
       {{#if canEdit}}
 	       <a href="{{pathFor 'groupEdit'}}">Edit</a>
       {{/if}}
-      <button class="btn" id="btnFollow">Follow</button>
     </div>
+	<button class="btn followbtn" id="btnfollow">Follow</button>
   </div>
 </template>

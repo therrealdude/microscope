@@ -2,11 +2,11 @@
   <div class="group-page page">
     {{> groupItem}}
 	<h3>Members</h3>
-	<ul>
+	<div class="wrapper ui items">
 		{{#each groupMembers}}
 				{{>personItem}}
 		{{/each}}
-	</ul>
+	</div>
     {{> socialMediaDisplay}}
     {{> videoDisplay}}
   </div>

@@ -1,5 +1,9 @@
 <template name="showList">
-    {{#each shows}}
-        {{> showItem}}
-    {{/each}}
+	<div class="shows">
+		<div class=" wrapper ui items">
+			{{#each shows}}
+				{{> showItem}}
+			{{/each}}
+		</div>
+	</div>
 </template>
