@@ -3,6 +3,10 @@ Template.showSubmit.onCreated(function(){
     Session.set('showDateInfo', [{id: 'date0', display: true}]);
 });
 
+Template.showSubmit.onRendered(function(){
+	$('#administrators').dropdown({});
+});
+
 
 Template.showSubmit.helpers({
     errorMessage: function(field){
@@ -17,7 +21,24 @@ Template.showSubmit.helpers({
             ret = Session.get('showDateInfo');
         }
         return ret;
-    }
+    },
+	administrators: function(){
+		return People.find().fetch().map(
+			function(p){
+				console.log(p.images);
+				if (p.images){
+					for (var i = 0; i<p.images.length; i++){
+						console.log(p.images[i]);
+						if (p.images[i].primary){
+							_.extend(p, {featuredImageID: p.images[i].response.public_id});
+							console.log(p);
+							return p;
+						}
+					}
+				}
+				return p;
+			});
+	}
 });
 
 Template.showSubmit.events({

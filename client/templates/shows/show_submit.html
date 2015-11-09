@@ -35,6 +35,26 @@
                 <input id="website" name="website" placeholder="Enter the website..."/>
             </div>
         </div>
+		<div class="field">
+			<label class="control-label" for="admins">Administrators</label>
+			<div class="ui fluid multiple search selection dropdown" id="administrators">
+				<input type="hidden" name="administrators"/>
+				<i class="dropdown icon"></i>
+				<div class="default text">Select Administrators</div>
+				<div class="menu">
+					{{#each administrators}}
+						<div class="item" data-value={{userId}}>
+							{{#if featuredImageID}}
+								<img class="ui mini avatar image" src="{{c.url featuredImageID}}"/>
+							{{else}}
+								<img class="ui mini avatar image" src="/noimage.jpg"/>
+							{{/if}}
+							{{name}}
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
         <div class="field">
             <div class="two fields">
                 <div class="field">
