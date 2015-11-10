@@ -8,6 +8,10 @@ Template.showEdit.onCreated(function(){
 	Session.set('showDateInfo', controls);
 });
 
+Template.showEdit.onRendered(function(){
+	$('#administrators').dropdown('set selected', this.data.administrators);
+});
+
 Template.showEdit.helpers({
     errorMessage: function(field){
         return Session.get('showEditErrors')[field];
@@ -23,8 +27,27 @@ Template.showEdit.helpers({
         return ret;
     },
     dateString: function(){
-        return this.date.toISOString().replace('Z', '').replace(':00.000', '');
-    }
+		if (this.date){
+			return this.date.toISOString().replace('Z', '').replace(':00.000', '');
+		}
+		else {
+			return '';
+		}
+    },
+	administrators: function(){
+		return People.find().fetch().map(
+			function(p){
+				if (p.images){
+					for (var i = 0; i<p.images.length; i++){
+						if (p.images[i].primary){
+							_.extend(p, {featuredImageID: p.images[i].response.public_id});
+							return p;
+						}
+					}
+				}
+				return p;
+			});
+	}
 });
 
 Template.showEdit.events({
@@ -87,7 +110,7 @@ Template.showEdit.events({
                     dates: dates,
                     socialmedia: Session.get('socialmedia'),
                     videos: Session.get('videosToSave'),
-					admins: this.admins
+					administrators: $(e.target).find('[name=administrators]').val().split(",")
                    };
         
         //var errors = validateShow(show);

@@ -25,13 +25,10 @@ Template.showSubmit.helpers({
 	administrators: function(){
 		return People.find().fetch().map(
 			function(p){
-				console.log(p.images);
 				if (p.images){
 					for (var i = 0; i<p.images.length; i++){
-						console.log(p.images[i]);
 						if (p.images[i].primary){
 							_.extend(p, {featuredImageID: p.images[i].response.public_id});
-							console.log(p);
 							return p;
 						}
 					}
@@ -98,7 +95,8 @@ Template.showSubmit.events({
                     dates: dates,
                     socialmedia: Session.get('socialmedia'),
                     videos: Session.get('videosToSave'),
-					images: Cloudinary.find().fetch()
+					images: Cloudinary.find().fetch(),
+					administrators: $(e.target).find('[name=administrators]').val()
                    };
         
         var errors = validateShow(show);

@@ -20,7 +20,8 @@ Template.performersSearch.onRendered(function(){
 		for(var j = 0; j<this.data.performers.people.length; j++){
 			val.push('p:' + this.data.performers.people[j]._id);
 		}
-		
+		console.log(val);
+		console.log($('#' + this.data.id).find('[name=performersSearch]'));
 		$('#' + this.data.id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
 	}
 	else{

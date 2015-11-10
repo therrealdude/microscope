@@ -11,8 +11,10 @@ Template.imageUpload.onRendered(function(){
     $('#imageUploadDiv .innerDiv').slimScroll({
         'height': '400px'
     });
-    var primary = Cloudinary.collection.findOne({primary: true});
-    $('#' + primary.response.public_id + '[name=primary]').prop('checked', true);
+	if (Cloudinary.collection.length > 0){
+		var primary = Cloudinary.collection.findOne({primary: true});
+		$('#' + primary.response.public_id + '[name=primary]').prop('checked', true);
+	}
 });
 
 Template.imageUpload.helpers({

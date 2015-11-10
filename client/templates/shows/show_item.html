@@ -4,7 +4,9 @@
     <div class="content">
 	  <br/>
       <div class="header"><a href={{pathFor 'showPage'}}>{{name}} </a></div>
+	  {{#if isAdmin}}
 	  <a href={{pathFor 'showEdit'}}>Edit</a>
+	  {{/if}}
 	  <div class="description">
 		<p>
 			{{description}}

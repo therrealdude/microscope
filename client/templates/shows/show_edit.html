@@ -1,7 +1,11 @@
 <template name="showEdit">
     <form class="ui main form page">
-        <h1>Show Submission Page</h1>
-        <h3>General Information</h3>
+        <div class="ui gray top attached label massive form-header">
+            Edit Show
+	    </div>
+        <br/>
+	    <br/>
+        <h3 class="ui dividing header">General Information</h3>
         <div class="form-group {{errorClass 'name'}}">
           <label class="control-label" for="name">Name</label>
           <div class="controls">
@@ -16,7 +20,6 @@
               <span class="help-block">{{errorMessage 'description'}}</span>
           </div>
         </div>
-
         <div class="form-group {{errorClass 'venue'}}">
           <label class="control-label" for="venue">Venue</label>
           <div class="controls">
@@ -25,6 +28,32 @@
               <span class="help-block">{{errorMessage 'venue'}}</span>
           </div>
         </div>
+		<div class="field">
+            <label class="control-label" for="website">Website</label>
+            <div class="ui input">
+                <input id="website" name="website" placeholder="Enter the website..." value="{{website}}"/>
+            </div>
+        </div>
+		<div class="field">
+			<label class="control-label" for="admins">Administrators</label>
+			<div class="ui fluid multiple search selection dropdown" id="administrators">
+				<input type="hidden"  name="administrators"/>
+				<i class="dropdown icon"></i>
+				<div class="default text">Select Administrators</div>
+				<div class="menu">
+					{{#each administrators}}
+						<div class="item" data-value={{userId}}>
+							{{#if featuredImageID}}
+								<img class="ui mini avatar image" src="{{c.url featuredImageID}}"/>
+							{{else}}
+								<img class="ui mini avatar image" src="/noimage.jpg"/>
+							{{/if}}
+							{{name}}
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
         <div class="field">
             <div class="two fields">
                 <div class="field">
@@ -51,7 +80,7 @@
             </div>
         </div>
         <div class="form-group {{errorClass 'date'}}">
-          <h3>Show Dates and Performers</h3>
+          <h3 class="ui dividing header">Show Dates and Performers</h3>
           <div class="controls" id="dates">
               {{#each numShowDates}}
               {{#if display}}

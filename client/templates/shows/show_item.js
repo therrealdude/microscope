@@ -1,6 +1,9 @@
 Template.showItem.helpers({
 	hasDistance: function(){
 		this.distance != undefined;
+	},
+	isAdmin : function(){
+		return $.inArray(Meteor.userId(), this.administrators) != -1;
 	}
 });
 
