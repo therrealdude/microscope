@@ -11,8 +11,9 @@ Template.venueItem.events({
         currentUser = People.findOne({userId: Meteor.userId()});
         
         var followers;
-        if(this.followers){
-            followers = this.followers.push(currentUser._id);
+        if(this.followers && this.followers.constructor === Array){
+            followers = this.followers;
+			followers.push(currentUser._id);
         }
         else{
             followers = [currentUser._id];

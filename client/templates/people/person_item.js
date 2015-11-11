@@ -1,7 +1,11 @@
 Template.personItem.helpers({
     isPerson: function(){
         return this.userId === Meteor.userId();
-    }
+    },
+	isFollowing: function(){
+		var curPerson = People.findOne({userId: Meteor.userId()});
+		return $.inArray(curPerson._id, this.followers) != -1;
+	}
 });
 
 Template.personItem.events({
@@ -11,9 +15,10 @@ Template.personItem.events({
         currentUser = People.findOne({userId: Meteor.userId()});
         
         var followers;
-        if(this.followers){
-            followers = this.followers.push(currentUser._id);
-        }
+        if(this.followers && this.followers.constructor === Array){
+            followers = this.followers;
+			followers.push(currentUser._id);
+		}
         else{
             followers = [currentUser._id];
         }

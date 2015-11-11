@@ -25,9 +25,11 @@
     border: solid 5px;
  }
 
-button.followbtn{
+button.followbtn, button.unfollowbtn {
     border-radius: 0px !important;
     border: solid 5px !important;
+	border-color: gray;
+	color: gray;
 } 
   
 body {

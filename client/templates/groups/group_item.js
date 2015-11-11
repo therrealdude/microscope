@@ -1,9 +1,6 @@
 Template.groupItem.helpers({
     canEdit: function(){
         var currentPerson = People.findOne({userId: Meteor.userId()});
-        console.log(currentPerson);
-        console.log(this.members);
-        console.log($.inArray(currentPerson._id, this.members));
         return $.inArray(currentPerson._id, this.members) != -1;
     }
 });
@@ -14,9 +11,10 @@ Template.groupItem.events({
         
         currentUser = People.findOne({userId: Meteor.userId()});
         
-        var followers;
-        if(this.followers){
-            followers = this.followers.push(currentUser._id);
+        var followers = [];
+        if(this.followers && this.followers.constructor === Array){
+            followers = this.followers;
+			followers.push(currentUser._id);
         }
         else{
             followers = [currentUser._id];
