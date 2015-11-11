@@ -4,7 +4,6 @@ Template.showSubmit.onCreated(function(){
 });
 
 Template.showSubmit.onRendered(function(){
-	$('#administrators').dropdown({});
 });
 
 
@@ -21,21 +20,7 @@ Template.showSubmit.helpers({
             ret = Session.get('showDateInfo');
         }
         return ret;
-    },
-	administrators: function(){
-		return People.find().fetch().map(
-			function(p){
-				if (p.images){
-					for (var i = 0; i<p.images.length; i++){
-						if (p.images[i].primary){
-							_.extend(p, {featuredImageID: p.images[i].response.public_id});
-							return p;
-						}
-					}
-				}
-				return p;
-			});
-	}
+    }
 });
 
 Template.showSubmit.events({
@@ -96,7 +81,7 @@ Template.showSubmit.events({
                     socialmedia: Session.get('socialmedia'),
                     videos: Session.get('videosToSave'),
 					images: Cloudinary.find().fetch(),
-					administrators: $(e.target).find('[name=administrators]').val()
+					administrators: $(e.target).find('[name=administrators]').val().split(',')
                    };
         
         var errors = validateShow(show);

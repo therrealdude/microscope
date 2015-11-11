@@ -5,7 +5,7 @@ Template.groupList.helpers({
         return Groups.find();
     }
     else{
-        return Groups.find({name: {$regex: new RegExp(searchCriteria, "i")}});
+        return Groups.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}});
     }
   }
 });

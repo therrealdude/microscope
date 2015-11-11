@@ -16,6 +16,12 @@ Template.venueEdit.helpers({
   },
   errorClass: function (field) {
     return !!Session.get('venueEditErrors')[field] ? 'has-error' : '';
+  },
+  lat: function() {
+    return this.loc.coordinates[1];
+  },
+  lng: function() {
+    return this.loc.coordinates[0];
   }
 });
 
@@ -39,7 +45,8 @@ Template.venueEdit.events({
 		website: $(e.target).find('[name=website]').val(),
 		videos: Session.get('videosToSave'),
 		socialmedia: Session.get('socialmedia'),
-		images: Cloudinary.collection.find().fetch()
+		images: Cloudinary.collection.find().fetch(),
+        administrators: $(e.target).find('[name=administrators]').val().split(',')
     };
     
     var errors = validateVenues(venueAttributes);

@@ -9,7 +9,6 @@ Template.showEdit.onCreated(function(){
 });
 
 Template.showEdit.onRendered(function(){
-	$('#administrators').dropdown('set selected', this.data.administrators);
 });
 
 Template.showEdit.helpers({

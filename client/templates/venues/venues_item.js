@@ -1,3 +1,9 @@
+Template.venueItem.helpers({
+    isAdmin: function(){
+        return $.inArray(Meteor.userId(), this.administrators) != -1;
+    }
+});
+
 Template.venueItem.events({
     'click #btnfollow': function(e){
         e.preventDefault();

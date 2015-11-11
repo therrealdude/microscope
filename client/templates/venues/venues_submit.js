@@ -38,7 +38,8 @@ Template.venueSubmit.events({
         website: $(e.target).find('[name=website]').val(),
 		videos: Session.get('videosToSave'),
 		socialmedia: Session.get('socialmedia'),
-		images: Cloudinary.collection.find().fetch()
+		images: Cloudinary.collection.find().fetch(),
+        administrators: $(e.target).find('[name=administrators]').val().split(',')
     };
     
     var errors = validateVenues(venueAttributes);

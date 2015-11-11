@@ -25,8 +25,8 @@
       <div class="controls">
           <input name="address1" id="address1" type="text" value="{{address1}}" placeholder="Enter address..." class="form-control" autocomplete="off" autocorrect="off"/>
           <div class="geolocation">
-            <input type="hidden" name="lat" value="{{latitude}}"/>
-            <input type="hidden" name="lng" value="{{longitude}}"/>
+            <input type="hidden" name="lat" value="{{lat}}"/>
+            <input type="hidden" name="lng" value="{{lng}}"/>
             <input name="formatted_address" type="hidden" value="{{formatted_address}}"/>
           </div>
           <img src="/desktop/powered-by-google-on-white.png"/>
@@ -39,6 +39,7 @@
 			<input name="website" id="website" type="text" value="{{website}}" placeholder="Enter website..." class="form-control"/>
 		</div>
 	</div>
+    {{>administratorsSelect}}
 	<div class="form-group {{errorClass 'images'}}">
 		{{>imageUpload}}
 	</div>	
