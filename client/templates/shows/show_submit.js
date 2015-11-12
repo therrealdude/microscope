@@ -80,7 +80,7 @@ Template.showSubmit.events({
                     dates: dates,
                     socialmedia: Session.get('socialmedia'),
                     videos: Session.get('videosToSave'),
-					images: Cloudinary.find().fetch(),
+					images: Cloudinary.collection.find().fetch(),
 					administrators: $(e.target).find('[name=administrators]').val().split(',')
                    };
         

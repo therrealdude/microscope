@@ -1,5 +1,9 @@
 <template name="showstream">
-    {{#each streamShows}}
-        {{streamItem}}
-    {{/each}}
+	{{#if hasStreamShows}}
+		{{#each streamShows}}
+			{{streamItem}}
+		{{/each}}
+	{{else}}
+		<p>Either you are not following anything or the things you are following do not have upcoming shows.</p>
+	{{/if}}
 </template>

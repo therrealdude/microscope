@@ -1,81 +1,63 @@
 Template.showstream.helpers({
+	hasStreamShows: function(){
+		if(Session.get('stream')){
+			return Session.get('stream').length > 0;
+		}
+		else{
+			return true;
+		}
+	},
     streamShows: function(){
         var stream = [];
         var currentUser = People.findOne({userId: Meteor.userId()});
 		if (currentUser.following) {
 			
 			if(currentUser.following.shows){
-				var shows = Shows.find({_id: {$in: currentUser.following.shows}, 'dates.0.date': {$gte: new Date() }});
-				for(var i = 0; i<shows.length; i++){
-					for(var j = 0; j< shows[i].dates; j++){
-						if(shows[i].dates[j].date >= new Date()){
-							stream.push({date: dates[j].date, showname: shows[i].name, message: ["You follow this show"]});
-						}
-					}
-				}
+				stream = addShowsToStream(Shows.find({_id: {$in: currentUser.following.shows}, 'dates.0.date': {$gte: new Date() }}).fetch(), stream, currentUser);
 			}
-			
-			console.log("Stream is:" + stream);
 			
 			if(currentUser.following.venues){
-				var venues = Shows.find({venue: {$in: currentUser.following.venues}});
-				console.log("Found " + venues.length + " venues");
-				for(var i = 0; i<venues.length; i++){
-					console.log(venues[i]);
-					for(var j = 0; j< venues[i].dates; j++){
-						var v = Venues.findOne({_id: venues[i].venue});
-						stream.push({date: dates[j].date, showname: shows[i].name, venue: v._id, message: [String.Format("<span>You follow <a href='/venue/{1}'>{0}</a></span>", v.Name, v._id)]});
-					}
-				}
+				addShowsToStream(Shows.find({venue: {$in: currentUser.following.venues}, 'dates.0.date': {$gte: new Date() }}).fetch(), stream, currentUser);
 			}
 			
-			console.log("Stream is:" + stream);
-			var allShows = Shows.find();
 			if(currentUser.following.groups){
-				var groupShows = [];
-				for (var j = 0; j < allShows.length; j++)
-				{
-					for (var i = 0; i< allShows.performers.groups.length; i++)
-					{
-						if($.inArray(allShows[i].performers.groups[j]._id, allShows.performers.groups)){
-							groupShows.push[{group: allShows[i].performers.groups[j]._id, show: allShows[i]}];
-							console.log('Group added');
-						}
-					}
-				}
-				
-				for(var i = 0; i<groupShows.length; i++){
-					for(var j = 0; j< groupShows[i].show.dates; j++){
-						if($.inArray(g._id, currentUser.following.groups)){
-							stream.push({date: dates[j].date, group: groupsShows[i].group, showname: shows[i].name, message: ["You follow this group"]});
-						}
-					}
-				}
+				addShowsToStream(Shows.find({'dates.0.performers.groups.0._id': {$in: currentUser.following.groups}, 'dates.0.date': {$gte: new Date() }}).fetch(), stream, currentUser);
 			}
-			
-			console.log("Stream is:" + stream);
 			
 			if(currentUser.following.people){
-				var people = Shows.find({performers: {people: {_id: {$in: currentUser.following.people}}}});
-				console.log(people);
-				for(var i = 0; i<people.length; i++){
-					for(var j = 0; j< people[i].dates; j++){
-						var ps = groups[i].dates.groups;
-						for (var p = 0; p < ps.length; p++ ){
-							if($.inArray(p._id, currentUser.following.people)){
-								stream.push({date: dates[j].date, person: p._id, showname: shows[i].name, message: ["You follow a person"]});
-							}
-						}
-					}
-				}
+				addShowsToStream(Shows.find({'dates.0,performers.people.0._id': {$in: currentUser.following.people}, 'dates.0.date': {$gte: new Date() }}).fetch(), stream, currentUser);
 			}
 			
-			console.log("Stream is:" + stream);
+			console.log(stream);
 		}
-		else{
-			stream.push({message:"You don't follow anything."})
-		}
-		
+		Session.set('stream', stream);
 		return stream;
     }
 });
+
+var addShowsToStream = function(shows, stream, currentUser){
+	for (var i = 0; i < shows.length; i++){
+		for (var j = 0; j < shows[i].dates.length; j++){
+			if(shows[i].dates[j].date >= new Date() && $.grep(stream, function(e){return e.show_id === shows[i]._id && e.date.toString() === shows[i].dates[j].date.toString();}).length === 0){
+				var peopleFollowed;
+				var groupsFollowed;
+				for (var p = 0; p<shows[i].dates[j].performers.people.length; p++){
+					if($.inArray(shows[i].dates[j].performers.people[p]._id, currentUser.following.people) != -1){
+						if (!peopleFollowed) { peopleFollowed = [];}
+						peopleFollowed.push(shows[i].dates[j].performers.people[p]._id)
+					}
+				}
+				for (var g = 0; g<shows[i].dates[j].performers.groups.length; g++){
+					if($.inArray(shows[i].dates[j].performers.groups[g]._id, currentUser.following.groups) != -1){
+						if (!groupsFollowed) { groupsFollowed = [];}
+						groupsFollowed.push(shows[i].dates[j].performers.groups[g]._id)
+					}
+				}
+				var venueFollowed = $.inArray(shows[i].venue, currentUser.following.venues) != -1;
+				var showFollowed = $.inArray(shows[i]._id, currentUser.following.shows) != -1;
+				stream.push({show_id: shows[i]._id, venue_id: shows[i].venue, date: shows[i].dates[j].date, peopleFollowed: peopleFollowed, groupsFollowed: groupsFollowed, venueFollowed: venueFollowed, showFollowed: showFollowed});
+			}
+		}
+	}
+	return stream;
+}
