@@ -1,6 +1,5 @@
 Template.showSubmit.onCreated(function(){
     Session.set('showSubmitErrors', {});
-    Session.set('showDateInfo', [{id: 'date0', display: true}]);
 });
 
 Template.showSubmit.onRendered(function(){
@@ -13,33 +12,10 @@ Template.showSubmit.helpers({
     },
     errorClass: function(field){
         return !!Session.get('showSubmitErrors')[field] ? 'has-error' : '';
-    },
-    numShowDates: function(){
-        var ret = [];
-        if(Session.get('showDateInfo')) {
-            ret = Session.get('showDateInfo');
-        }
-        return ret;
     }
 });
 
 Template.showSubmit.events({
-    'click input#btnAddDate': function(){
-        var ret = Session.get('showDateInfo');
-        ret.push({id: 'date' + ret.length, display: true});
-        Session.set('showDateInfo', ret);
-    },
-    'click input.removeDate': function(e){
-        var info = Session.get('showDateInfo');
-        var id = $(this).attr('id');
-        for(var i = 0; i < info.length; i++)
-        {
-            if(id === info[i].id){
-                info[i].display = false;
-            }
-        }
-        Session.set('showDateInfo', info);
-    },
     'submit form': function(e){
         e.preventDefault();
         

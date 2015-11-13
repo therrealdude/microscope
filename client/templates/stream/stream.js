@@ -27,9 +27,8 @@ Template.showstream.helpers({
 			if(currentUser.following.people){
 				addShowsToStream(Shows.find({'dates.0,performers.people.0._id': {$in: currentUser.following.people}, 'dates.0.date': {$gte: new Date() }}).fetch(), stream, currentUser);
 			}
-			
-			console.log(stream);
 		}
+		stream.sort(function(a, b){ return a.date > b.date });
 		Session.set('stream', stream);
 		return stream;
     }

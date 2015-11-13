@@ -1,8 +1,29 @@
-<template name="performersSearch">
-    <select class="ui fluid search dropdown" multiple="" id="performersSearch" name="performersSearch">
-        <option value="">Select Performers</option>
-        {{#each performers}}
-            <option value="{{_id}}">{{name}}</option>
-        {{/each}}
-    </select>
+<template name="performersSearch">          
+		  <h3 class="ui dividing header">Show Dates and Performers</h3>
+          <div class="controls" id="dates">
+              {{#each numShowDates}}
+				  {{#if display}}
+					<div id="{{id}}" class="field">
+					  <label class="control-label" for="date">Date</label>
+					  <div class="row-fluid" display="inline-block">
+						<input name="showdate" id="date{{id}}" type="datetime-local" value="{{dateString}}" placeholder="Enter show date" class="form-control show-date-control" style="display:inline-block"/>
+						<input type="button" value="Remove Date" id="remove{{id}}" remove="{{id}}" class="btn removeDate" style="display:inline-block"/>
+					  </div>
+					  <div>
+						<label class="control-label" for="performers">Performers</label>
+							<div class="controls">
+								<select class="ui fluid search dropdown" multiple="" id="performersSearch" name="performersSearch">
+									<option value="">Select Performers</option>
+									{{#each performers}}
+										<option value="{{_id}}">{{name}}</option>
+									{{/each}}
+								</select>
+								<span> If the group or person is not listed encourage them to create a profile or add their group.</span>
+							</div>
+					  </div>
+					</div>
+				  {{/if}}
+              {{/each}}
+              <input type="button" value="Add Date" class="btn" id="btnAddDate"/>
+          </div>
 </template>

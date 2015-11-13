@@ -28,7 +28,7 @@ Template.showPage.helpers({
             ret.push(person);
         }
         for(var i = 0; i<this.performers.groups.length; i++){
-            var group = People.findOne({_id: this.performers.groups[i]._id});
+            var group = Groups.findOne({_id: this.performers.groups[i]._id});
             _.extend(group, {type: 'G'});
             ret.push(group);
         }
