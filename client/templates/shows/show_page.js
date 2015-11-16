@@ -1,5 +1,5 @@
 Template.showPage.onCreated(function(){
-	Session.set('isAdmin', $.inArray(Meteor.userId(), this.data.admins) != -1);
+	Session.set('isAdmin', $.inArray(Meteor.userId(), this.data.administrators) != -1);
 	Session.set('acceptsSubmissions', this.data.acceptsSubmissions);
     Session.set('currentShow', this.data);
 });
@@ -10,6 +10,18 @@ Template.showPage.onRendered(function(){
 			popup : $('#' + this.data.dates[i].id + ' .custom.popup'),
 			on    : 'click'
 		  });
+	}
+	for(var i = 0; i<this.data.dates.length; i++){
+		$('#' + this.data.dates[i].id + ' .viewRequests').popup({
+			popup : $('#' + this.data.dates[i].id + ' .custom.popup'),
+			on    : 'click'
+		  });
+		  for (var j = 0; j<this.data.dates[i].requests.people.length; j++){
+			  $('#' + this.data.dates[i].requests.people[j].id + '.personstatusddl').dropdown('set selected', this.data.dates[i].requests.people[j].status);
+		  }
+		  for (var j = 0; j<this.data.dates[i].requests.groups.length; j++){
+			  $('#' + this.data.dates[i].requests.groups[j].id + '.groupstatusddl').dropdown('set selected', this.data.dates[i].requests.groups[j].status);
+		  }
 	}
 })
 
@@ -24,13 +36,17 @@ Template.showPage.helpers({
         var ret = [];
         for(var i = 0; i<this.performers.people.length; i++){
             var person = People.findOne({_id: this.performers.people[i]._id});
-            _.extend(person, {type: 'P'});
-            ret.push(person);
+			if (person){
+				_.extend(person, {type: 'P'});
+				ret.push(person);
+			}
         }
         for(var i = 0; i<this.performers.groups.length; i++){
             var group = Groups.findOne({_id: this.performers.groups[i]._id});
-            _.extend(group, {type: 'G'});
-            ret.push(group);
+			if(group){
+				_.extend(group, {type: 'G'});
+				ret.push(group);
+			}
         }
         return ret;
     },
@@ -52,6 +68,12 @@ Template.showPage.helpers({
 	},
 	numberRequests: function(){
 		return this.requests.people.length + this.requests.groups.length;
+	},
+	getPerson: function(){
+		return _.extend(People.findOne({_id: this.id}), {status: this.status});
+	},
+	getGroup: function() {
+		return _.extend(Groups.findOne({_id: this.id}), {status: this.status});
 	}
 });
 
@@ -96,8 +118,43 @@ Template.showPage.events({
 		var showid = show._id;
         Shows.update(showid, {$set: {dates: show.dates}}, function(error){
             if(error){
-                Error.throw(error.reason);
+                console.log(error.reason);
             }
         });
-    }
+    },
+	'click .updateRequests': function(e){
+		e.preventDefault();
+		var show = Template.parentData();
+		var popup = $(e.target).closest('.popup');
+		
+		for (var i = 0; i<show.dates.length; i++){
+			if(show.dates[i].id === popup.attr('id')){
+				for (var p = 0; p<show.dates[i].requests.people.length; p++){
+					var status = popup.find('#' + show.dates[i].requests.people[p].id + '.personstatusddl').val();
+					show.dates[i].requests.people[p].status = status;
+					if(status === 'Accepted'){
+						show.dates[i].performers.people.push({_id: show.dates[i].requests.people[p].id});
+					}
+					else{
+						show.dates[i].performers.people.pop({id: show.dates[i].requests.people[p].id});
+					}
+				}
+				for (var p = 0; p<show.dates[i].requests.groups.length; p++){
+					var status = popup.find('#' + show.dates[i].requests.groups[p].id + '.groupstatusddl').val();
+					show.dates[i].requests.group[p].status = status;
+					if(status === 'Accepted'){
+						show.dates[i].performers.people.push({_id: show.dates[i].requests.groups[p].id});
+					}
+					else{
+						show.dates[i].performers.people.pop({_id: show.dates[i].requests.groups[p].id});
+					}
+				}
+				Shows.update(show._id, {$set: {dates: show.dates}}, function(error){
+					if(error){
+						console.log(error);
+					}
+				});
+			}
+		}
+	}
 })

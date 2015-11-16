@@ -39,7 +39,7 @@ Template.personSubmit.events({
     Meteor.call('personInsert', person, function(error, result) {
       // display the error to the user and abort
       if (error)
-        Errors.throw(error.reason);
+        console.log(error.reason);
 	
 	  var imagesToDelete = Session.get('imagesToDelete');
 	  if(imagesToDelete){
