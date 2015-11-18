@@ -143,10 +143,10 @@ Template.showPage.events({
 					var status = popup.find('#' + show.dates[i].requests.groups[p].id + '.groupstatusddl').val();
 					show.dates[i].requests.group[p].status = status;
 					if(status === 'Accepted'){
-						show.dates[i].performers.people.push({_id: show.dates[i].requests.groups[p].id});
+						show.dates[i].performers.groups.push({_id: show.dates[i].requests.groups[p].id});
 					}
 					else{
-						show.dates[i].performers.people.pop({_id: show.dates[i].requests.groups[p].id});
+						show.dates[i].performers.groups.pop({_id: show.dates[i].requests.groups[p].id});
 					}
 				}
 				Shows.update(show._id, {$set: {dates: show.dates}}, function(error){
