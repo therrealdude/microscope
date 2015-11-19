@@ -1,5 +1,6 @@
 Template.header.onRendered(function() {
     $('input#search').val(Session.get('searchCriteria'));
+	$('.ui.sticky.navbar.navbar-default').sticky({context: '#page'});
 });
 
 Template.header.helpers({

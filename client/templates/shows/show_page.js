@@ -130,17 +130,17 @@ Template.showPage.events({
 		for (var i = 0; i<show.dates.length; i++){
 			if(show.dates[i].id === popup.attr('id')){
 				for (var p = 0; p<show.dates[i].requests.people.length; p++){
-					var status = popup.find('#' + show.dates[i].requests.people[p].id + '.personstatusddl').val();
+					var status = popup.find('.personstatusddl ' + '#' + show.dates[i].requests.people[p].id).val();
 					show.dates[i].requests.people[p].status = status;
 					if(status === 'Accepted'){
 						show.dates[i].performers.people.push({_id: show.dates[i].requests.people[p].id});
 					}
 					else{
-						show.dates[i].performers.people.pop({id: show.dates[i].requests.people[p].id});
+						show.dates[i].performers.people.pop({_id: show.dates[i].requests.people[p].id});
 					}
 				}
 				for (var p = 0; p<show.dates[i].requests.groups.length; p++){
-					var status = popup.find('#' + show.dates[i].requests.groups[p].id + '.groupstatusddl').val();
+					var status = popup.find('.groupstatusddl ' + '#' + show.dates[i].requests.groups[p].id).val();
 					show.dates[i].requests.group[p].status = status;
 					if(status === 'Accepted'){
 						show.dates[i].performers.groups.push({_id: show.dates[i].requests.groups[p].id});

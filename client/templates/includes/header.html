@@ -1,6 +1,6 @@
 <template name="header">
-  <a href={{pathFor 'search'}}><img src="/ace_logo_smaller.svg" class="ui image fluid" style="display:block;margin-left:auto;margin-right:auto"/></a>
-  <nav class="navbar navbar-default" role="navigation">
+  <!--<a href={{pathFor 'search'}}><img src="/ace_logo_smaller.svg" class="ui image" style="display:block;margin-left:auto;margin-right:auto"/></a>-->
+  <nav class="ui sticky navbar navbar-default" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
         <span class="sr-only">Toggle navigation</span>
@@ -11,6 +11,11 @@
     </div>
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav">
+	    <li>
+			<div class="ui basic segment">
+				<div class="ui header">Affordable City Entertaiment</div>
+			</div>
+		</li>
 		<li class="{{activeRouteClass 'search'}}">
 			<a href={{pathFor 'search'}}>Search</a>
 		</li>
@@ -21,21 +26,15 @@
               {{else}}
                 <a href={{pathFor 'personSubmit'}}>Fill Out Profile!</a>
               {{/if}}
-
           </li>
 		  <li class="{{activeRouteClass 'stream'}}  {{activeRouteClass 'stream'}}">
 			<a href={{pathFor 'showstream'}}>Stream</a>
           </li>
-          <li class="{{activeRouteClass 'postSubmit'}}"><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
-			<li class="dropdown">
-				{{> notifications}}
-            </li>
+		  <li class="dropdown">
+			{{> notifications}}
+		  </li>
 		{{/if}}
-        <li class="{{activeRouteClass 'newPosts'}}">
-          <a href="{{pathFor 'newPosts'}}">Blog</a>
-        </li>
 	  </ul>
-
       <ul class="nav navbar-nav navbar-right">
         {{> loginButtons}}
       </ul>

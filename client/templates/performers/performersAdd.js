@@ -19,20 +19,30 @@ Template.performersSearch.onRendered(function(){
 	
 	if(Session.get('showDateInfo')) {
 		var dates = Session.get('showDateInfo');
-		for (var i = 0; i<dates.length; i++) {
-			var val = [];
-			for(var j = 0; j<dates[i].performers.groups.length; j++){
-				val.push('g:' + dates[i].performers.groups[j]._id);
+		console.log(dates.length);
+		if(dates.length > 0){
+			for (var i = 0; i<dates.length; i++) {
+				if (dates[i].performers){
+					var val = [];
+					for(var j = 0; j<dates[i].performers.groups.length; j++){
+						val.push('g:' + dates[i].performers.groups[j]._id);
+					}
+					for(var j = 0; j<dates[i].performers.people.length; j++){
+						val.push('p:' + dates[i].performers.people[j]._id);
+					}
+					$('#' + dates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
+				}
+				else{
+					$('[name=performersSearch]').dropdown({allowAdditions: true})
+				}
 			}
-			for(var j = 0; j<dates[i].performers.people.length; j++){
-				val.push('p:' + dates[i].performers.people[j]._id);
-			}
-			$('#' + dates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
+		}
+		else {
+			console.log('initialize empty search');
+			$('[name=performersSearch]').dropdown({allowAdditions: true})
 		}
 	}
-	else {
-		$('[name=performersSearch]').dropdown({allowAdditions: true})
-	}
+	
 });
 
 Template.performersSearch.helpers({

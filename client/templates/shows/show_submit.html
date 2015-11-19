@@ -2,9 +2,11 @@
     <form class="ui main form page">
         <div class="ui gray top attached label massive form-header">
             Submit Show
+			<input type="submit" value="Submit" class="ui primary right floated button"/>
 	    </div>
         <br/>
 	    <br/>
+		<br/>
         <h3 class="ui dividing header">General Info</h3>
         <div class="form-group {{errorClass 'name'}}">
           <label class="control-label" for="name">Name</label>
@@ -62,7 +64,7 @@
             </div>
         </div>
         <div class="form-group {{errorClass 'date'}}">
-			{{>performerSearch}}
+			{{>performersSearch}}
         </div>
 		<div class="form-group {{errorClass 'photos'}}">
 			{{>imageUpload}}
@@ -73,7 +75,6 @@
         <div class="form-group {{errorClass 'socialmedia'}}">
             {{>socialMediaAdd}}
         </div>
-        <input type="submit" value="Submit" class="btn btn-primary"/>
     </form>
 </template>
 
