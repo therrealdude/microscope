@@ -8,7 +8,10 @@ Template.verifyAccount.events({
             console.log('email sent');
             if(error){
                 console.log(error);
-            }
+            } 
+			else{
+				$('span#verificationConfirmation').html('Verification Email Sent');
+			}
         });
     }
 });

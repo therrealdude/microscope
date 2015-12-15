@@ -2,7 +2,6 @@
     <form class="ui main form page">
         <div class="ui gray top attached label massive form-header">
             Submit Show
-			<input type="submit" value="Submit" class="ui primary right floated button"/>
 	    </div>
         <br/>
 	    <br/>
@@ -34,7 +33,7 @@
         <div class="field">
             <label class="control-label" for="website">Website</label>
             <div class="ui input">
-                <input id="website" name="website" placeholder="Enter the website..."/>
+                <input id="website" name="website" class="form-control" placeholder="Enter the website..."/>
             </div>
         </div>
         {{>administratorsSelect}}
@@ -75,6 +74,7 @@
         <div class="form-group {{errorClass 'socialmedia'}}">
             {{>socialMediaAdd}}
         </div>
+		<input type="submit" value="Submit" class="ui primary fluid button"/>
     </form>
 </template>
 

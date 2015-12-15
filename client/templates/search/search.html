@@ -55,18 +55,18 @@
       <a class="item {{venuesActive}}" name="venues">Venues</a>
     </div>
     {{#if showsSelected}}
-        <a href={{pathFor 'showSubmit'}} class="btn">Add Show</a>
+        <a href={{pathFor 'showSubmit'}} class="ui fluid grey addItem button">Add Show</a>
         {{> showList}}
     {{/if}}
     {{#if groupsSelected}}
-        <a href={{pathFor 'groupSubmit'}} class="btn">Add Group</a>
+        <a href={{pathFor 'groupSubmit'}} class="ui fluid grey addItem button">Add Group</a>
         {{> groupList}}
     {{/if}}
     {{#if peopleSelected}}
         {{> peopleList}}
     {{/if}}
     {{#if venuesSelected}}
-        <a href={{pathFor 'venueSubmit'}} class="btn">Add Venue</a>
+        <a href={{pathFor 'venueSubmit'}} class="ui fluid grey addItem button">Add Venue</a>
         {{> venueList}}
     {{/if}}
 </template>
