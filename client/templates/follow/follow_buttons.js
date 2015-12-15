@@ -4,7 +4,12 @@ Template.followButtons.onRendered(function(){
 Template.followButtons.helpers({
 	isFollowing: function(){
 		var curPerson = People.findOne({userId: Meteor.userId()});
-		return $.inArray(curPerson._id, this.followers) != -1;
+		if (curPerson) {
+			return $.inArray(curPerson._id, this.followers) != -1;
+		}
+		else{
+			return false;
+		}
 	}
 })
 
