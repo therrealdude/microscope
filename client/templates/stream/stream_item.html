@@ -1,4 +1,29 @@
 <template name="streamItem">
-	<p>{{date}}</p>
-	<p>{{message}}</p>
+	<div class="event">
+		<div class="label">
+			{{#with show}}
+				{{> imageFeature}}
+			{{/with}}
+		</div>
+		<div class="content">
+			<div class="summary">
+				{{#with show}}
+					<a class="user" href={{pathFor 'show'}}>
+						{{name}}
+					</a>
+				{{/with}}
+				{{date}} at {{venue}}
+			</div>
+		</div>
+		<div class="ui custom popup">
+			<h3>You see this show because...</h3>
+			<ul>
+				{{#each message}}
+					<li>
+						{{this}}
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
 </template>

@@ -1,9 +1,13 @@
 <template name="showstream">
 	{{#if hasStreamShows}}
-		{{#each streamShows}}
-			{{>streamItem}}
-		{{/each}}
+		<div class="ui feed">
+			{{#each streamShows}}
+				{{>streamItem}}
+			{{/each}}
+		</div>
 	{{else}}
-		<p>Either you are not following anything or the things you are following do not have upcoming shows.</p>
+		<div class="main">
+			<p class="importantMessage">Either you are not following anything or nothing you are following has an upcoming show. Go follow stuff, encourage your friends to do more shows, or ask your local venues if they will host a show.</p>
+		</div>
 	{{/if}}
 </template>

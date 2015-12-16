@@ -54,7 +54,7 @@ var addShowsToStream = function(shows, stream, currentUser){
 				}
 				var venueFollowed = $.inArray(shows[i].venue, currentUser.following.venues) != -1;
 				var showFollowed = $.inArray(shows[i]._id, currentUser.following.shows) != -1;
-				stream.push({show_id: shows[i]._id, venue_id: shows[i].venue, date: shows[i].dates[j].date, peopleFollowed: peopleFollowed, groupsFollowed: groupsFollowed, venueFollowed: venueFollowed, showFollowed: showFollowed});
+				stream.push({show: shows[i], date: shows[i].dates[j].date, peopleFollowed: peopleFollowed, groupsFollowed: groupsFollowed, venueFollowed: venueFollowed, showFollowed: showFollowed});
 			}
 		}
 	}

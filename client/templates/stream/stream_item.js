@@ -1,20 +1,26 @@
 Template.streamItem.helpers({
 	message: function(){
 		console.log('Creating message');
-		var ret = '';
+		var ret = [];
 		if (this.showFollowed){
-			ret += 'You follow this show. ';
+			ret.push('You follow this show.');
 		}
 		if (this.venueFollowed){
-			ret += 'You follow this venue. ';
+			ret.push('You follow this venue.');
 		}
 		if (this.peopleFollowed){
-			ret += 'You follow people in this show. ';
+			for (var i = 0; i < this.peopleFollowed.length; i++){
+				var person = People.findOne({_id: this.peopleFollowed[i]});
+				ret.push('You follow <a href="/person/' + this.peopleFollowed[i] + '">' + person.name + '.</a>');
+			}
 		}
 		if (this.groupsFollowed){
-			ret += 'You follow groups in this show.';
+			ret.push('You follow groups in this show.');
 		}
-		console.log(ret);
+		
 		return ret;
+	},
+	venue: function(){
+		return Venues.findOne({_id: this.show.venue});
 	}
 });
