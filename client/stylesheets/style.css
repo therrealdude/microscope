@@ -23,6 +23,8 @@
  
  img.featured {
     border: solid 5px;
+	height: 100px;
+	width: 100px;
  }
 
 button.followbtn, button.unfollowbtn {
@@ -55,6 +57,10 @@ body {
   /* line 32, ../sass/style.scss */
   .navbar .navbar-inner {
     border-radius: 0px 0px 3px 3px; }
+
+nav .nav.navbar-nav li.active a, nav .nav.navbar-nav li.open a, .searchmenuitem.active {
+	background-color: #EFEFFB !important;
+}
 
 #spinner {
   height: 300px; }
@@ -273,8 +279,12 @@ body {
 	background: red;
 }
 
-p.importantMessage {
-	font-size: 18px;
+.summary.importantMessage {
+	margin-top: 35px !important;
+}
+
+.importantMessage {
+	font-size: 18px !important;
 	text-align: center;
 }
 
@@ -282,3 +292,11 @@ a.addItem {
 	margin-bottom: 10px !important;
 }
 
+.content.noborder {
+	border: none !important;
+}
+
+.editbtn {
+	float: right;
+	margin-right: 15px;
+}

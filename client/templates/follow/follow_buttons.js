@@ -84,21 +84,21 @@ Template.followButtons.events({
             if(error){
                 Errors.throw(error.reason);
             }
-			else{
-				Meteor.call('sendEmail', 
-					'dandersonerling@gmail.com', 
-					'admin@affordablecityentertainment.com', 
-					'Person followed', 
-					'A person has been followed', 
-					function(error, result){
-						if (error) {
-							console.log(error.reason);
-						}
-						else{
-							console.log("Email sent.");
-						}
-					});
-			}
+			// else{
+				// Meteor.call('sendEmail', 
+					// 'dandersonerling@gmail.com', 
+					// 'admin@affordablecityentertainment.com', 
+					// 'Person followed', 
+					// 'A person has been followed', 
+					// function(error, result){
+						// if (error) {
+							// console.log(error.reason);
+						// }
+						// else{
+							// console.log("Email sent.");
+						// }
+					// });
+			// }
         });
         
         collection.update(this._id, {$set: {followers: this.followers}}, function(error) {

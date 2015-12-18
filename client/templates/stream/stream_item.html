@@ -1,26 +1,44 @@
 <template name="streamItem">
-	<div class="event">
-		<div class="label">
-			{{#with show}}
-				{{> imageFeature}}
-			{{/with}}
-		</div>
+	<div class="event" id="{{id}}">
+		{{#with show}}
+			{{> imageFeature}}
+		{{/with}}
 		<div class="content">
-			<div class="summary">
+			<div class="summary importantMessage">
 				{{#with show}}
-					<a class="user" href={{pathFor 'show'}}>
+					<a class="user" href={{pathFor 'showPage'}}>
 						{{name}}
 					</a>
 				{{/with}}
-				{{date}} at {{venue}}
+				{{date}} at 
+				{{#with venue}}
+					<a href={{pathFor 'venuePage'}}>
+						{{name}}
+					</a>
+				{{/with}}
 			</div>
 		</div>
 		<div class="ui custom popup">
 			<h3>You see this show because...</h3>
 			<ul>
-				{{#each message}}
+				{{#if showFollowed}}
 					<li>
-						{{this}}
+						You follow this show.
+					</li>
+				{{/if}}
+				{{#if venueFollowed}}
+					<li>
+						You follow this venue.
+					</li>
+				{{/if}}
+				{{#each peopleFollowed}}
+					<li>
+						You follow <a href={{pathFor 'personPage'}}> {{name}} </a>
+					</li>
+				{{/each}}
+				{{#each groupFollowed}}
+					<li>
+						You follow <a href={{pathFor 'groupPage'}}> {{name}} </a>
 					</li>
 				{{/each}}
 			</ul>

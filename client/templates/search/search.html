@@ -49,10 +49,10 @@
 	</div>
 
     <div class="ui four item menu">
-      <a class="item {{showsActive}}" name="shows">Shows</a>
-      <a class="item {{groupsActive}}" name="groups">Groups</a>
-      <a class="item {{peopleActive}}" name="people">People</a>
-      <a class="item {{venuesActive}}" name="venues">Venues</a>
+      <a class="item {{showsActive}} searchmenuitem" name="shows">Shows</a>
+      <a class="item {{groupsActive}} searchmenuitem" name="groups">Groups</a>
+      <a class="item {{peopleActive}} searchmenuitem" name="people">People</a>
+      <a class="item {{venuesActive}} searchmenuitem" name="venues">Venues</a>
     </div>
     {{#if showsSelected}}
         <a href={{pathFor 'showSubmit'}} class="ui fluid grey addItem button">Add Show</a>
@@ -63,6 +63,9 @@
         {{> groupList}}
     {{/if}}
     {{#if peopleSelected}}
+		<div class="post">
+			Note: We don't have an ability to add a person outside of filling out your profile. If you want to add a person that is not currently in our system, then either encourage them to join or when creating the group or show just type in their name. It won't add them to our system, but they will appear as a member on your team or performer in your show.
+		</div>
         {{> peopleList}}
     {{/if}}
     {{#if venuesSelected}}

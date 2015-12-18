@@ -1,5 +1,16 @@
 <template name="showstream">
 	{{#if hasStreamShows}}
+		<div class="post">
+			<h1 class="ui header">
+				<i class="feed icon"></i>
+				<div class="content noborder">
+					Stream
+					<div class="sub header">
+						You are seeing these shows because you follow the venue, one or more of the performers, or the show itself. Hit the follow button on the left hand side of a person, group, venue, or show to add their shows to your stream.
+					</div>
+				</div>
+			</h1>
+		</div>
 		<div class="ui feed">
 			{{#each streamShows}}
 				{{>streamItem}}

@@ -2,16 +2,16 @@
   <div class="item person">
     {{>imageFeature}}
     <div class="content">
-        <br/>
-        <div class="header"><a href={{pathFor 'personPage'}}>{{name}}</a></div>
-	  <div class="description">
-		<p>
-          {{bio}}
-	    </p>
-      </div>
-      {{#if isPerson}}
-	   <a href="{{pathFor 'personEdit'}}" class="discuss btn btn-default">Edit</a>
-      {{/if}}
+		<br/>
+		<div class="header"><a href={{pathFor 'personPage'}}>{{name}}</a></div>
+		{{#if isPerson}}
+			<a href="{{pathFor 'personEdit'}}" class="editbtn">Edit</a>
+		{{/if}}
+		<div class="description">
+			<p>
+			  {{bio}}
+			</p>
+		</div>
     </div>
 	{{>followButtons}}
   </div>

@@ -1,7 +1,7 @@
 <Template name="imageFeature">
     {{#if featuredImage}}
         {{#with featuredImage}}
-            <img src="{{c.url public_id format=format width=150 height=150 crop="fill"}}" class="ui image featured"/>
+            <img src="{{c.url public_id format=format width=100 height=100 crop="fill"}}" class="ui image featured"/>
         {{/with}}
     {{else}}
         <img src="/noimage.jpg" class="ui image featured"/>
