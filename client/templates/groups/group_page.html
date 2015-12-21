@@ -1,13 +1,14 @@
 <template name="groupPage">
-  <div class="group-page page">
-    {{> groupItem}}
+    <div class="wrapper ui items">
+		{{> groupItem}}
+	</div>
 	<h3>Members</h3>
 	<div class="wrapper ui items">
 		{{#each groupMembers}}
-				{{>personItem}}
+			{{>personItem}}
 		{{/each}}
 	</div>
+	{{>imageDisplay}}
     {{> socialMediaDisplay}}
     {{> videoDisplay}}
-  </div>
 </template>

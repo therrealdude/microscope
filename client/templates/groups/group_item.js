@@ -1,7 +1,6 @@
 Template.groupItem.helpers({
     canEdit: function(){
         var currentPerson = People.findOne({userId: Meteor.userId()});
-		console.log(this.members);
         return $.inArray(currentPerson._id, this.members) != -1;
     }
 });

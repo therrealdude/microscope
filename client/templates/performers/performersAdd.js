@@ -16,7 +16,6 @@ Template.performersSearch.onCreated(function(){
 });
 
 Template.performersSearch.onRendered(function(){
-	
 	if(Session.get('showDateInfo')) {
 		var dates = Session.get('showDateInfo');
 		console.log(dates.length);
@@ -31,15 +30,19 @@ Template.performersSearch.onRendered(function(){
 						val.push('p:' + dates[i].performers.people[j]._id);
 					}
 					$('#' + dates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
+					console.log(dates[i].date.toISOString().replace('Z', '').replace(':00.000', '').replace('T', ' '));
+					$('#' + dates[i].id).find('[name=showdate]').datetimepicker({defaultDate: dates[i].date.toISOString().replace('Z', '').replace(':00.000', '').replace('T', ' ')});
 				}
 				else{
-					$('[name=performersSearch]').dropdown({allowAdditions: true})
+					$('[name=performersSearch]').dropdown({allowAdditions: true});
+					$('[name=showdate]').datetimepicker();
 				}
 			}
 		}
 		else {
 			console.log('initialize empty search');
-			$('[name=performersSearch]').dropdown({allowAdditions: true})
+			$('[name=performersSearch]').dropdown({allowAdditions: true});
+			$('[name=showdate]').datetimepicker();
 		}
 	}
 	
@@ -78,6 +81,11 @@ Template.performersSearch.events({
         var ret = Session.get('showDateInfo');
         ret.push({id: 'date' + ret.length, display: true, requests: {people: [], groups: []}});
         Session.set('showDateInfo', ret);
+		setTimeout(function(){
+			console.log($('#date' + (Session.get('showDateInfo').length - 1).toString()));
+			$('#date' + (Session.get('showDateInfo').length - 1).toString()).find('[name=performersSearch]').dropdown({allowAdditions: true});
+			$('#date' +(Session.get('showDateInfo').length - 1).toString()).find('[name=showdate]').datetimepicker();
+		}, 100);
     },
     'click input.removeDate': function(e){
         var info = Session.get('showDateInfo');

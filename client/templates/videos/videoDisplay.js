@@ -28,7 +28,11 @@ Template.videoDisplay.helpers({
         return id;
     },
     hasVideos: function(){
-        return this.videos && this.videos.length > 0;
+		var videos = null;
+		if(this.videos) {
+			videos = $.grep(this.videos, function(v){ v != '' });
+		}
+        return videos != null && videos.length > 0;
     },
     showNextPrevious: function(){
         return this.videos.length > 1;
