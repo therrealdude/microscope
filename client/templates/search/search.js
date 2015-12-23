@@ -11,6 +11,7 @@ Template.search.onRendered(function(){
           $("input#addressSearch").geocomplete({details: '.geolocation'});
         }
     });
+	$('.set-due-date').datetimepicker({sideBySide: true}).on('dp.change', function(e){ e.preventDefault(); setSearchCriteria($('#searchCriteria')); });
 });
 
 Template.search.helpers({
@@ -42,7 +43,24 @@ Template.search.helpers({
 
 Template.search.events({
     'click a.item': function(e) {
-        Session.set('lastClicked', $(e.target).attr('name'));
+		var item = $(e.target).attr('name')
+        Session.set('lastClicked', item);
+		if (item === 'shows'){
+			$('#locationSearch').show();
+			$('#dateSearch').show();
+		}
+		else if (item === 'groups'){
+			$('#locationSearch').hide();
+			$('#dateSearch').hide();
+		}
+		else if(item === 'people'){
+			$('#locationSearch').hide();
+			$('#dateSearch').hide();
+		}
+		else if(item === 'venues'){
+			$('#locationSearch').show();
+			$('#dateSearch').hide();
+		}
     },
 	'keyup #searchCriteria input': function(e){
 		e.preventDefault();

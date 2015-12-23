@@ -1,14 +1,21 @@
 <Template name="calendarItem">
-    <div class="ui card calendarItem {{inPast}}">
-		<div class="content">
-			<div class="header">{{dayOfWeek}}</div>
-			<p>{{dayAndMonth}}</p>
+	<div class="content">
+		<div class="ui list">
+			<div class="ui item">
+				<div class="ui horizontal list">
+					<div class="ui item">
+						<h3 class="header">{{dayOfWeek}}</h3>
+					</div>
+					<div class="ui item">
+						<div class="subheader">{{dayAndMonth}}</div>
+					</div>
+				</div>
+			</div>
 			{{#each shows}}
-				<p>{{showName}}</p>
-				<p>{{showTime}}</p>
-				<p>{{showLocation}}</p>
-				<p>{{showAddress}}</p>
+				<div class="ui item">
+					{{showName}} {{showTime}} at {{showLocation}} {{showAddress}}
+				</div>
 			{{/each}}
 		</div>
-    </div>
+	</div>
 </Template>

@@ -3,48 +3,42 @@
 </template>
 
 <template name="search">
-	<div class="ui main grid-block">
+	<div class="ui main grid-block" id="searchCriteria">
         <div class="ui gray top attached label big searchlabel">
 			Search Criteria
 		</div>
 		<br/>
 		<br/>
-		<div class="ui three column very relaxed grid" id="searchCriteria">
-		  <div class="column">
-			<div class="content">
-				<div class="header">Keywords</div>
-				<div class="ui input fluid">
-					<input type="text" placeholder="Search..." id="search"/>
-				</div>
-			</div>
-		  </div>
-		  <div class="column">
-			<div class="content">
-			  <div class="header">Location</div>
-			  <div class="ui input fluid">
+		<div class="header">Keywords</div>
+		<div class="ui input fluid">
+			<input type="text" placeholder="Search..." id="search"/>
+		</div>
+		<div id="locationSearch">
+			<div class="header">Location</div>
+			<div class="ui input fluid">
 				<input name="addressSearch" id="addressSearch" type="text" value="" placeholder="Enter address" autocomplete="off" autocorrect="off"/>
-			  </div>
-			  <div class="geolocation">
+			</div>
+			<div class="geolocation">
 				<input type="hidden" name="lat" id="lat" value=""/>
 				<input type="hidden" name="lng" id="lng" value=""/>
 				<input name="formatted_address" type="hidden" value=""/>
-			  </div>
-			  <div class="header">Radius</div>
-			  <div class="ui input fluid">
-				<input name="radius" id="radius" type="number" placeholder="Enter radius..."/>
-			  </div>
 			</div>
-		  </div>
-		  <div class="column">
-			<div class="header">Start Date</div>
+			<div class="header">Radius</div>
 			<div class="ui input fluid">
-				<input type="datetime-local" placeholder="Start date and time..." name="startdate" id="startdate"/>
+				<input name="radius" id="radius" type="number" placeholder="Enter radius..."/>
+			</div>
+		</div>
+		<div id="dateSearch">
+			<div class="header">Start Date</div>
+			<div class="ui icon input fluid">
+				<i class="calendar icon"></i>
+				<input type="text" placeholder="Start date and time..." name="startdate" id="startdate" class="set-due-date"/>
 			</div>
 			<div class="header">End Date</div>
-			<div class="ui input fluid">
-				<input type="datetime-local" placeholder="End date and time..." name="enddate" id="enddate"/>
+			<div class="ui icon input fluid">
+				<i class="calendar icon"></i>
+				<input type="text" placeholder="End date and time..." name="enddate" id="enddate" class="set-due-date"/>
 			</div>
-		  </div>
 		</div>
 	</div>
 

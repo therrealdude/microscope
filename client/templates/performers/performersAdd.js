@@ -17,35 +17,32 @@ Template.performersSearch.onCreated(function(){
 
 Template.performersSearch.onRendered(function(){
 	if(Session.get('showDateInfo')) {
-		var dates = Session.get('showDateInfo');
-		console.log(dates.length);
-		if(dates.length > 0){
-			for (var i = 0; i<dates.length; i++) {
-				if (dates[i].performers){
-					var val = [];
-					for(var j = 0; j<dates[i].performers.groups.length; j++){
-						val.push('g:' + dates[i].performers.groups[j]._id);
+		setTimeout( function() {
+			var dates = Session.get('showDateInfo');
+			if(dates.length > 0){
+				for (var i = 0; i<dates.length; i++) {
+					if (dates[i].performers){
+						var val = [];
+						for(var j = 0; j<dates[i].performers.groups.length; j++){
+							val.push('g:' + dates[i].performers.groups[j]._id);
+						}
+						for(var j = 0; j<dates[i].performers.people.length; j++){
+							val.push('p:' + dates[i].performers.people[j]._id);
+						}
+						$('#' + dates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
+						$('#' + dates[i].id).find('[name=showdate]').datetimepicker({defaultDate: dates[i].date.toISOString().replace('Z', '').replace(':00.000', '').replace('T', ' ')});
 					}
-					for(var j = 0; j<dates[i].performers.people.length; j++){
-						val.push('p:' + dates[i].performers.people[j]._id);
-					}
-					$('#' + dates[i].id).find('[name=performersSearch]').dropdown({allowAdditions: true}).dropdown('set selected', val);
-					console.log(dates[i].date.toISOString().replace('Z', '').replace(':00.000', '').replace('T', ' '));
-					$('#' + dates[i].id).find('[name=showdate]').datetimepicker({defaultDate: dates[i].date.toISOString().replace('Z', '').replace(':00.000', '').replace('T', ' ')});
-				}
-				else{
-					$('[name=performersSearch]').dropdown({allowAdditions: true});
-					$('[name=showdate]').datetimepicker();
-				}
+					else {
+						$('[name=performersSearch]').dropdown({allowAdditions: true});
+						$('[name=showdate]').datetimepicker();
+					}}
 			}
-		}
-		else {
-			console.log('initialize empty search');
-			$('[name=performersSearch]').dropdown({allowAdditions: true});
-			$('[name=showdate]').datetimepicker();
-		}
+		}, 500);
 	}
-	
+	else {
+		$('[name=performersSearch]').dropdown({allowAdditions: true});
+		$('[name=showdate]').datetimepicker();
+	}
 });
 
 Template.performersSearch.helpers({
@@ -82,9 +79,8 @@ Template.performersSearch.events({
         ret.push({id: 'date' + ret.length, display: true, requests: {people: [], groups: []}});
         Session.set('showDateInfo', ret);
 		setTimeout(function(){
-			console.log($('#date' + (Session.get('showDateInfo').length - 1).toString()));
 			$('#date' + (Session.get('showDateInfo').length - 1).toString()).find('[name=performersSearch]').dropdown({allowAdditions: true});
-			$('#date' +(Session.get('showDateInfo').length - 1).toString()).find('[name=showdate]').datetimepicker();
+			$('#date' + (Session.get('showDateInfo').length - 1).toString()).find('[name=showdate]').datetimepicker();
 		}, 100);
     },
     'click input.removeDate': function(e){
