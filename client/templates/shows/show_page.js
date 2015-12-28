@@ -129,11 +129,17 @@ Template.showPage.events({
 		
 		for (var i = 0; i<show.dates.length; i++){
 			if(show.dates[i].id === popup.attr('id')){
+				var changedItems = {people: [], groups: []};
 				for (var p = 0; p<show.dates[i].requests.people.length; p++){
 					var status = popup.find('.personstatusddl ' + '#' + show.dates[i].requests.people[p].id).val();
 					show.dates[i].requests.people[p].status = status;
 					if(status === 'Accepted'){
 						show.dates[i].performers.people.push({_id: show.dates[i].requests.people[p].id});
+						changedItems.people.push({person: show.dates[i].requests.people[p], status: status});
+					}
+					else if(status === 'Declined'){
+						changedItems.people.push({person: show.dates[i].requests.people[p], status: status});
+						show.dates[i].performers.people.pop({_id: show.dates[i].requests.people[p].id});
 					}
 					else{
 						show.dates[i].performers.people.pop({_id: show.dates[i].requests.people[p].id});
@@ -144,6 +150,11 @@ Template.showPage.events({
 					show.dates[i].requests.group[p].status = status;
 					if(status === 'Accepted'){
 						show.dates[i].performers.groups.push({_id: show.dates[i].requests.groups[p].id});
+						changedItems.groups.push({group: show.dates[i].requests.people[p], status: status});
+					}
+					else if (){
+						changedItems.groups.push({group: show.dates[i].requests.people[p], status: status});
+						show.dates[i].groups.pop({_id: show.dates[i].requests.groups[p].id});
 					}
 					else{
 						show.dates[i].performers.groups.pop({_id: show.dates[i].requests.groups[p].id});
@@ -152,6 +163,11 @@ Template.showPage.events({
 				Shows.update(show._id, {$set: {dates: show.dates}}, function(error){
 					if(error){
 						console.log(error);
+					} 
+					else{
+						for (var i = 0; i < changedItems.people.length; i++){
+							
+						}
 					}
 				});
 			}

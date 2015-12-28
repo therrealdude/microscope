@@ -1,11 +1,16 @@
 <Template name="calendar">
-	<h1 class="ui header">Upcoming Shows</h1>
-	<div class="ui fluid list calendar">
-        <button class="ui fluid top attached button calendarPrevious"><i class="ui up arrow icon"></i></button>
-		{{#each calendarShows}}
-			<div class="ui item">
-				{{>calendarItem}}
+	{{#if hasAnyShows}}
+		<div class="calendar content">
+			<div class="ui dividing header">Shows This Week</div>
+			<div class="ui fluid list calendar">
+				{{#each calendarShows}}
+					{{#if hasShows}}
+						<div class="ui item calendarItem">
+							{{>calendarItem}}
+						</div>
+					{{/if}}
+				{{/each}}
 			</div>
-		{{/each}}<button class="ui fluid bottom attached button calendarNext"><i class="ui down arrow icon"></i></button>
-	</div>
+		</div>
+	{{/if}}
 </Template>	

@@ -1,21 +1,12 @@
 <Template name="calendarItem">
-	<div class="content">
-		<div class="ui list">
-			<div class="ui item">
-				<div class="ui horizontal list">
-					<div class="ui item">
-						<h3 class="header">{{dayOfWeek}}</h3>
-					</div>
-					<div class="ui item">
-						<div class="subheader">{{dayAndMonth}}</div>
-					</div>
-				</div>
-			</div>
-			{{#each shows}}
-				<div class="ui item">
-					{{showName}} {{showTime}} at {{showLocation}} {{showAddress}}
-				</div>
-			{{/each}}
+	<div class="ui list">
+		<div class="ui item">
+			{{dayOfWeek}} {{dayAndMonth}}
 		</div>
+		{{#each shows}}
+			<div class="ui item">
+				{{#with show}} <a href={{pathFor 'showPage'}}>{{name}}</a> {{/with}} {{showTime}} at {{#with venue}} <a href={{pathFor 'venuePage'}}>{{name}}</a> {{/with}} {{showAddress}}
+			</div>
+		{{/each}}
 	</div>
 </Template>

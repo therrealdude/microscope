@@ -267,16 +267,12 @@ nav .nav.navbar-nav li.active a, nav .nav.navbar-nav li.open a, .searchmenuitem.
 }
 
 .calendar {
-
+	margin: 5px;
+	padding: 5px;
 }
 
 .calendar .calendarItem {
-	border: 5px solid;
-	background: #fff;
-}
-
-.calendar .calendarItem.past {
-	background: red;
+	background: #E6E6E6;
 }
 
 .summary.importantMessage {
