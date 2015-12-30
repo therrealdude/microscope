@@ -2,7 +2,6 @@
   <library name="meteor-packages-auto-import-browser" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/lepozepo_cloudinary/4.0.3/web.browser/lib/jquery.cloudinary.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/localstorage/1.0.5/web.browser/localstorage.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/logging/1.0.8/web.browser/logging.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/mongo-id/1.0.1/web.browser/id.js" />
@@ -95,6 +94,7 @@
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/blaze-tools/1.0.4/web.browser/tokens.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/blaze-tools/1.0.4/web.browser/tojs.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/blaze-tools/1.0.4/web.browser/preamble.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/lepozepo_cloudinary/3.0.3/web.browser/packages/lepozepo_cloudinary.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/callback-hook/1.0.4/web.browser/hook.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/check/1.1.0/web.browser/match.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/dburles_google-maps/1.1.5/web.browser/google-maps.js" />
@@ -122,11 +122,14 @@
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/fastclick/1.0.7/web.browser/pre.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/fastclick/1.0.7/web.browser/post.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/fastclick/1.0.7/web.browser/fastclick.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/momentjs_moment/2.8.4/web.browser/packages/momentjs_moment.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/geojson-utils/1.0.4/web.browser/geojson-utils.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/geojson-utils/1.0.4/web.browser/pre.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/geojson-utils/1.0.4/web.browser/post.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/tsega_bootstrap3-datetimepicker/3.1.3_3/web.browser/packages/tsega_bootstrap3-datetimepicker.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/google/1.1.7/web.browser/google_client.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/google/1.1.7/web.browser/google_configure.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/tsega_bootstrap3-datetimepicker/3.1.3_3/web.browser/packages/tsega_bootstrap3-datetimepicker/lib/css/bootstrap3-datetimepicker.css" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/html-tools/1.0.5/web.browser/scanner.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/html-tools/1.0.5/web.browser/templatetag.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/html-tools/1.0.5/web.browser/tokenize.js" />
@@ -208,7 +211,6 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/lepozepo_cloudinary/4.0.3/web.browser/lib/jquery.cloudinary.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/localstorage/1.0.5/web.browser/localstorage.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/logging/1.0.8/web.browser/logging.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/mongo-id/1.0.1/web.browser/id.js" />
@@ -301,6 +303,7 @@
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/blaze-tools/1.0.4/web.browser/tokens.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/blaze-tools/1.0.4/web.browser/tojs.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/blaze-tools/1.0.4/web.browser/preamble.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/lepozepo_cloudinary/3.0.3/web.browser/packages/lepozepo_cloudinary.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/callback-hook/1.0.4/web.browser/hook.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/check/1.1.0/web.browser/match.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/dburles_google-maps/1.1.5/web.browser/google-maps.js" />
@@ -328,11 +331,14 @@
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/fastclick/1.0.7/web.browser/pre.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/fastclick/1.0.7/web.browser/post.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/fastclick/1.0.7/web.browser/fastclick.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/momentjs_moment/2.8.4/web.browser/packages/momentjs_moment.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/geojson-utils/1.0.4/web.browser/geojson-utils.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/geojson-utils/1.0.4/web.browser/pre.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/geojson-utils/1.0.4/web.browser/post.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/tsega_bootstrap3-datetimepicker/3.1.3_3/web.browser/packages/tsega_bootstrap3-datetimepicker.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/google/1.1.7/web.browser/google_client.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/google/1.1.7/web.browser/google_configure.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/tsega_bootstrap3-datetimepicker/3.1.3_3/web.browser/packages/tsega_bootstrap3-datetimepicker/lib/css/bootstrap3-datetimepicker.css" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/html-tools/1.0.5/web.browser/scanner.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/html-tools/1.0.5/web.browser/templatetag.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/html-tools/1.0.5/web.browser/tokenize.js" />

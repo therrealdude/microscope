@@ -135,10 +135,10 @@ Template.showPage.events({
 					show.dates[i].requests.people[p].status = status;
 					if(status === 'Accepted'){
 						show.dates[i].performers.people.push({_id: show.dates[i].requests.people[p].id});
-						changedItems.people.push({person: show.dates[i].requests.people[p], status: status});
+						changedItems.people.push({person: show.dates[i].requests.people[p], status: status, date: show.dates[i]});
 					}
 					else if(status === 'Declined'){
-						changedItems.people.push({person: show.dates[i].requests.people[p], status: status});
+						changedItems.people.push({person: show.dates[i].requests.people[p], status: status, date: show.dates[i]});
 						show.dates[i].performers.people.pop({_id: show.dates[i].requests.people[p].id});
 					}
 					else{
@@ -150,10 +150,10 @@ Template.showPage.events({
 					show.dates[i].requests.group[p].status = status;
 					if(status === 'Accepted'){
 						show.dates[i].performers.groups.push({_id: show.dates[i].requests.groups[p].id});
-						changedItems.groups.push({group: show.dates[i].requests.people[p], status: status});
+						changedItems.groups.push({group: show.dates[i].requests.people[p], status: status, date: show.dates[i]});
 					}
-					else if (){
-						changedItems.groups.push({group: show.dates[i].requests.people[p], status: status});
+					else if (status === 'Declined'){
+						changedItems.groups.push({group: show.dates[i].requests.groups[p], status: status, date: show.dates[i]});
 						show.dates[i].groups.pop({_id: show.dates[i].requests.groups[p].id});
 					}
 					else{
@@ -166,7 +166,7 @@ Template.showPage.events({
 					} 
 					else{
 						for (var i = 0; i < changedItems.people.length; i++){
-							
+							createPersonRequestNotification(changedItems.people[i], show)
 						}
 					}
 				});
