@@ -42,8 +42,8 @@
                                     {{#each currentUser}}
                                         <div class="item">
                                             <div class="field">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox" id="{{_id}}" name="chooseYourself" style="left:20px;bottom:25px;"/>
+                                                <div class="ui checkbox {{disabledPersonClass}}" title="{{personTitle}}">
+                                                    <input type="checkbox" id="{{_id}}" name="chooseYourself" style="left:20px;bottom:25px;" {{disabledPersonAttribute}}/>
                                                     <label for="chooseYourself">{{name}}</label>
                                                 </div>
                                             </div>
@@ -57,8 +57,8 @@
                                     {{#each userGroups}}
                                         <div class="item">
                                             <div class="field">
-                                                <div class="ui checkbox">
-                                                    <input type="checkbox" id="{{_id}}" name="chooseGroup" style="left:20px;bottom:25px;"/>
+                                                <div class="ui checkbox {{disabledGroupClass}}" title="{{groupTitle}}">
+                                                    <input type="checkbox" id="{{_id}}" name="chooseGroup" style="left:20px;bottom:25px;" {{disabledGroupAttribute}}/>
                                                     <label for="chooseGroup">{{name}}</label>
                                                 </div>
                                             </div>

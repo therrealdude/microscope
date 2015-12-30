@@ -19,8 +19,9 @@
 
 <template name="notificationItem">
   <li>
-    <a href="{{notificationPostPath}}">
-      <strong>{{commenterName}}</strong> commented on your post
-    </a>
+	{{#if person_id}}
+		
+	{{#elseif group_id}}
+	{{/if}}
   </li>
 </template>

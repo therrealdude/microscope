@@ -74,6 +74,15 @@ Template.showPage.helpers({
 	},
 	getGroup: function() {
 		return _.extend(Groups.findOne({_id: this.id}), {status: this.status});
+	},
+	disabledPersonClass: function() {
+		return $.inArray(this.requests.people, this._id) ? "disabled" : "";
+	},
+	disabledPersonAttribute : function () {
+		return $.inArray(this.requests.people, this._id) ? 'disabled="disabled"' : "";
+	},
+	personTitle : function () {
+		return $.inArray(this.requests.people, this._id) ? 'You are already in this show' : 'Check to request a slt in this show';
 	}
 });
 
@@ -87,6 +96,9 @@ Template.showPage.events({
 		
         var popup = $(e.target).closest('.popup');
         var requests;
+		var addedRequests = [];
+		var show = Template.parentData();
+		
         if(this.requests){
             requests = this.requests;
         }
@@ -99,11 +111,13 @@ Template.showPage.events({
         
         if(yourself.prop('checked')){
             requests.people.push({id: yourself.attr('id'), status: 'Pending', message: ''});
+			addedRequests.push({id: yourself.attr('id'), date: this.date, show: show, type: 'person'});
         }
         for(var i = 0; i < groups.length; i++){
 			var addGroup = groups[i].checked;
             if(addGroup){
                 requests.groups.push({id: groups[i].id, status: 'Pending', message: ''});
+				addedRequests.push({id: groups[i].id, date: this.date, show: show, type: 'group'});
             }
         }
         
@@ -120,6 +134,15 @@ Template.showPage.events({
             if(error){
                 console.log(error.reason);
             }
+			else {
+				Meteor.call('createNotification', addedRequests, function(error, result){
+					if (error){
+						console.log(error);
+					} else {
+						
+					}
+				});
+			}
         });
     },
 	'click .updateRequests': function(e){
@@ -166,7 +189,10 @@ Template.showPage.events({
 					} 
 					else{
 						for (var i = 0; i < changedItems.people.length; i++){
-							createPersonRequestNotification(changedItems.people[i], show)
+							createPersonRequestNotification(changedItems.people[i], show);
+						}
+						for (var i = 0; i < changedItems.groups.length; i++){
+							createGroupRequestNotification(changedItems.groups[i], show);
 						}
 					}
 				});
