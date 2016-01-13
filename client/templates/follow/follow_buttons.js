@@ -22,6 +22,8 @@ Template.followButtons.events({
 		var isGroup = $(e.target).closest('.item').hasClass('group');
 		var isVenue = $(e.target).closest('.item').hasClass('venue');
 		var isShow = $(e.target).closest('.item').hasClass('performance');
+		var notificationType = '';
+		var notificationItem = {personId: currentUser._id};
 		
         if(this.followers && this.followers.constructor === Array){
 			this.followers.push(currentUser._id);
@@ -41,6 +43,7 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [this._id], groups: [], venues: [], shows: []}
 			}
+			notificationType = notificationType_personFollow;
 			collection = People;
 		}
 		else if (isGroup){
@@ -53,6 +56,7 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [], groups: [this._id], venues: [], shows: []}
 			}
+			notificationType = notificationType_groupFollow;
 			collection = Groups;
 		}
 		else if (isVenue){
@@ -65,6 +69,7 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [], groups: [], venues: [this._id], shows: []}
 			}
+			notificationType = notificationType_venueFollow;
 			collection = Venues;
 		}
 		else if (isShow){
@@ -77,6 +82,7 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [], groups: [], venues: [], shows: [this._id]}
 			}
+			notificationType = notificationType_showFollow;
 			collection = Shows;
 		}
         
@@ -84,6 +90,11 @@ Template.followButtons.events({
             if(error){
                 Errors.throw(error.reason);
             }
+			else {
+				Meteor.call(
+					'createNotification', 
+				);
+			}
 			// else{
 				// Meteor.call('sendEmail', 
 					// 'dandersonerling@gmail.com', 
