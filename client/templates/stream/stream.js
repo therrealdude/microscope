@@ -6,6 +6,7 @@ Template.showstream.onCreated(function(){
 	if (currentUser.following) {
 		if(currentUser.following.shows){
 			stream = addShowsToStream(Shows.find({_id: {$in: currentUser.following.shows}, 'dates.0.date': {$gte: new Date() }}).fetch(), stream, currentUser);
+			console.log(stream);
 		}
 		
 		if(currentUser.following.venues){

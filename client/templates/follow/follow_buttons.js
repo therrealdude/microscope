@@ -22,8 +22,7 @@ Template.followButtons.events({
 		var isGroup = $(e.target).closest('.item').hasClass('group');
 		var isVenue = $(e.target).closest('.item').hasClass('venue');
 		var isShow = $(e.target).closest('.item').hasClass('performance');
-		var notificationType = '';
-		var notificationItem = {personId: currentUser._id};
+		var notificationItem = {personId: currentUser._id, recipients: [], type: ''};
 		
         if(this.followers && this.followers.constructor === Array){
 			this.followers.push(currentUser._id);
@@ -43,7 +42,8 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [this._id], groups: [], venues: [], shows: []}
 			}
-			notificationType = notificationType_personFollow;
+			notificationItem.type = notificationType_personFollow;
+			notificationItem.recipients = this.userId;
 			collection = People;
 		}
 		else if (isGroup){
@@ -56,7 +56,10 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [], groups: [this._id], venues: [], shows: []}
 			}
-			notificationType = notificationType_groupFollow;
+			notificationItem.type = notificationType_groupFollow;
+			var admins = People.find({_id: {$in: this.members}}).fetch().map(function(p) {return p.userId;});
+			notificationItem.recipients = admins;
+			notificationItem.groupId = this._id;
 			collection = Groups;
 		}
 		else if (isVenue){
@@ -69,7 +72,9 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [], groups: [], venues: [this._id], shows: []}
 			}
-			notificationType = notificationType_venueFollow;
+			notificationItem.type = notificationType_venueFollow;
+			notificationItem.recipients = this.administrators;
+			notificationItem.venueId = this._id;
 			collection = Venues;
 		}
 		else if (isShow){
@@ -82,7 +87,9 @@ Template.followButtons.events({
 			else{
 				currentUser.following = {people: [], groups: [], venues: [], shows: [this._id]}
 			}
-			notificationType = notificationType_showFollow;
+			notificationItem.type = notificationType_showFollow;
+			notificationItem.recipients = this.administrators;
+			notificationItem.showId = this._id;
 			collection = Shows;
 		}
         
@@ -90,32 +97,18 @@ Template.followButtons.events({
             if(error){
                 Errors.throw(error.reason);
             }
-			else {
-				Meteor.call(
-					'createNotification', 
-				);
-			}
-			// else{
-				// Meteor.call('sendEmail', 
-					// 'dandersonerling@gmail.com', 
-					// 'admin@affordablecityentertainment.com', 
-					// 'Person followed', 
-					// 'A person has been followed', 
-					// function(error, result){
-						// if (error) {
-							// console.log(error.reason);
-						// }
-						// else{
-							// console.log("Email sent.");
-						// }
-					// });
-			// }
         });
         
         collection.update(this._id, {$set: {followers: this.followers}}, function(error) {
             if(error){
                 Errors.throw(error.reason);
-            }
+            } else{
+				Meteor.call('createNotification', notificationItem, function(error, result){
+					if(error){
+						Errors.throw(error.reason);
+					}
+				})
+			}
         });
     },
 	'click .unfollowbtn': function(e){

@@ -1,5 +1,5 @@
 <template name="notifications">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notifications">
     Notifications
     {{#if notificationCount}}
       <span class="badge badge-inverse">{{notificationCount}}</span>
@@ -7,10 +7,13 @@
     <b class="caret"></b>
   </a>
   <ul class="notification dropdown-menu">
-    {{#if notificationCount}}
+    {{#if hasNotifications}}
       {{#each notifications}}
         {{> notificationItem}}
       {{/each}}
+	  <li>
+		<span><a href={{pathFor 'notificationsPage'}} name="see-all-notifications" id="see-all-notifications">See all...</a></span>
+	  </li>
     {{else}}
       <li><span>No Notifications</span></li>
     {{/if}}
@@ -18,8 +21,18 @@
 </template>
 
 <template name="notificationItem">
-  <li>
-	{{#if follow}}
+  <li class="notification">
+	{{#if followPerson}}
+		<span><a href={{personRoute}}>{{personName}}</a> follows you.</span>
+	{{/if}}
+	{{#if followGroup}}
+		<span><a href={{personRoute}}>{{personName}}</a> follows <a href={{groupRoute}}>{{groupName}}</a>.</span>
+	{{/if}}
+	{{#if followShow}}
+		<span><a href={{personRoute}}>{{personName}}</a> follows <a href={{showRoute}}>{{showName}}</a>.</span>
+	{{/if}}
+	{{#if followVenue}}
+		<span><a href={{personRoute}}>{{personName}}</a> follows <a href={{venueRoute}}>{{venueName}}</a>.</span>
 	{{/if}}
   </li>
 </template>
