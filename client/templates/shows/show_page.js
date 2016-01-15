@@ -76,13 +76,13 @@ Template.showPage.helpers({
 		return _.extend(Groups.findOne({_id: this.id}), {status: this.status});
 	},
 	disabledPersonClass: function() {
-		return $.inArray(this.requests.people, this._id) ? "disabled" : "";
+		return this.requests && $.inArray(this.requests.people, this._id) ? "disabled" : "";
 	},
 	disabledPersonAttribute : function () {
-		return $.inArray(this.requests.people, this._id) ? 'disabled="disabled"' : "";
+		return this.requests && $.inArray(this.requests.people, this._id) ? 'disabled="disabled"' : "";
 	},
 	personTitle : function () {
-		return $.inArray(this.requests.people, this._id) ? 'You are already in this show' : 'Check to request a slt in this show';
+		return this.requests && $.inArray(this.requests.people, this._id) ? 'You are already in this show' : 'Check to request a slt in this show';
 	}
 });
 
@@ -111,13 +111,23 @@ Template.showPage.events({
         
         if(yourself.prop('checked')){
             requests.people.push({id: yourself.attr('id'), status: 'Pending', message: ''});
-			addedRequests.push({id: yourself.attr('id'), date: this.date, show: show, type: 'person'});
+			addedRequests.push({
+				personId: yourself.attr('id'), 
+				date: this.date, 
+				showId: show._id, 
+				type: notificationType_showRequestPerson, 
+				recipients: show.administrators});
         }
         for(var i = 0; i < groups.length; i++){
 			var addGroup = groups[i].checked;
             if(addGroup){
                 requests.groups.push({id: groups[i].id, status: 'Pending', message: ''});
-				addedRequests.push({id: groups[i].id, date: this.date, show: show, type: 'group'});
+				addedRequests.push({
+					groupId: groups[i].id, 
+					date: this.date, 
+					showId: show._id, 
+					type: notificationType_showRequestGroup,
+					recipients: show.administrators});
             }
         }
         
@@ -135,11 +145,9 @@ Template.showPage.events({
                 console.log(error.reason);
             }
 			else {
-				Meteor.call('createNotification', addedRequests, function(error, result){
+				Meteor.call('createMultipleNotifications', addedRequests, function(error, result){
 					if (error){
 						console.log(error);
-					} else {
-						
 					}
 				});
 			}
@@ -158,11 +166,23 @@ Template.showPage.events({
 					show.dates[i].requests.people[p].status = status;
 					if(status === 'Accepted'){
 						show.dates[i].performers.people.push({_id: show.dates[i].requests.people[p].id});
-						changedItems.people.push({person: show.dates[i].requests.people[p], status: status, date: show.dates[i]});
+						changedItems.push({
+							personId: show.dates[i].requests.people[p]._id, 
+							recipients: show.dates[i].requests.people[p].userId,
+							showId: show._id,
+							date: show.dates[i].date,
+							status: status,
+							type: notificationType_showAnswerPerson});
 					}
 					else if(status === 'Declined'){
-						changedItems.people.push({person: show.dates[i].requests.people[p], status: status, date: show.dates[i]});
 						show.dates[i].performers.people.pop({_id: show.dates[i].requests.people[p].id});
+						changedItems.push({
+							personId: show.dates[i].requests.people[p]._id, 
+							recipients: show.dates[i].requests.people[p].userId,
+							showId: show._id,
+							date: show.dates[i].date,
+							status: status,
+							type: notificationType_showAnswerPerson});
 					}
 					else{
 						show.dates[i].performers.people.pop({_id: show.dates[i].requests.people[p].id});
@@ -171,13 +191,26 @@ Template.showPage.events({
 				for (var p = 0; p<show.dates[i].requests.groups.length; p++){
 					var status = popup.find('.groupstatusddl ' + '#' + show.dates[i].requests.groups[p].id).val();
 					show.dates[i].requests.group[p].status = status;
+					var recipients = People.find({_id: {$in: show.dates[i].requests.groups[p].members}}).fetch().map(function(u) {return u.userId});
 					if(status === 'Accepted'){
 						show.dates[i].performers.groups.push({_id: show.dates[i].requests.groups[p].id});
-						changedItems.groups.push({group: show.dates[i].requests.people[p], status: status, date: show.dates[i]});
+						changedItems.groups.push({
+							groupId: show.dates[i].requests.groups[p]._id, 
+							recipients: recipients,
+							showId: show._id,
+							status: status, 
+							date: show.dates[i].date,
+							type: notificationType_showAnswerGroup});
 					}
 					else if (status === 'Declined'){
-						changedItems.groups.push({group: show.dates[i].requests.groups[p], status: status, date: show.dates[i]});
 						show.dates[i].groups.pop({_id: show.dates[i].requests.groups[p].id});
+						changedItems.groups.push({
+							groupId: show.dates[i].requests.groups[p]._id, 
+							recipients: recipients,
+							showId: show._id,
+							status: status, 
+							date: show.dates[i].date,
+							type: notificationType_showAnswerGroup});
 					}
 					else{
 						show.dates[i].performers.groups.pop({_id: show.dates[i].requests.groups[p].id});
@@ -188,12 +221,11 @@ Template.showPage.events({
 						console.log(error);
 					} 
 					else{
-						for (var i = 0; i < changedItems.people.length; i++){
-							createPersonRequestNotification(changedItems.people[i], show);
-						}
-						for (var i = 0; i < changedItems.groups.length; i++){
-							createGroupRequestNotification(changedItems.groups[i], show);
-						}
+						Meteor.call('createMultipleNotifications', changedItems, function(error, result){
+							if(error){
+								Errors.throw(error.reason);
+							}
+						});
 					}
 				});
 			}

@@ -34,5 +34,17 @@
 	{{#if followVenue}}
 		<span><a href={{personRoute}}>{{personName}}</a> follows <a href={{venueRoute}}>{{venueName}}</a>.</span>
 	{{/if}}
+	{{#if showRequestPerson}}
+		<span><a href={{personRoute}}>{{personName}}</a> has requested to be in <a href={{showRoute}}>{{showName}}</a> on {{date}}.</span>
+	{{/if}}
+	{{#if showRequestGroup}}
+		<span><a href={{groupRoute}}>{{groupName}}</a> has requested to be in <a href={{showRoute}}>{{showName}}</a> on {{date}}.</span>
+	{{/if}}
+	{{#if showAnswerPerson}}
+		<span>Your request to be in <a href={{showRoute}}>{{showName}}</a> on {{date}} has been {{status}}.</span>
+	{{/if}}
+	{{#if showAnswerGroup}}
+		<span>The request for <a href={{groupRoute}}>{{groupName}}</a> to be in <a href={{showRoute}}>{{showName}}</a> on {{date}} has been {{status}}.</span>
+	{{/if}}
   </li>
 </template>

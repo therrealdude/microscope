@@ -26,6 +26,18 @@ Template.notificationItem.helpers({
   followVenue: function(){
 	  return this.type === notificationType_venueFollow;
   },
+  showRequestPerson: function(){
+	  return this.type === notificationType_showRequestPerson;
+  },
+  showRequestGroup: function(){
+	  return this.type === notificationType_showRequestGroup;
+  },
+  showAnswerPerson: function(){
+	  return this.type === notificationType_showAnswerPerson;
+  },
+  showAnswerGroup: function(){
+	  return this.type === notificationType_showAnswerGroup;
+  },
   personName: function(){ 
 	  var person = People.findOne({_id: this.personId});
 	  if(person){
