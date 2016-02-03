@@ -83,7 +83,10 @@ Template.showPage.helpers({
 	},
 	personTitle : function () {
 		return this.requests && $.inArray(this.requests.people, this._id) ? 'You are already in this show' : 'Check to request a slt in this show';
-	}
+	},
+    venueObject : function() {
+        return Venues.findOne({_id: this.venue});
+    }
 });
 
 Template.showPage.events({

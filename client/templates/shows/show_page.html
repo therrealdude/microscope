@@ -4,7 +4,50 @@
 	</div>
     <div class="show main">
 	<h3 class="ui dividing header">Show Info</h3>
-	
+	   <div class="ui relaxed list">
+            {{#if venue}}
+                {{#with venueObject}}
+                    <div class="item">
+                        <div class="content noborder">
+                            <div class="description">
+                                Where
+                                <a href={{pathFor 'venuePage'}}>
+                                    {{name}}
+                                </a>
+                                {{formatted_address}}
+                            </div>
+                        </div>
+                    </div>
+                {{/with}}
+           {{/if}}
+           {{#if ticketPrice}}
+                <div class="item">
+                    <div class="content noborder">
+                        <div class="description">
+                            Price
+                            ${{ticketPrice}}
+                            {{#if ticketLink}}
+                                <a href={{ticketLink}} target="_blank">
+                                    Buy them here.
+                                </a>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+           {{/if}}
+           {{#if website}}
+                <div class="item">
+                    <div class="content noborder">
+                        <div class="description">
+                            For more Information 
+                            <a href={{website}} target="_blank">
+                                Visit their website.
+                            </a>
+                        </div>
+                    </div>
+                </div>
+           {{/if}}
+        </div>
     <h3 class="ui dividing header">Show Dates</h3>
     <div class="ui list">
         {{#each dates}}
