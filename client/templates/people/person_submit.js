@@ -29,7 +29,8 @@ Template.personSubmit.events({
 	  email: $(e.target).find('[name=email]').val(),
 	  phone: $(e.target).find('[name=phone]').val(),
 	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked'),
-	  images: Cloudinary.collection.find().fetch()
+	  images: Cloudinary.collection.find().fetch(),
+      tags: $(e.target).find('[name=tags]').val()
     };
 	
     var errors = validatePerson(person);

@@ -79,7 +79,8 @@ setSearchCriteria = function(container) {
 		'longitude': container.find('#lng').val(),
 		'radius': container.find('#radius').val(),
 		'startdate': container.find('#startdate').val(),
-		'enddate': container.find('#enddate').val()
+		'enddate': container.find('#enddate').val(),
+        'tags': container.find('#tagsSearch').val()
 	}
 	Session.set('searchCriteria', searchCriteria);
 }

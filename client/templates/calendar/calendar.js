@@ -79,7 +79,7 @@ Template.calendar.helpers({
 		return global_shows;
     },
 	hasAnyShows: function(){
-		return global_shows.length > 0;
+		return $.grep(global_shows, function(s) { s.hasShows }).length > 0;
 	}
 });
 

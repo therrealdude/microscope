@@ -39,3 +39,7 @@ Meteor.publish('venues', function(){
 Meteor.publish('shows', function(){
     return Shows.find();
 });
+
+Meteor.publish('tags', function(){
+    return Tags.find();
+})

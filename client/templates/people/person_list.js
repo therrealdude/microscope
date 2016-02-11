@@ -4,8 +4,15 @@ Template.peopleList.helpers({
     if(!searchCriteria || searchCriteria === ''){
         return People.find();
     }
-    else{
+    else if (searchCriteria && !searchCriteria.tags){
         return People.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}});
+    }
+    else if (searchCriteria && !searchCriteria.keywords){
+        console.log('search in tags');
+        return People.find({tags: {$in: searchCriteria.tags}});
+    }
+    else{
+        return People.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, tags: {$in: searchCriteria.tags}});
     }
   }
 });

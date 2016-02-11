@@ -25,29 +25,20 @@ Template.personEdit.events({
 	  email: $(e.target).find('[name=email]').val(),
 	  phone: $(e.target).find('[name=phone]').val(),
 	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked'),
-      images: Cloudinary.collection.find().fetch()
+      images: Cloudinary.collection.find().fetch(),
+      tags: $(e.target).find('[name=tags]').val()
     }
     
     var errors = validatePerson(personProperties);
     if (errors.name || errors.bio)
       return Session.set('personEditErrors', errors);
     
-    People.update(currentPersonId, {$set: personProperties}, function(error) {
-      if (error) {
-        // display the error to the user
-        Errors.throw(error.reason);
-        // show this result but route anyway
-        if (result.postExists)
-            Errors.throw('This link has already been posted');
-      } else {
-        var imagesToDelete = Session.get('imagesToDelete');
-        if(imagesToDelete){
-            for (var i = 0; i<imagesToDelete.length; i++){
-                Cloudinary.delete(imagesToDelete[i]);
-            }
+    Meteor.call('personUpdate', currentPersonId, personProperties, Session.get('imagesToDelete'), function(error, result){
+        if(error){
+            console.log(error.reason);
         }
         Router.go('personPage', {_id: currentPersonId});
       }
-    });
+    );
   }
 });

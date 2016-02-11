@@ -1,0 +1,9 @@
+<Template name="tagsSearch">
+    <div class="header">Tags</div>
+    <select class="ui fluid search dropdown" multiple="" id="tagsSearch" name="tagsSearch">
+        <option value="">Select Tags</option>
+        {{#each tags}}
+            <option value="{{name}}">{{name}}</option>
+        {{/each}}
+    </select>
+</Template>
