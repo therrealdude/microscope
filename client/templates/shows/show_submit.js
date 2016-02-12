@@ -57,7 +57,8 @@ Template.showSubmit.events({
                     socialmedia: Session.get('socialmedia'),
                     videos: Session.get('videosToSave'),
 					images: Cloudinary.collection.find().fetch(),
-					administrators: $(e.target).find('[name=administrators]').val().split(',')
+					administrators: $(e.target).find('[name=administrators]').val().split(','),
+                    tags: $(e.target).find('[name=tags]').val()
                    };
         
         var errors = validateShow(show);
@@ -66,7 +67,7 @@ Template.showSubmit.events({
             return Session.set('showSubmitErrors', errors);
         }
         
-        Meteor.call('showInsert', show, function(error, result){
+        Meteor.call('showInsert', show, Session.get('imagesToDelete'), function(error, result){
             if(error){
                 Errors.throw(error.reason);
             }

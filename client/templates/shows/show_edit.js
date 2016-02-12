@@ -72,7 +72,8 @@ Template.showEdit.events({
                     dates: dates,
                     socialmedia: Session.get('socialmedia'),
                     videos: Session.get('videosToSave'),
-					administrators: $(e.target).find('[name=administrators]').val().split(",")
+					administrators: $(e.target).find('[name=administrators]').val().split(","),
+                    tags: $(e.target).find('[name=tags]').val()
                    };
         
         //var errors = validateShow(show);
@@ -81,7 +82,7 @@ Template.showEdit.events({
          //   return Session.set('showSubmitErrors', errors);
         //}
         
-        Shows.update(showid, {$set: show}, function(error){
+        Meteor.call('showUpdate', show, Session.get('imagesToDelete'), function(error, result){
             if(error){
                 console.log(error.reason);
             }

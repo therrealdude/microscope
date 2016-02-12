@@ -2,6 +2,7 @@
 	<div class=" wrapper ui items">
 		{{> showItem}}
 	</div>
+    {{>tagsDisplay}}
     <div class="show main">
 	<h3 class="ui dividing header">Show Info</h3>
 	   <div class="ui relaxed list">
@@ -20,6 +21,7 @@
                     </div>
                 {{/with}}
            {{/if}}
+           
            {{#if ticketPrice}}
                 <div class="item">
                     <div class="content noborder">
@@ -48,6 +50,7 @@
                 </div>
            {{/if}}
         </div>
+        
     <h3 class="ui dividing header">Show Dates</h3>
     <div class="ui list">
         {{#each dates}}
