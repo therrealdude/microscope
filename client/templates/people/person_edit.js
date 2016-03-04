@@ -20,11 +20,9 @@ Template.personEdit.events({
       name: $(e.target).find('[name=name]').val(),
       bio: $(e.target).find('[name=bio]').val(),
 	  website: $(e.target).find('[name=website]').val(),
+      isPerformer: $(e.target).find('[name=isPerformer]').prop('checked'),
 	  videos: Session.get('videosToSave'),
 	  socialmedia: Session.get('socialmedia'),
-	  email: $(e.target).find('[name=email]').val(),
-	  phone: $(e.target).find('[name=phone]').val(),
-	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked'),
       images: Cloudinary.collection.find().fetch(),
       tags: $(e.target).find('[name=tags]').val()
     }

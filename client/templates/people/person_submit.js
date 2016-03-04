@@ -1,10 +1,8 @@
 Template.personSubmit.onCreated(function() {
   Session.set('personSubmitErrors', {});
-  $('#personContactInfo').checkbox({onChange: function(){console.log($(this).val())}});
 });
 
 Template.personSubmit.onRendered(function(){
-	$('#personContactInfo').checkbox({'onChecked': function() { console.log($(this).val()) }});
 });
 
 Template.personSubmit.helpers({
@@ -23,12 +21,10 @@ Template.personSubmit.events({
     var person = {
       name: $(e.target).find('[name=name]').val(),
       bio: $(e.target).find('[name=bio]').val(),
+      isPerformer: $(e.target).find('[name=isPerformer]').prop('checked'),
 	  website: $(e.target).find('[name=website]').val(),
 	  videos: Session.get('videosToSave'),
 	  socialmedia: Session.get('socialmedia'),
-	  email: $(e.target).find('[name=email]').val(),
-	  phone: $(e.target).find('[name=phone]').val(),
-	  showContactInfo: $(e.target).find('[name=showContactInfo]').prop('checked'),
 	  images: Cloudinary.collection.find().fetch(),
       tags: $(e.target).find('[name=tags]').val()
     };

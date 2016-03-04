@@ -2,17 +2,17 @@ Template.peopleList.helpers({
   people: function(){
     var searchCriteria = Session.get('searchCriteria');
     if(!searchCriteria || searchCriteria === ''){
-        return People.find();
+        return People.find({isPerformer: true});
     }
     else if (searchCriteria && !searchCriteria.tags){
-        return People.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}});
+        return People.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, isPerformer: true});
     }
     else if (searchCriteria && !searchCriteria.keywords){
         console.log('search in tags');
         return People.find({tags: {$in: searchCriteria.tags}});
     }
     else{
-        return People.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, tags: {$in: searchCriteria.tags}});
+        return People.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, tags: {$in: searchCriteria.tags}, isPerformer: true});
     }
   }
 });

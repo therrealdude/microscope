@@ -50,21 +50,23 @@
       <a class="item {{venuesActive}} searchmenuitem" name="venues">Venues</a>
     </div>
     {{#if showsSelected}}
-        <a href={{pathFor 'showSubmit'}} class="ui fluid grey addItem button">Add Show</a>
+        {{#if isPerformer}}<a href={{pathFor 'showSubmit'}} class="ui fluid grey addItem button">Add Show</a>{{/if}}
         {{> showList}}
     {{/if}}
     {{#if groupsSelected}}
-        <a href={{pathFor 'groupSubmit'}} class="ui fluid grey addItem button">Add Group</a>
+        {{#if isPerformer}}<a href={{pathFor 'groupSubmit'}} class="ui fluid grey addItem button">Add Group</a>{{/if}}
         {{> groupList}}
     {{/if}}
     {{#if peopleSelected}}
-		<div class="post">
-			Note: We don't have an ability to add a person outside of filling out your profile. If you want to add a person that is not currently in our system, then either encourage them to join or when creating the group or show just type in their name. It won't add them to our system, but they will appear as a member on your team or performer in your show.
-		</div>
+        {{#if isPerformer}}
+		  <div class="post">
+			 Note: We don't have an ability to add a person outside of filling out your profile. If you want to add a person that is not currently in our system, then either encourage them to join or when creating the group or show just type in their name. It won't add them to our system, but they will appear as a member on your team or performer in your show.
+		  </div>
+        {{/if}}
         {{> peopleList}}
     {{/if}}
     {{#if venuesSelected}}
-        <a href={{pathFor 'venueSubmit'}} class="ui fluid grey addItem button">Add Venue</a>
+        {{#if isPerformer}}<a href={{pathFor 'venueSubmit'}} class="ui fluid grey addItem button">Add Venue</a>{{/if}}
         {{> venueList}}
     {{/if}}
 </template>

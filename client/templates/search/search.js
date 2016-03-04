@@ -38,6 +38,10 @@ Template.search.helpers({
     },
     venuesActive: function() {
         return Session.get('lastClicked') === 'venues' && 'active';
+    },
+    isPerformer: function() {
+        var curPerson = People.findOne({userId: Meteor.userId()});
+        return curPerson.isPerformer;
     }
 });
 
