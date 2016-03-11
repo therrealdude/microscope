@@ -46,7 +46,8 @@ Template.venueEdit.events({
 		videos: Session.get('videosToSave'),
 		socialmedia: Session.get('socialmedia'),
 		images: Cloudinary.collection.find().fetch(),
-        administrators: $(e.target).find('[name=administrators]').val().split(',')
+        administrators: $(e.target).find('[name=administrators]').val().split(','),
+        tags: $(e.target).find('[name=tags]').val()
     };
     
     var errors = validateVenues(venueAttributes);
@@ -54,16 +55,9 @@ Template.venueEdit.events({
         return Session.set('venueSubmitErrors', errors);
     }
       
-    Venues.update(venueId, {$set: venueAttributes}, function(error) {
-        if(error) {
-            Errors.throw(error.reason);
-        }
-		
-        var imagesToDelete = Session.get('imagesToDelete');
-        if(imagesToDelete){
-            for (var i = 0; i<imagesToDelete.length; i++){
-                Cloudinary.delete(imagesToDelete[i]);
-            }
+    Meteor.call('venueUpdate', venueId, venueAttributes, Session.get('imagesToDelete'), function(error, result) {
+        if (error){
+            console.log(error);
         }
         Router.go('/venue/' + venueId);
     });
@@ -72,7 +66,7 @@ Template.venueEdit.events({
   'click .delete': function(e) {
     e.preventDefault();
 
-    if (confirm("Delete this post?")) {
+    if (confirm("Delete this venue?")) {
       var currentVenueId = this._id;
       Venues.remove(currentVenueId);
       Router.go('home');

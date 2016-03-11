@@ -1,12 +1,14 @@
 <Template name="tagsDisplay">
-    <div class="grid-block fluid socialmedia">
-        <h3 class="ui dividing header">Tags</h3>
-        <div class="ui horizontal list">
-            {{#each tags}}
-                <div class="item">
-                    <span>{{this}}</span>
-				</div>
-            {{/each}}
+    {{#if hastags}}
+        <div class="grid-block fluid socialmedia">
+            <h3 class="ui dividing header">Tags</h3>
+            <div class="ui horizontal list">
+                {{#each tags}}
+                    <div class="item">
+                        <span>{{this}}</span>
+                    </div>
+                {{/each}}
+            </div>
         </div>
-    </div>
+    {{/if}}
 </Template>

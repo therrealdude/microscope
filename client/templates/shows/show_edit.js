@@ -82,7 +82,7 @@ Template.showEdit.events({
          //   return Session.set('showSubmitErrors', errors);
         //}
         
-        Meteor.call('showUpdate', show, Session.get('imagesToDelete'), function(error, result){
+        Meteor.call('showUpdate', showid, show, Session.get('imagesToDelete'), function(error, result){
             if(error){
                 console.log(error.reason);
             }

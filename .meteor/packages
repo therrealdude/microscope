@@ -12,9 +12,6 @@ ian:accounts-ui-bootstrap-3
 accounts-password
 tmeasday:errors
 reactive-var
-accounts-google
-accounts-twitter
-accounts-facebook
 semantic:ui
 flemay:less-autoprefixer
 semantic:ui-css
