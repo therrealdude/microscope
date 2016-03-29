@@ -8,7 +8,6 @@ Template.peopleList.helpers({
         return People.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, isPerformer: true});
     }
     else if (searchCriteria && !searchCriteria.keywords){
-        console.log('search in tags');
         return People.find({tags: {$in: searchCriteria.tags}});
     }
     else{

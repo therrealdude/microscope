@@ -31,7 +31,8 @@ Template.groupSubmit.events({
 	  members: $(e.target).find('[name=members]').val(),
 	  website: $(e.target).find('[name=website]').val(),
 	  videos: Session.get('videosToSave'),
-	  socialmedia: Session.get('socialmedia')
+	  socialmedia: Session.get('socialmedia'),
+      tags: $(e.target).find('[name=tags]').val()
     };
 	
     var errors = validategroup(group);

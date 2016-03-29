@@ -1,11 +1,22 @@
 Template.groupList.helpers({
   groups: function(){
     var searchCriteria = Session.get('searchCriteria');
-    if(!searchCriteria || searchCriteria === ''){
-        return Groups.find();
+    var chkKeywords = searchCriteria && searchCriteria.keywords && searchCriteria.keywords != '';
+    var chkTags = searchCriteria && searchCriteria.tags && searchCriteria.tags.length > 0;
+    console.log(chkKeywords);
+    console.log(chkTags);
+      
+    if(chkKeywords && chkTags){
+        return Groups.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}, tags: {$in: searchCriteria.tags}});
+    }
+    else if (chkKeywords && !chkTags){
+        return Groups.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}});
+    }
+    else if (!chkKeywords && chkTags){
+        return Groups.find({tags: {$in: searchCriteria.tags}});
     }
     else{
-        return Groups.find({name: {$regex: new RegExp(searchCriteria.keywords, "i")}});
+        return Groups.find();
     }
   }
 });

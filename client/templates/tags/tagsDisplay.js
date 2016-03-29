@@ -3,6 +3,6 @@ Template.tagsDisplay.helpers({
         return this.tags;
     },
     hastags: function(){
-        return this.tags.length > 0;
+        return this.tags && this.tags.length > 0;
     }
-})
+});

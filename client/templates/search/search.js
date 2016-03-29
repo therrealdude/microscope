@@ -70,6 +70,10 @@ Template.search.events({
 		e.preventDefault();
 		setSearchCriteria($(e.target).closest('#searchCriteria'));
     },
+    'change #searchCriteria #tagsSearch': function(e){
+        e.preventDefault();
+        setSearchCriteria($(e.target).closest('#searchCriteria'));
+    },
 	'change #searchCriteria input': function(e){
 		e.preventDefault();
 		setSearchCriteria($(e.target).closest('#searchCriteria'));
@@ -87,4 +91,5 @@ setSearchCriteria = function(container) {
         'tags': container.find('#tagsSearch').val()
 	}
 	Session.set('searchCriteria', searchCriteria);
+    console.log(searchCriteria)
 }
